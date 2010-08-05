@@ -1,0 +1,41 @@
+piwik_menu                              = Piwik Statistik
+
+piwik_headline                          = DECAF AddOn: Piwik Statistik 
+piwik_configuration                     = Konfiguration
+piwik_configuration_ministats           = Piwik API Einstellungen
+piwik_ministats                         = Statistik
+
+piwik_link_caption                      = Komplette Statistik einsehen
+
+piwik_tracker_url                       = Tracker URL
+piwik_site_id                           = Site ID
+piwik_login                             = Benutzername
+piwik_md5_pass                          = Passwort (MD5)
+piwik_token_auth                        = Auth Token
+piwik_tracking_method                   = Tracking Methode
+piwik_api_period                        = Zeitraum
+piwik_api_date                          = Datum
+
+
+piwik_save                              = Speichern
+piwik_reset                             = Verwerfen
+
+piwik_config_saved_error                = Fehler beim speichern der Konfiguration!
+piwik_config_saved_successful           = Konfiguration erfolgreich gespeichert!
+piwik_config_missing                    = ACHTUNG! Keine Konfigurationsdatei gefunden. Bitte re-installieren Sie das Addon um die config.ini anzulegen.
+piwik_config_dir_locked                 = Das Verzeichnis decaf_piwikTracker/config ist nicht beschreibbar. Bitte passen Sie die Zugriffrechte an.
+piwik_allow_url_fopen_off               = allow_url_fopen ist abgestellt. Bitte passen Sie Ihre php.ini an (allow_url_fopen = On) um alle Features benutzen zu können.
+
+piwik_placeholder_tracker_url           = http://your.stat-server
+piwik_placeholder_site_id               = Site ID für diese Website
+piwik_placeholder_login                 = Piwik Benutzername
+piwik_placeholder_md5_pass              = MD5 verschlüsseltes Passwort
+piwik_placeholder_token_auth            = Auth Token (für API Zugriff)
+piwik_placeholder_api_period            = day, week, month oder year
+piwik_placeholder_api_date              = YYYY-MM-DD, today oder yesterday, lastX, previousX
+
+piwik_error_get_stats                   = Fehler beim holen der Statistik von  %s
+
+nb_uniq_visitors                        = Eindeutige Besucher
+nb_visits                               = Besucher
+nb_actions                              = Seitenansichten

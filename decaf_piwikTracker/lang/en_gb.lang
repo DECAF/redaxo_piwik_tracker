@@ -1,0 +1,41 @@
+piwik_menu                              = Piwik Statistics
+
+piwik_headline                          = DECAF AddOn: Piwik Statistics 
+piwik_configuration                     = Configuration
+piwik_configuration_ministats           = Piwik API Settings
+piwik_ministats                         = Statistic
+
+piwik_link_caption                      = View complete statistic
+
+
+piwik_tracker_url                       = Tracker URL
+piwik_site_id                           = Site ID
+piwik_login                             = Username
+piwik_md5_pass                          = Password (MD5)
+piwik_token_auth                        = Auth Token
+piwik_tracking_method                   = Tracking Method
+piwik_api_period                        = Period
+piwik_api_date                          = Date
+
+piwik_save                              = Save
+piwik_reset                             = Cancel
+
+piwik_config_saved_error                = Error saving configuration!
+piwik_config_saved_successful           = Configuration saved!
+piwik_config_missing                    = No configuration file found. Please re-install the addon to generate a config.ini
+piwik_config_dir_locked                 = The folder decaf_piwikTracker/config is not writable. Please fix the permissions for this folder.
+piwik_allow_url_fopen_off               = To update the statistic with the php include 'allow_url_fopen' must be set turned on in your php.ini
+
+piwik_placeholder_tracker_url           = http://your.stat-server
+piwik_placeholder_site_id               = Site ID for this Website
+piwik_placeholder_login                 = Piwik Username
+piwik_placeholder_md5_pass              = MD5 encrypted password
+piwik_placeholder_token_auth            = Auth Token (für API Zugriff)
+piwik_placeholder_api_period            = day, week, month or year
+piwik_placeholder_api_date              = YYYY-MM-DD, today, yesterday, lastX or previousX
+
+piwik_error_get_stats                   = Error retrieving statistic from %s
+
+nb_uniq_visitors                        = Unique visitors
+nb_visits                               = Visits
+nb_actions                              = Pageviews
