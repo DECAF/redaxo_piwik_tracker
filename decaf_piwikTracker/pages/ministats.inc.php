@@ -83,7 +83,7 @@ if (!$stats_error)
   foreach ($stats as $stat) 
   {
     $j=0;
-    $max = 0;
+    $max = 1;
     foreach($stat as $date => $values)
     {
       $data[$i]['header_date'][$j] = $date;
@@ -115,10 +115,10 @@ if (!$stats_error)
             <div id="<?php echo $canvas_id ?>"></div>
           </td>
         </tr>
+        <?php $ratio_h = 200 / $d['max'];  ?>
+        <?php $w = floor(((740-148) / $d['columns']) /3)-2;  ?>
+        <?php $x = 149; ?>
         <script type="text/javascript">
-          <?php $ratio_h = 200 / $max;  ?>
-          <?php $w = floor(((740-148) / $d['columns']) /3)-2;  ?>
-          <?php $x = 149; ?>
           var mycanvas = Raphael("<?php echo $canvas_id ?>", 740, 200  );
           <?php $i=1; ?>
           <?php foreach($d['header_date'] as $k => $v): ?>
@@ -169,3 +169,10 @@ if (!$stats_error)
 <h2>
   <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
 </h2>
+
+<?php
+
+echo "<pre>";
+print_r($data);
+echo "</pre>";
+?>
