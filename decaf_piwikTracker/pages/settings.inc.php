@@ -1,7 +1,7 @@
 <?php
 /**
  * piwikTracker Addon
- * 
+ *
  * @author Sven Kesting <sk@decaf.de>
  * @author <a href="http://www.decaf.de">www.decaf.de</a>
  * @package redaxo4
@@ -14,7 +14,7 @@
     exit;
   }
 
-  
+
   $allow_url_fopen = ini_get('allow_url_fopen');
 
   if (!$allow_url_fopen) {
@@ -38,7 +38,7 @@
       $search   = array();
       $replace  = array();
 
-      foreach($_POST as $key => $val) 
+      foreach($_POST as $key => $val)
       {
         $search[]   = '{{'.$key.'}}';
         $replace[]  = $val;
@@ -67,7 +67,7 @@ if($message) {
 ?>
 
 <div class="rex-addon-output">
-  
+
   <div id="rex-addon-editmode" class="rex-form">
     <form action="" method="post">
       <fieldset class="rex-form-col-1">
@@ -126,7 +126,7 @@ if($message) {
               <input type="text" name="api_date" id="piwik_api_date" value="<?php echo $piwik_config['ministats']['api_date'] ?>" placeholder="<?php echo $I18N->msg('piwik_placeholder_api_date') ?>" />
             </p>
           </div>
-          
+
         </div>
       </fieldset>
       <div class="rex-form-row">

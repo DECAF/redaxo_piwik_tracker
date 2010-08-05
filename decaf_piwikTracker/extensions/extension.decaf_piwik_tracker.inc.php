@@ -1,7 +1,7 @@
 <?php
 /**
  * piwikTracker Addon
- * 
+ *
  * @author Sven Kesting <sk@decaf.de>
  * @author <a href="http://www.decaf.de">www.decaf.de</a>
  * @package redaxo4
@@ -20,7 +20,7 @@ function decaf_piwik_tracker($params) {
     $content = $params['subject'];
 
     // Frontend
-    if ($piwik_config['piwik']['tracker_url'] && $piwik_config['piwik']['site_id']) 
+    if ($piwik_config['piwik']['tracker_url'] && $piwik_config['piwik']['site_id'])
     {
       if ($piwik_config['piwik']['tracking_method'] == 'Javascript') {
         $js = "

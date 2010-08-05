@@ -1,14 +1,14 @@
 <?php
 /**
  * Piwik - Open source web analytics
- * 
+ *
  * Client to record visits, page views, Goals, in a Piwik server.
  * For more information, see http://piwik.org/docs/tracking-api/
- * 
+ *
  * Note: Piwik Cookies are not forwarded in the request and from the response
  *
  * @license released under BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version $Id: PiwikTracker.php 2785 2010-07-29 10:41:55Z matt $
+ * @version $Id: PiwikTracker.php 2785  10:41:55Z matt $
  * @link http://piwik.org/docs/tracking-api/
  *
  * @category Piwik
@@ -18,19 +18,19 @@ class PiwikTracker
 {
   /**
    * Piwik base URL, for example http://example.org/piwik/
-   * Must be set before using the class by calling 
+   * Must be set before using the class by calling
    *  PiwikTracker::$URL = 'http://yourwebsite.org/piwik/';
-   * 
+   *
    * @var string
    */
   static public $URL = '';
-  
+
   const VERSION = 1;
-  
+
   /**
-   * Builds a PiwikTracker object, used to track visits, pages and Goal conversions 
+   * Builds a PiwikTracker object, used to track visits, pages and Goal conversions
    * for a specific website, by using the Piwik Tracking API.
-   * 
+   *
    * @param int $idSite Id site to be tracked
    * @param string $apiUrl "http://example.org/piwik/" or "http://piwik.example.org/"
    *              If set, will overwrite PiwikTracker::$URL
@@ -56,7 +56,7 @@ class PiwikTracker
         self::$URL = $apiUrl;
       }
     }
-    
+
     /**
      * Sets the current URL being tracked
      * @param string $url
@@ -74,41 +74,41 @@ class PiwikTracker
     {
       $this->urlReferer = $url;
     }
-    
+
     /**
-     * Sets custom data to be passed to the piwik.php script, 
+     * Sets custom data to be passed to the piwik.php script,
      * with the variable name 'data'. Data will be JSON encoded.
-     * 
+     *
      * @param mixed $data An array, strings, ints, etc.
      */
     public function setCustomData( $data )
     {
       $this->customData = json_encode($data);
     }
-    
+
     /**
      * Sets the Browser language. Used to detect visitor Countries.
-     * 
+     *
      * @param string $acceptLanguage
      */
     public function setBrowserLanguage( $acceptLanguage )
     {
       $this->acceptLanguage = $acceptLanguage;
     }
-    
+
     /**
      * Sets the user agent, used to detect OS and browser.
-     * 
+     *
      * @param string $userAgent
      */
     public function setUserAgent($userAgent)
     {
       $this->userAgent = $userAgent;
     }
-    
+
     /**
      * Sets local visitor time.
-     * 
+     *
      * @param string $time HH:MM:SS format
      */
     public function setLocalTime($time)
@@ -118,7 +118,7 @@ class PiwikTracker
       $this->localMinute = (int)$minute;
       $this->localSecond = (int)$second;
     }
-    
+
     /**
      * Sets user resolution width and height.
      *
@@ -130,7 +130,7 @@ class PiwikTracker
       $this->width = $width;
       $this->height = $height;
     }
-    
+
     /**
      * Sets cookie support (Cookie appears in the List of plugins report)
      *
@@ -140,9 +140,9 @@ class PiwikTracker
     {
       $this->hasCookies = $bool ;
     }
-    
+
     /**
-     * Sets visitor browser supported plugins 
+     * Sets visitor browser supported plugins
      *
      * @param bool $flash
      * @param bool $java
@@ -156,7 +156,7 @@ class PiwikTracker
      */
     public function setPlugins($flash = false, $java = false, $director = false, $quickTime = false, $realPlayer = false, $pdf = false, $windowsMedia = false, $gears = false, $silverlight = false)
     {
-      $this->plugins = 
+      $this->plugins =
         '&fla='.(int)$flash.
         '&java='.(int)$java.
         '&dir='.(int)$director.
@@ -171,7 +171,7 @@ class PiwikTracker
 
     /**
      * Tracks a page view
-     * 
+     *
      * @param string $documentTitle Page view name as it will appear in Piwik reports
      * @return string Response
      */
@@ -179,11 +179,11 @@ class PiwikTracker
     {
       $url = $this->getUrlTrackPageView($documentTitle);
       return $this->sendRequest($url);
-    } 
-    
+    }
+
     /**
      * Tracks a Goal
-     * 
+     *
      * @param int $idGoal Id Goal to record a conversion
      * @param int $revenue Revenue for this conversion
      * @return string Response
@@ -193,10 +193,10 @@ class PiwikTracker
       $url = $this->getUrlTrackGoal($idGoal, $revenue);
       return $this->sendRequest($url);
     }
-    
+
     /**
      * Tracks a download or outlink
-     * 
+     *
      * @param string $actionUrl URL of the download or outlink
      * @param string $actionType Type of the action: 'download' or 'link'
      * @return string Response
@@ -205,7 +205,7 @@ class PiwikTracker
     {
         // Referer could be udpated to be the current URL temporarily (to mimic JS behavior)
       $url = $this->getUrlTrackAction($actionUrl, $actionType);
-      return $this->sendRequest($url); 
+      return $this->sendRequest($url);
     }
 
     /**
@@ -221,7 +221,7 @@ class PiwikTracker
       }
       return $url;
     }
-    
+
     /**
      * @see doTrackGoal()
      * @param string $actionUrl URL of the download or outlink
@@ -237,7 +237,7 @@ class PiwikTracker
       }
       return $url;
     }
-        
+
     /**
      * @see doTrackAction()
      * @param string $actionUrl URL of the download or outlink
@@ -249,7 +249,7 @@ class PiwikTracker
       $url = $this->getRequest( $this->idSite );
     $url .= '&'.$actionType.'=' . $actionUrl .
         '&redirect=0';
-    
+
       return $url;
     }
 
@@ -261,7 +261,7 @@ class PiwikTracker
     {
       $this->forcedDatetime = $dateTime;
     }
-    
+
     /**
      * Do not use - this will only work when used in Piwik unit tests
      * @ignore
@@ -270,7 +270,7 @@ class PiwikTracker
     {
       $this->ip = $ip;
     }
-    
+
     /**
      * @ignore
      */
@@ -291,7 +291,7 @@ class PiwikTracker
     $response = file_get_contents($url, 0, $ctx);
     return $response;
     }
-    
+
     /**
      * @ignore
      */
@@ -308,25 +308,25 @@ class PiwikTracker
       $url = self::$URL .
        '?idsite=' . $idSite .
       '&rec=1' .
-      '&apiv=' . self::VERSION . 
+      '&apiv=' . self::VERSION .
           '&url=' . urlencode($this->pageUrl) .
       '&urlref=' . urlencode($this->urlReferer) .
           '&rand=' . mt_rand() .
-      
+
         // Optional since debugger can be triggered remotely
-        '&XDEBUG_SESSION_START=' . @$_GET['XDEBUG_SESSION_START'] . 
+        '&XDEBUG_SESSION_START=' . @$_GET['XDEBUG_SESSION_START'] .
           '&KEY=' . @$_GET['KEY'] .
-       
+
         // only allowed in tests (see tests/integration/piwik.php)
       (!empty($this->ip) ? '&cip=' . $this->ip : '') .
       (!empty($this->forcedDatetime) ? '&cdt=' . urlencode($this->forcedDatetime) : '') .
-          
+
       // These parameters are set by the JS, but optional when using API
-          (!empty($this->plugins) ? $this->plugins : '') . 
+          (!empty($this->plugins) ? $this->plugins : '') .
       (($this->localHour !== false && $this->localMinute !== false && $this->localSecond !== false) ? '&h=' . $this->localHour . '&m=' . $this->localMinute  . '&s=' . $this->localSecond : '' ).
           (!empty($this->width) && !empty($this->height) ? '&res=' . $this->width . 'x' . $this->height : '') .
           (!empty($this->hasCookies) ? '&cookie=' . $this->hasCookies : '') .
-          (!empty($this->customData) ? '&data=' . $this->customData : '') 
+          (!empty($this->customData) ? '&data=' . $this->customData : '')
         ;
       return $url;
     }
@@ -341,16 +341,16 @@ class PiwikTracker
   static protected function getCurrentScriptName()
   {
     $url = '';
-    if( !empty($_SERVER['PATH_INFO']) ) { 
+    if( !empty($_SERVER['PATH_INFO']) ) {
       $url = $_SERVER['PATH_INFO'];
-    } 
+    }
     else if( !empty($_SERVER['REQUEST_URI']) )   {
       if( ($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false ) {
         $url = substr($_SERVER['REQUEST_URI'], 0, $pos);
       } else {
         $url = $_SERVER['REQUEST_URI'];
       }
-    } 
+    }
     if(empty($url)) {
       $url = $_SERVER['SCRIPT_NAME'];
     }
@@ -403,7 +403,7 @@ class PiwikTracker
    */
   static protected function getCurrentQueryString()
   {
-    $url = '';  
+    $url = '';
     if(isset($_SERVER['QUERY_STRING'])
       && !empty($_SERVER['QUERY_STRING']))
     {
@@ -411,10 +411,10 @@ class PiwikTracker
     }
     return $url;
   }
-  
+
   /**
    * Returns the current full URL (scheme, host, path and query string.
-   *  
+   *
    * @return string
      * @ignore
    */
@@ -422,7 +422,7 @@ class PiwikTracker
     {
     return self::getCurrentScheme() . '://'
       . self::getCurrentHost()
-      . self::getCurrentScriptName() 
+      . self::getCurrentScriptName()
       . self::getCurrentQueryString();
   }
 }

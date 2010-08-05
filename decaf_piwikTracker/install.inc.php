@@ -1,13 +1,13 @@
 <?php
 /**
  * piwikTracker Addon
- * 
+ *
  * @author Sven Kesting <sk@decaf.de>
  * @author <a href="http://www.decaf.de">www.decaf.de</a>
  * @package redaxo4
  * @version $Id$
  */
- 
+
 $mypage = "decaf_piwikTracker";
 if ($REX['REDAXO'])
 {
@@ -36,7 +36,7 @@ if (!is_writable($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/'))
     }
     $config_str = str_replace($search, $replace, $tpl);
     file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini', $config_str);
-  }  
+  }
 }
 
 if (!$error) {

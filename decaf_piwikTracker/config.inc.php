@@ -1,7 +1,7 @@
 <?php
 /**
  * piwikTracker Addon
- * 
+ *
  * @author Sven Kesting <sk@decaf.de>
  * @author <a href="http://www.decaf.de">www.decaf.de</a>
  * @package redaxo4
@@ -20,25 +20,25 @@ if ($REX['REDAXO'])
 
   $REX['ADDON']['name'][$mypage]    = $I18N->msg("piwik_menu");
 
-  // add menu buttons
-  $settingsPage = new rex_be_page($I18N->msg('piwik_configuration'), array(
-      'page'=>'decaf_piwikTracker',
-      'subpage'=>'settings'
-    )
-  );
+    // add menu buttons
+    $settingsPage = new rex_be_page($I18N->msg('piwik_configuration'), array(
+        'page'=>'decaf_piwikTracker',
+        'subpage'=>'settings'
+      )
+    );
 
-  $settingsPage->setHref('index.php?page=decaf_piwikTracker&subpage=settings');
-  
-  $statsPage = new rex_be_page($I18N->msg('piwik_ministats'), array(
-      'page'=>'decaf_piwikTracker',
-      'subpage'=> ''
-    )
-  ); 
-  $statsPage->setHref('index.php?page=decaf_piwikTracker');
+    $settingsPage->setHref('index.php?page=decaf_piwikTracker&subpage=settings');
 
-  $REX['ADDON']['pages'][$mypage] = array (
-    $statsPage, $settingsPage
-  );
+    $statsPage = new rex_be_page($I18N->msg('piwik_ministats'), array(
+        'page'=>'decaf_piwikTracker',
+        'subpage'=> ''
+      )
+    );
+    $statsPage->setHref('index.php?page=decaf_piwikTracker');
+
+    $REX['ADDON']['pages'][$mypage] = array (
+      $statsPage, $settingsPage
+    );
 }
 
 $REX['ADDON']['rxid'][$mypage]    = "770";
@@ -49,7 +49,7 @@ $REX['ADDON']['perm'][$mypage]    = "decaf_piwiktracker[]";
 $REX['PERM'][]                    = "decaf_piwiktracker[]";
 
 // include extension point
-if (!$REX['REDAXO']) 
+if (!$REX['REDAXO'])
 {
-  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");  
+  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");
 }

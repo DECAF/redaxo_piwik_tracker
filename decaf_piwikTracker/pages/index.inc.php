@@ -1,13 +1,13 @@
 <?php
 /**
  * piwikTracker Addon
- * 
+ *
  * @author Sven Kesting <sk@decaf.de>
  * @author <a href="http://www.decaf.de">www.decaf.de</a>
  * @package redaxo4
  * @version $Id$
  */
- 
+
 // Parameter
 $Basedir = dirname(__FILE__);
 
@@ -35,7 +35,7 @@ switch($subpage)
   default:
     $subpage = 'ministats';
     require $Basedir .'/ministats.inc.php';
-    
+
 }
 
 

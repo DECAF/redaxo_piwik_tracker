@@ -1,6 +1,6 @@
 piwik_menu                              = Piwik Statistik
 
-piwik_headline                          = DECAF AddOn: Piwik Statistik 
+piwik_headline                          = DECAF AddOn: Piwik Statistik
 piwik_configuration                     = Konfiguration
 piwik_configuration_ministats           = Piwik API Einstellungen
 piwik_ministats                         = Statistik
