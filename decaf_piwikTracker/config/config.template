@@ -8,4 +8,4 @@ tracking_method   = {{tracking_method}}
 
 [ministats]
 api_period        = {{api_period}}
-api_date          = {{api_date2}}
+api_date          = {{api_date}}
