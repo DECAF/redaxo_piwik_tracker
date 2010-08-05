@@ -170,9 +170,3 @@ if (!$stats_error)
   <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
 </h2>
 
-<?php
-
-echo "<pre>";
-print_r($data);
-echo "</pre>";
-?>
