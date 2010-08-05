@@ -106,61 +106,63 @@ if (!$stats_error)
 ?>
 <?php if (!$stats_error): ?>
   <?php foreach ($data as $i => $d): ?>
-    <?php $cell_width = floor(92 / ($d['columns'] + 1)) ?>
-    <table border="0" cellspacing="1" cellpadding="2" width="100%" class="rex-table">
-      <tr>
-        <td colspan="<?php echo ($d['columns'] + 1) ?>">
-          <?php $canvas_id = "canvas_".$i ?>
-          <div id="<?php echo $canvas_id ?>"></div>
-        </td>
-      </tr>
-      <script type="text/javascript">
-        <?php $ratio_h = 200 / $max;  ?>
-        <?php $w = floor(((740-148) / $d['columns']) /3)-2;  ?>
-        <?php $x = 149; ?>
-        var mycanvas = Raphael("<?php echo $canvas_id ?>", 740, 200  );
-        <?php $i=1; ?>
-        <?php foreach($d['header_date'] as $k => $v): ?>
-          <?php if (isset($d['data'][$k]['nb_uniq_visitors'])): ?>
-            var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_uniq_visitors'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_uniq_visitors'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#c00"});
-          <?php endif ?>
-          <?php $x += $w + 1 ?>
-          <?php $i++; ?>
-          <?php if (isset($d['data'][$k]['nb_visits'])): ?>
-            var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_visits'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_visits'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#0c0"});
-          <?php endif ?>
-          <?php $x += $w + 1 ?>
-          <?php $i++; ?>
-          <?php if (isset($d['data'][$k]['nb_actions'])): ?>
-            var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_actions'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_actions'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#00c"});
-          <?php endif ?>
-          <?php $x += $w + 5 ?>
-          <?php $i++; ?>
-        <?php endforeach ?>
-        
-      </script>
-      <tr>
-        <th style="width: 8%;">&nbsp;</th>
-          <?php foreach ($d['header_date'] as $date): ?>
-            <th style="width: <?php echo $cell_width ?>%"><?php echo $date ?></th>
-          <?php endforeach ?>
+    <?php if (isset($d['data']) && count($d['data'])): ?>
+      <?php $cell_width = floor(92 / ($d['columns'] + 1)) ?>
+      <table border="0" cellspacing="1" cellpadding="2" width="100%" class="rex-table">
+        <tr>
+          <td colspan="<?php echo ($d['columns'] + 1) ?>">
+            <?php $canvas_id = "canvas_".$i ?>
+            <div id="<?php echo $canvas_id ?>"></div>
+          </td>
         </tr>
-        <?php foreach ($d['header_value'] as $key => $value): ?>
-          <tr>
-            <th style="width: 8;"><?php echo $I18N->msg($key) ?></th>
-            <?php foreach($d['header_date'] as $k => $v): ?>
-              <td style="width: <?php echo $cell_width ?>%">
-                <?php if (isset($d['data'][$k][$key])): ?>
-                  <?php echo $d['data'][$k][$key] ?>
-                <?php else: ?>
-                  &nbsp;
-                <?php endif ?>
-              </td>
+        <script type="text/javascript">
+          <?php $ratio_h = 200 / $max;  ?>
+          <?php $w = floor(((740-148) / $d['columns']) /3)-2;  ?>
+          <?php $x = 149; ?>
+          var mycanvas = Raphael("<?php echo $canvas_id ?>", 740, 200  );
+          <?php $i=1; ?>
+          <?php foreach($d['header_date'] as $k => $v): ?>
+            <?php if (isset($d['data'][$k]['nb_uniq_visitors'])): ?>
+              var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_uniq_visitors'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_uniq_visitors'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#c00"});
+            <?php endif ?>
+            <?php $x += $w + 1 ?>
+            <?php $i++; ?>
+            <?php if (isset($d['data'][$k]['nb_visits'])): ?>
+              var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_visits'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_visits'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#0c0"});
+            <?php endif ?>
+            <?php $x += $w + 1 ?>
+            <?php $i++; ?>
+            <?php if (isset($d['data'][$k]['nb_actions'])): ?>
+              var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_actions'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_actions'] * $ratio_h) ?>).attr({"stroke-width":"0","fill": "#00c"});
+            <?php endif ?>
+            <?php $x += $w + 5 ?>
+            <?php $i++; ?>
+          <?php endforeach ?>
+
+        </script>
+        <tr>
+          <th style="width: 8%;">&nbsp;</th>
+            <?php foreach ($d['header_date'] as $date): ?>
+              <th style="width: <?php echo $cell_width ?>%"><?php echo $date ?></th>
             <?php endforeach ?>
           </tr>
-        <?php endforeach ?>
-    </table>
-    <p>&nbsp;</p>
+          <?php foreach ($d['header_value'] as $key => $value): ?>
+            <tr>
+              <th style="width: 8;"><?php echo $I18N->msg($key) ?></th>
+              <?php foreach($d['header_date'] as $k => $v): ?>
+                <td style="width: <?php echo $cell_width ?>%">
+                  <?php if (isset($d['data'][$k][$key])): ?>
+                    <?php echo $d['data'][$k][$key] ?>
+                  <?php else: ?>
+                    &nbsp;
+                  <?php endif ?>
+                </td>
+              <?php endforeach ?>
+            </tr>
+          <?php endforeach ?>
+      </table>
+      <p>&nbsp;</p>
+    <?php endif ?>
   <?php endforeach ?>
 <?php endif ?>
 
