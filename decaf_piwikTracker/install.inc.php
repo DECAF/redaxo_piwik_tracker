@@ -27,9 +27,9 @@ if (!is_writable($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/'))
   // check if config.ini exists
   $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini';
   if (!file_exists($file)) {
-    $cfg = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.template', true);
+    $cfg = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.template');
     $tpl = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.template');
-    foreach($cfg as $key => $val) 
+    foreach($cfg as $key => $val)
     {
       $search[]   = '{{'.$key.'}}';
       $replace[]  = '';
