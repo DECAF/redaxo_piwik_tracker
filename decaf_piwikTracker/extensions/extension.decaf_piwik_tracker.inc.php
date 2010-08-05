@@ -15,17 +15,10 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker');
  */
 function decaf_piwik_tracker($params) {
   global $REX;
-  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini', true);
-  $content = $params['subject'];
-  if ($REX['REDAXO']) 
-  {
-    // Backend - include Rafael.js
-    $js = '  <script src="../files/addons/decaf_piwikTracker/rafael.js" type="text/javascript" charset="utf-8"></script>';
-    $content = str_replace("</head>", $js."\n</head>", $content);
-    return $content;
-  }
-  else 
-  {
+  if (file_exists($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini')) {
+    $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini', true);
+    $content = $params['subject'];
+
     // Frontend
     if ($piwik_config['piwik']['tracker_url'] && $piwik_config['piwik']['site_id']) 
     {

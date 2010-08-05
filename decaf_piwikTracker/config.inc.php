@@ -49,4 +49,7 @@ $REX['ADDON']['perm'][$mypage]    = "decaf_piwiktracker[]";
 $REX['PERM'][]                    = "decaf_piwiktracker[]";
 
 // include extension point
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");  
+if (!$REX['REDAXO']) 
+{
+  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");  
+}

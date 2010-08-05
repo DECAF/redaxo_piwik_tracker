@@ -14,6 +14,8 @@
     exit;
   }
 
+  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker_stats.inc.php");  
+
   $allow_url_fopen = ini_get('allow_url_fopen');
 
   if (!$allow_url_fopen) {
