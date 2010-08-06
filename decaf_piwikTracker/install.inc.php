@@ -23,22 +23,25 @@ if (!is_writable($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/'))
 {
   echo rex_warning($I18N->msg('piwik_config_dir_locked'));
   $error = true;
-} else {
+}
+else 
+{
   // check if config.ini exists
-  $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini';
+  $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php';
   if (!file_exists($file)) {
-    $cfg = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.template');
-    $tpl = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.template');
+    $cfg = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/_config.ini.php');
+    $tpl = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/_config.ini.php');
     foreach($cfg as $key => $val)
     {
       $search[]   = '{{'.$key.'}}';
       $replace[]  = '';
     }
     $config_str = str_replace($search, $replace, $tpl);
-    file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini', $config_str);
+    file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php', $config_str);
   }
 }
 
-if (!$error) {
+if (!$error) 
+{
   $REX['ADDON']['install'][$mypage] = true;
 }

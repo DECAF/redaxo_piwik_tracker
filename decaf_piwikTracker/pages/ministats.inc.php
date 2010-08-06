@@ -136,7 +136,7 @@ if (!$stats_error)
             <?php if (isset($d['data'][$k]['nb_uniq_visitors'])): ?>
               var r<?php echo $i ?> = mycanvas.rect(<?php echo $x ?>,<?php echo round(200-($d['data'][$k]['nb_uniq_visitors'] * $ratio_h)) ?>, <?php echo $w ?>,<?php echo round($d['data'][$k]['nb_uniq_visitors'] * $ratio_h) ?>).attr({"stroke-width":"2", "stroke": "#edf7f7","fill": "#c00"});
             <?php endif ?>
-            <?php $x += $w + 4 ?>
+            <?php $x += $w + 5 ?>
             <?php $i++; ?>
           <?php endforeach ?>
         </script>

@@ -19,7 +19,7 @@ require $REX['INCLUDE_PATH'].'/layout/top.php';
 
 rex_title($I18N->msg('piwik_headline'), $REX['ADDON']['pages']['decaf_piwikTracker']);
 
-$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini', true);
+$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
 if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
 {
   $subpage = 'settings';

@@ -15,7 +15,7 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker_stats');
  */
 function decaf_piwik_tracker_stats($params) {
   global $REX;
-  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini', true);
+  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
   $content = $params['subject'];
   // Backend - include Rafael.js
   $js = '  <script src="../files/addons/decaf_piwikTracker/rafael.js" type="text/javascript" charset="utf-8"></script>';

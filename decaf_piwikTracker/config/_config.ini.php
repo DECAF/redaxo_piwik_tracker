@@ -1,3 +1,4 @@
+; <?php die('No access);
 [piwik]
 tracker_url       = {{tracker_url}}
 site_id           = {{site_id}}

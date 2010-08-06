@@ -8,7 +8,7 @@
  * @version $Id$
  */
 
-  if (!file_exists($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini'))
+  if (!file_exists($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php'))
   {
     echo rex_warning($I18N->msg('piwik_config_missing'));
     exit;
@@ -28,13 +28,13 @@
 
   if (rex_post('btn_save', 'string') != '')
   {
-    $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini';
+    $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php';
     $message = rex_is_writable($file);
 
     if($message === true)
     {
       $message  = $I18N->msg('piwik_config_saved_error');
-      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.template');
+      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/_config.ini.php.php');
       $search   = array();
       $replace  = array();
 
@@ -44,14 +44,14 @@
         $replace[]  = $val;
       }
       $config_str = str_replace($search, $replace, $tpl);
-      if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini', $config_str))
+      if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php', $config_str))
       {
         $message  = $I18N->msg('piwik_config_saved_successful');
       }
     }
   }
 
-  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini', true);
+  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
 
   $sel_tracking_method = new rex_select();
   $sel_tracking_method->setId('piwik_tracking_method');
