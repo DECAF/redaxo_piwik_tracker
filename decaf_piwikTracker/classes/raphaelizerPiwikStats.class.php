@@ -25,6 +25,7 @@ class raphaelizerPiwikStats extends raphaelizer
   private $offset_x;
   private $offset_y;
 
+  private $canvas_h;
 
   public function __construct($id='stats_canvas', $options=array(), $I18N)
   {
@@ -34,8 +35,8 @@ class raphaelizerPiwikStats extends raphaelizer
         $this->$key = $opt;
       }
     }
-    $h = 240 + (count($this->show) * 20);
-    parent::__construct(750, $h, $id);
+    $this->canvas_h = 240 + (count($this->show) * 20);
+    parent::__construct(750, $this->canvas_h, $id);
     $this->stats = array();
     $this->I18N = $I18N;
   }
@@ -67,8 +68,8 @@ class raphaelizerPiwikStats extends raphaelizer
       )
     );
 
-    $this->segment_width    = floor(650 / $this->nb_columns)-2;
-    $this->bar_width        = floor(($this->segment_width / (count($this->show)) - (3/count($this->show))) );
+    $this->segment_width    = round(650 / $this->nb_columns)-1;
+    $this->bar_width        = round(($this->segment_width / (count($this->show)) - (3/count($this->show))) );
     $this->offset_x         = 100;
     $this->offset_y         = 210;
 
@@ -96,7 +97,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   public function drawLegend()
   {
-    $x = 70;
+    $x = 10;
     $y = 238;
     foreach ($this->show as $type) 
     {
@@ -232,6 +233,11 @@ class raphaelizerPiwikStats extends raphaelizer
         }
         $x = ($this->offset_x + ($this->segment_width * $i)) + round($this->bar_width * $j);
         $y = $this->offset_y - $h;
+        // draw divider
+        $this->path(array(
+          0 => array('x' => ($x - 1), 'y' => 10),
+          1 => array('x' => ($x - 1), 'y' => 210),
+        ),array('stroke-width' => '1', 'stroke' => $this->color_background));
         $this->rect($x,$y,$this->bar_width,$h,array('fill' => '#eff9f9', 'stroke-width' => '0'));
         $elem = 'bar_'.$i.'_'.$j;
         $this->rect($x+1,$y,$this->bar_width-1,$h,array('fill' => $color, 'stroke-width' => '0'), $elem);
