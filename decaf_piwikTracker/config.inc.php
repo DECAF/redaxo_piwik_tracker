@@ -55,7 +55,7 @@ $REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#14568a';
 $REX['ADDON'][$mypage]['options']['color_actions']        = '#5ab8ef';
 $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
 
-$REX['ADDON'][$mypage]['options']['show']                 = array('nb_uniq_visitors', 'nb_actions');
+$REX['ADDON'][$mypage]['options']['show']                 = array('nb_visits');
 
 
 // include extension point

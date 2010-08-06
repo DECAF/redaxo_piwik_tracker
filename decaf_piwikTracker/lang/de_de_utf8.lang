@@ -41,6 +41,6 @@ nb_visits                               = Besucher
 nb_actions                              = Seitenansichten
 
 date_format_day                         = j.n.
-date_format_week                        = K\W W, Y
+date_format_week                        = K\W W
 date_format_month                       = M Y
 
