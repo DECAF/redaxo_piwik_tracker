@@ -27,8 +27,12 @@ class raphaelizer
     }
   }
 
-  public function rect($x,$y,$w,$h,$attr=array())
+  public function rect($x, $y, $w, $h, $attr=array(), $id='')
   {
+    if ($id)
+    {
+      $this->js .= '  var '.$id.' =';
+    }
     $this->js .= '  '.$this->canvas_id.'.rect('.$x.','.$y.','.$w.','.$h.')';
     if (count($attr))
     {
@@ -38,8 +42,12 @@ class raphaelizer
   }
 
 
-  public function text($x,$y,$text,$attr=array())
+  public function text($x, $y, $text, $attr=array(), $id='')
   {
+    if ($id)
+    {
+      $this->js .= '  var '.$id.' =';
+    }
     $this->js .= '  '.$this->canvas_id.'.text('.$x.','.$y.',"'.$text.'")';
     if (count($attr))
     {
@@ -48,8 +56,26 @@ class raphaelizer
     $this->js .= ';'."\n";
   }
 
-  public function path($points, $attr=array())
+  public function image($src, $x, $y, $w, $h, $attr=array(), $id='')
   {
+    if ($id)
+    {
+      $this->js .= '  var '.$id.' =';
+    }
+    $this->js .= '  '.$this->canvas_id.'.image("'.$src.'", '.$x.', '.$y.', '.$w.', '.$h.')';
+    if (count($attr))
+    {
+      $this->addAttr($attr);
+    }
+    $this->js .= ';'."\n";
+  }
+
+  public function path($points, $attr=array(), $id='')
+  {
+    if ($id)
+    {
+      $this->js .= '  var '.$id.' =';
+    }
     $path = $this->getSvgPath($points);
     $this->js .= '  '.$this->canvas_id.'.path("'.$path.'")';
     if (count($attr))
@@ -69,6 +95,11 @@ class raphaelizer
       $i++;
     }
     return trim($svg_path_str);
+  }
+
+  public function addEventListener($elem, $event, $action)
+  {
+    $this->js .= '  '.$elem.'.'.$event.'(function(event) { '.$action.' });';
   }
 
   public function addAttr($attr) 

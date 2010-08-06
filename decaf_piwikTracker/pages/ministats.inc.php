@@ -76,15 +76,18 @@ else
     }
   }
 }
+require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/classes/raphaelizerPiwikStats.class.php");
+$raphaelizerOptions = array();
 
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/classes/raphaelizerPiwikStats.class.php"); 
+
+
 ?>
 <?php if (!$stats_error): ?>
   <?php $i = 0; ?>
   <?php foreach ($stats as $stat): ?>
     
     <?php
-      $raphael = new raphaelizerPiwikStats('stat_'.$i);
+      $raphael = new raphaelizerPiwikStats('stat_'.$i, array_merge($REX['ADDON']['decaf_piwikTracker']['options'],$raphaelizerOptions), $I18N);
       $raphael->setStats($stat);
       $raphael->canvas('#eff9f9');
       $i++;

@@ -48,6 +48,17 @@ $REX['ADDON']['author'][$mypage]  = "Sven Kesting &lt;sk@decaf.de&gt;, DECAF&deg
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwiktracker[]";
 $REX['PERM'][]                    = "decaf_piwiktracker[]";
 
+$REX['ADDON'][$mypage]['options']['color_background']     = '#eff9f9';
+$REX['ADDON'][$mypage]['options']['color_background_alt'] = '#dfe9e9';
+$REX['ADDON'][$mypage]['options']['color_visits']         = '#3c9ed0';
+$REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#14568a';
+$REX['ADDON'][$mypage]['options']['color_actions']        = '#5ab8ef';
+$REX['ADDON'][$mypage]['options']['color_text']           = '#000';
+
+$REX['ADDON'][$mypage]['options']['show']                 = array('nb_actions');
+$REX['ADDON'][$mypage]['options']['show']                 = array('nb_uniq_visitors', 'nb_actions', 'nb_visits');
+
+
 // include extension point
 if (!$REX['REDAXO'])
 {

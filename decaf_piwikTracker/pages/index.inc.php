@@ -8,8 +8,7 @@
  * @version $Id$
  */
 
-// Parameter
-$Basedir = dirname(__FILE__);
+$basedir = dirname(__FILE__);
 
 $page = rex_request('page', 'string');
 $subpage = rex_request('subpage', 'string');
@@ -29,16 +28,14 @@ if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id']
 switch($subpage)
 {
   case 'settings' :
-    require $Basedir .'/settings.inc.php';
+    require $basedir .'/settings.inc.php';
     break;
 
   default:
     $subpage = 'ministats';
-    require $Basedir .'/ministats.inc.php';
+    require $basedir .'/ministats.inc.php';
 
 }
-
-
 
 require $REX['INCLUDE_PATH'].'/layout/bottom.php';
 
