@@ -29,6 +29,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   public function __construct($id='stats_canvas', $options=array(), $I18N)
   {
+    // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
     {
       if ($this->$key) {
@@ -87,12 +88,12 @@ class raphaelizerPiwikStats extends raphaelizer
       'text-anchor' => 'end',
       'font'        => 'Helvetica, Verdana, Arial, sans-serif',
       'font-size'   => '9',
-      'fill'        => '#999'
+      'fill'        => '#bbb'
     ));
-    $this->image('/files/addons/decaf_piwikTracker/logo.decaf.png',690,237,50,12, array('opacity' => '0.7'), 'logo_decaf');
+    $this->image('/files/addons/decaf_piwikTracker/logo.decaf.png',690,237,50,12, array('opacity' => '0.2'), 'logo_decaf');
     $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1});');
     $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de");');
-    $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.7});');
+    $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
   }
 
   public function drawLegend()
@@ -137,7 +138,7 @@ class raphaelizerPiwikStats extends raphaelizer
     
     $this->text(80, 225, $this->I18N->msg('piwik_api_date'),array(
       'font'        => 'Helvetica, Arial, sans-serif',
-      'font-size'   => '12',
+      'font-size'   => '11',
       'font-weight' => 'bold',
       'text-anchor' => 'end'
     ));
@@ -145,7 +146,7 @@ class raphaelizerPiwikStats extends raphaelizer
     {
       $this->text($this->offset_x + round($this->segment_width/2) + ($this->segment_width * $i), 225, $this->convertPiwikDate($date),array(
         'font'        => 'Helvetica, Arial, sans-serif',
-        'font-size'   => '12',
+        'font-size'   => '11',
         'font-weight' => 'bold'
       ));
       $i++;

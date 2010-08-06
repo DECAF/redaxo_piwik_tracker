@@ -85,7 +85,15 @@ $raphaelizerOptions = array();
 <?php if (!$stats_error): ?>
   <?php $i = 0; ?>
   <?php foreach ($stats as $stat): ?>
-    
+
+    <?php if ($i == 0): ?>
+      <h1>Besucher der letzen 21 Tage</h1>
+    <?php endif ?>
+    <?php if ($i == 1): ?>
+      <h1>Besucher der letzen 8 Wochen</h1>
+    <?php endif ?>
+    <p>&nbsp;</p>
+
     <?php
       $raphael = new raphaelizerPiwikStats('stat_'.$i, array_merge($REX['ADDON']['decaf_piwikTracker']['options'],$raphaelizerOptions), $I18N);
       $raphael->setStats($stat);
@@ -101,6 +109,8 @@ $raphaelizerOptions = array();
       print_r($raphael->getMax());
       echo '</xmp></pre>';
     */ ?>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <p>&nbsp;</p>
   <?php endforeach ?>
 <?php endif ?>
