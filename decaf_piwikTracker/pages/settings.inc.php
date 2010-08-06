@@ -34,7 +34,7 @@
     if($message === true)
     {
       $message  = $I18N->msg('piwik_config_saved_error');
-      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/_config.ini.php.php');
+      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/_config.ini.php');
       $search   = array();
       $replace  = array();
 

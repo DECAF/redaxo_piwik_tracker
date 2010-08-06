@@ -53,3 +53,4 @@ if (!$REX['REDAXO'])
 {
   require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");
 }
+
