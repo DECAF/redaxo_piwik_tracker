@@ -7,8 +7,10 @@ class raphaelizer
   public $canvas_id;
   
   private $has_closing_tag;
-  private $valid_attr = array('clip-rect', 'cx', 'cy', 'fill', 'fill-opacity', 'font', 'font-family', 'font-size', 'font-weight', 'height', 'opacity', 'path', 'r', 'rotation', 'rx', 'ry', 'scale', 'src', 'stroke', 'stroke-dash', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'translation', 'width', 'x', 'y');
-
+  // private $valid_attr = array('clip-rect', 'cx', 'cy', 'fill', 'fill-opacity', 'font', 'font-family', 'font-size', 'font-weight', 'height', 'opacity', 'path', 'r', 'rotation', 'rx', 'ry', 'scale', 'src', 'stroke', 'stroke-dash', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'translation', 'width', 'x', 'y');
+  private $valid_attr = array('clip-rect', 'cx', 'cy', 'fill', 'fill-opacity', 'font-size', 'font-weight', 'height', 'opacity', 'path', 'r', 'rotation', 'rx', 'ry', 'scale', 'src', 'stroke', 'stroke-dash', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'translation', 'width', 'x', 'y'); 
+  // IE BUG - This sad excuse of browser can't handle the 'font' attribute
+  
   public function __construct($w, $h, $canvas_id='mycanvas')
   {
     $this->w  = $w;
