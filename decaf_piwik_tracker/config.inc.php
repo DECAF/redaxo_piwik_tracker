@@ -8,7 +8,7 @@
  * @version $Id$
  */
 
-$mypage                           = "decaf_piwikTracker";
+$mypage                           = "decaf_piwik_tracker";
 
 // just in case, we allow url_fopen wrapper
 ini_set("allow_url_fopen", "On");
@@ -22,19 +22,19 @@ if ($REX['REDAXO'])
 
     // add menu buttons
     $settingsPage = new rex_be_page($I18N->msg('piwik_configuration'), array(
-        'page'=>'decaf_piwikTracker',
+        'page'=>'decaf_piwik_tracker',
         'subpage'=>'settings'
       )
     );
 
-    $settingsPage->setHref('index.php?page=decaf_piwikTracker&subpage=settings');
+    $settingsPage->setHref('index.php?page=decaf_piwik_tracker&subpage=settings');
 
     $statsPage = new rex_be_page($I18N->msg('piwik_ministats'), array(
-        'page'=>'decaf_piwikTracker',
+        'page'=>'decaf_piwik_tracker',
         'subpage'=> ''
       )
     );
-    $statsPage->setHref('index.php?page=decaf_piwikTracker');
+    $statsPage->setHref('index.php?page=decaf_piwik_tracker');
 
     $REX['ADDON']['pages'][$mypage] = array (
       $statsPage, $settingsPage
@@ -45,8 +45,8 @@ $REX['ADDON']['rxid'][$mypage]    = "770";
 $REX['ADDON']['page'][$mypage]    = $mypage;
 $REX['ADDON']['version'][$mypage] = "0.1";
 $REX['ADDON']['author'][$mypage]  = "Sven Kesting &lt;sk@decaf.de&gt;, DECAF&deg; | www.decaf.de";
-$REX['ADDON']['perm'][$mypage]    = "decaf_piwiktracker[]";
-$REX['PERM'][]                    = "decaf_piwiktracker[]";
+$REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
+$REX['PERM'][]                    = "decaf_piwik_tracker[]";
 
 $REX['ADDON'][$mypage]['options']['color_background']     = '#eff9f9';
 $REX['ADDON'][$mypage]['options']['color_background_alt'] = '#dfe9e9';
@@ -61,6 +61,6 @@ $REX['ADDON'][$mypage]['options']['show']                 = array('nb_visits');
 // include extension point
 if (!$REX['REDAXO'])
 {
-  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker.inc.php");
+  require_once($REX['INCLUDE_PATH']."/addons/decaf_piwik_tracker/extensions/extension.decaf_piwik_tracker.inc.php");
 }
 

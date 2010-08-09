@@ -23,7 +23,7 @@ piwik_reset                             = Cancel
 piwik_config_saved_error                = Error saving configuration!
 piwik_config_saved_successful           = Configuration saved!
 piwik_config_missing                    = No configuration file found. Please re-install the addon to generate a config.ini
-piwik_config_dir_locked                 = The folder decaf_piwikTracker/config is not writable. Please fix the permissions for this folder.
+piwik_config_dir_locked                 = The folder decaf_piwik_tracker/config is not writable. Please fix the permissions for this folder.
 piwik_allow_url_fopen_off               = To update the statistic with the php include 'allow_url_fopen' must be set turned on in your php.ini
 
 piwik_placeholder_tracker_url           = http://your.stat-server

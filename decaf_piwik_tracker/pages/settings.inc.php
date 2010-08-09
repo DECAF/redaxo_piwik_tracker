@@ -8,7 +8,7 @@
  * @version $Id$
  */
 
-  if (!file_exists($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php'))
+  if (!file_exists($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php'))
   {
     echo rex_warning($I18N->msg('piwik_config_missing'));
     exit;
@@ -17,10 +17,13 @@
 
   $allow_url_fopen = ini_get('allow_url_fopen');
 
-  if (!$allow_url_fopen) {
+  if (!$allow_url_fopen) 
+  {
     $tracking_types = array('Javascript');
     echo rex_warning($I18N->msg('piwik_allow_url_fopen_off'));
-  } else {
+  } 
+  else 
+  {
     $tracking_types = array('Javascript', 'PHP');
   }
 
@@ -28,13 +31,13 @@
 
   if (rex_post('btn_save', 'string') != '')
   {
-    $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php';
+    $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php';
     $message = rex_is_writable($file);
 
     if($message === true)
     {
       $message  = $I18N->msg('piwik_config_saved_error');
-      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/_config.ini.php');
+      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/_config.ini.php');
       $search   = array();
       $replace  = array();
 
@@ -44,14 +47,14 @@
         $replace[]  = $val;
       }
       $config_str = str_replace($search, $replace, $tpl);
-      if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwikTracker/config/config.ini.php', $config_str))
+      if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php', $config_str))
       {
         $message  = $I18N->msg('piwik_config_saved_successful');
       }
     }
   }
 
-  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
+  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/config/config.ini.php', true);
 
   $sel_tracking_method = new rex_select();
   $sel_tracking_method->setId('piwik_tracking_method');
@@ -61,7 +64,8 @@
   foreach($tracking_types as $type)
   $sel_tracking_method->addOption($type,$type);
 
-if($message) {
+if($message) 
+{
   echo rex_info($message);
 }
 ?>

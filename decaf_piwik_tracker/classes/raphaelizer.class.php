@@ -24,7 +24,8 @@ class raphaelizer
   public function canvas($bgcolor = FALSE)
   {
     $this->js .= '  var '.$this->canvas_id.' = Raphael("'.$this->canvas_id.'", '.$this->w.', '.$this->h.');'."\n";
-    if ($bgcolor) {
+    if ($bgcolor) 
+    {
       $this->rect(0,0,$this->w,$this->h,array('fill' => $bgcolor, 'stroke-width' => 0));
     }
   }
@@ -108,7 +109,8 @@ class raphaelizer
   {
     foreach ($attr as $key => $value) 
     {
-      if (in_array($key,$this->valid_attr)) {
+      if (in_array($key,$this->valid_attr)) 
+      {
         $this->js .= '.attr({"'.$key.'":"'.$value.'"})';
       }
     }
@@ -116,7 +118,8 @@ class raphaelizer
 
   public function getJs()
   {
-    if (!$this->has_closing_tag) {
+    if (!$this->has_closing_tag) 
+    {
       $this->setJsClosingTag();
     }
     return $this->js;

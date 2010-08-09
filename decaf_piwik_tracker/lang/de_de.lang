@@ -23,7 +23,7 @@ piwik_reset                             = Verwerfen
 piwik_config_saved_error                = Fehler beim speichern der Konfiguration!
 piwik_config_saved_successful           = Konfiguration erfolgreich gespeichert!
 piwik_config_missing                    = ACHTUNG! Keine Konfigurationsdatei gefunden. Bitte re-installieren Sie das Addon um die config.ini anzulegen.
-piwik_config_dir_locked                 = Das Verzeichnis decaf_piwikTracker/config ist nicht beschreibbar. Bitte passen Sie die Zugriffrechte an.
+piwik_config_dir_locked                 = Das Verzeichnis decaf_piwik_tracker/config ist nicht beschreibbar. Bitte passen Sie die Zugriffrechte an.
 piwik_allow_url_fopen_off               = allow_url_fopen ist abgestellt. Bitte passen Sie Ihre php.ini an (allow_url_fopen = On) um alle Features benutzen zu können.
 
 piwik_placeholder_tracker_url           = http://your.stat-server

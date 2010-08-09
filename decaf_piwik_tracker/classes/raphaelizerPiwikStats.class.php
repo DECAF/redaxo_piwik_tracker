@@ -32,7 +32,8 @@ class raphaelizerPiwikStats extends raphaelizer
     // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
     {
-      if ($this->$key) {
+      if ($this->$key) 
+      {
         $this->$key = $opt;
       }
     }
@@ -90,7 +91,7 @@ class raphaelizerPiwikStats extends raphaelizer
       'font-size'   => '9',
       'fill'        => '#bbb'
     ));
-    $this->image('/files/addons/decaf_piwikTracker/logo.decaf.png',690,237,50,12, array('opacity' => '0.2'), 'logo_decaf');
+    $this->image('/files/addons/decaf_piwik_tracker/logo.decaf.png',690,237,50,12, array('opacity' => '0.2'), 'logo_decaf');
     $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1});');
     $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de");');
     $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
@@ -172,7 +173,8 @@ class raphaelizerPiwikStats extends raphaelizer
           ));
           $y = 243;
       }
-      if (in_array('nb_visits', $this->show)) {
+      if (in_array('nb_visits', $this->show)) 
+      {
         $this->text(80,$y - (50 * $i),$nb_visits_step * $i,
           array(
             'text-anchor' => 'end', 
@@ -198,7 +200,8 @@ class raphaelizerPiwikStats extends raphaelizer
 
   public function drawStatBars()
   {
-    if (!$this->nb_columns) {
+    if (!$this->nb_columns) 
+    {
       return;
     }
 
@@ -283,8 +286,10 @@ class raphaelizerPiwikStats extends raphaelizer
     foreach($this->stats as $date => $values)
     {
       $this->header_date[$i] = $date;
-      foreach($values as $k => $v) {
-        if (in_array($k, $this->show)) {
+      foreach($values as $k => $v) 
+      {
+        if (in_array($k, $this->show)) 
+        {
           $this->header_type[$k] = $k;
           $this->data[$i][$k] = $v;
           if ($v > $max['total'])

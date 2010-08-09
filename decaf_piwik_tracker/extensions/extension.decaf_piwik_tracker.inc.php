@@ -13,10 +13,12 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker');
 /**
  * adds the js code to the html <head> section
  */
-function decaf_piwik_tracker($params) {
+function decaf_piwik_tracker($params) 
+{
   global $REX;
-  if (file_exists($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php')) {
-    $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
+  if (file_exists($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/config/config.ini.php')) 
+  {
+    $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/config/config.ini.php', true);
     $content = $params['subject'];
 
     // Frontend
@@ -43,7 +45,7 @@ function decaf_piwik_tracker($params) {
       }
       if ($piwik_config['piwik']['tracking_method'] == 'PHP' && ini_get('allow_url_fopen')) 
       {
-        require_once($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/classes/PiwikTracker.php');
+        require_once($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/classes/PiwikTracker.php');
         PiwikTracker::$URL = $piwik_config['piwik']['tracker_url'];
         $piwikTracker = new PiwikTracker(  $idSite = $piwik_config['piwik']['site_id']);
         preg_match('/<title>(.*)<\/title>/U', $content, $hits);

@@ -16,9 +16,9 @@ $func = rex_request('func', 'string');
 
 require $REX['INCLUDE_PATH'].'/layout/top.php';
 
-rex_title($I18N->msg('piwik_headline'), $REX['ADDON']['pages']['decaf_piwikTracker']);
+rex_title($I18N->msg('piwik_headline'), $REX['ADDON']['pages']['decaf_piwik_tracker']);
 
-$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwikTracker/config/config.ini.php', true);
+$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/config/config.ini.php', true);
 if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
 {
   $subpage = 'settings';

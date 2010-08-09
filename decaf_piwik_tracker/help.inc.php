@@ -21,7 +21,7 @@
 <h3>Installation:</h3>
 <p>
   &nbsp;&nbsp;» copy all files to the REDAXO-addon folder. <br />
-  &nbsp;&nbsp;» Make sure the  folders 'decaf_piwikTracker' and 'decaf_piwikTracker/config' are writable by the webserver<br />
+  &nbsp;&nbsp;» Make sure the  folders 'decaf_piwik_tracker' and 'decaf_piwik_tracker/config' are writable by the webserver<br />
   &nbsp;&nbsp;» activate the addon
 </p>
 <p>&nbsp;</p>

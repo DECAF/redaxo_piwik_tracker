@@ -7,7 +7,7 @@
  * @package redaxo4
  * @version $Id$
  */
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/extensions/extension.decaf_piwik_tracker_stats.inc.php");  
+require_once($REX['INCLUDE_PATH']."/addons/decaf_piwik_tracker/extensions/extension.decaf_piwik_tracker_stats.inc.php");  
 
 if (!ini_get('allow_url_fopen'))
 {
@@ -76,7 +76,7 @@ else
     }
   }
 }
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwikTracker/classes/raphaelizerPiwikStats.class.php");
+require_once($REX['INCLUDE_PATH']."/addons/decaf_piwik_tracker/classes/raphaelizerPiwikStats.class.php");
 $raphaelizerOptions = array();
 
 
@@ -95,7 +95,7 @@ $raphaelizerOptions = array();
     <p>&nbsp;</p>
 
     <?php
-      $raphael = new raphaelizerPiwikStats('stat_'.$i, array_merge($REX['ADDON']['decaf_piwikTracker']['options'],$raphaelizerOptions), $I18N);
+      $raphael = new raphaelizerPiwikStats('stat_'.$i, array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$raphaelizerOptions), $I18N);
       $raphael->setStats($stat);
       $raphael->canvas('#eff9f9');
       $i++;
