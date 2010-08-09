@@ -36,7 +36,7 @@ class decaf_piwik_tracker_config
     $this->widget_config = parse_ini_file($this->config_widgets_file, true);
   }
 
-
+/*
   public function saveWidgetConfig($widgets)
   {
     $config_str = '';
@@ -105,5 +105,6 @@ api_date          = {{api_date}}
 ';
     return $tpl;
   }
+*/
 
 } // end class  
