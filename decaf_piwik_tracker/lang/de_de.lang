@@ -4,6 +4,7 @@ piwik_headline                          = Besucherstatistik
 piwik_configuration                     = Konfiguration
 piwik_configuration_ministats           = Piwik API Einstellungen
 piwik_ministats                         = Statistik
+piwik_widgets                           = Widgets
 
 piwik_link_caption                      = Komplette Statistik einsehen
 
@@ -13,9 +14,11 @@ piwik_login                             = Benutzername
 piwik_md5_pass                          = Passwort (MD5)
 piwik_token_auth                        = Auth Token
 piwik_tracking_method                   = Tracking Methode
+piwik_widget                            = Widget
+piwik_widget_title                      = Überschrift
 piwik_api_period                        = Zeitraum
 piwik_api_date                          = Datum
-
+piwik_width                             = Breite (px)
 
 piwik_save                              = Speichern
 piwik_reset                             = Verwerfen
@@ -23,16 +26,19 @@ piwik_reset                             = Verwerfen
 piwik_config_saved_error                = Fehler beim speichern der Konfiguration!
 piwik_config_saved_successful           = Konfiguration erfolgreich gespeichert!
 piwik_config_missing                    = ACHTUNG! Keine Konfigurationsdatei gefunden. Bitte re-installieren Sie das Addon um die config.ini anzulegen.
+piwik_config_incomplete                 = Die Konfigurations enthält nicht die notwendigen Parameter
 piwik_config_dir_locked                 = Das Verzeichnis decaf_piwik_tracker/config ist nicht beschreibbar. Bitte passen Sie die Zugriffrechte an.
 piwik_allow_url_fopen_off               = allow_url_fopen ist abgestellt. Bitte passen Sie Ihre php.ini an (allow_url_fopen = On) um alle Features benutzen zu können.
 
-piwik_placeholder_tracker_url           = http://your.stat-server
-piwik_placeholder_site_id               = Site ID für diese Website
-piwik_placeholder_login                 = Piwik Benutzername
-piwik_placeholder_md5_pass              = MD5 verschlüsseltes Passwort
-piwik_placeholder_token_auth            = Auth Token (für API Zugriff)
-piwik_placeholder_api_period            = day, week, month oder year
-piwik_placeholder_api_date              = YYYY-MM-DD, today oder yesterday, lastX, previousX
+piwik_tracker_url_placeholder           = http://your.stat-server
+piwik_site_id_placeholder               = Site ID für diese Website
+piwik_login_placeholder                 = Piwik Benutzername
+piwik_md5_pass_placeholder              = MD5 verschlüsseltes Passwort
+piwik_token_auth_placeholder            = Auth Token (für API Zugriff)
+piwik_widget_title_placeholder          = Überschrift für dieses Widget
+piwik_api_period_placeholder            = day, week, month oder year
+piwik_api_date_placeholder              = YYYY-MM-DD, today oder yesterday, lastX, previousX
+piwik_width_placeholder                 = Breite des Widget in Pixeln
 
 piwik_error_get_stats                   = Fehler beim holen der Statistik von  %s
 

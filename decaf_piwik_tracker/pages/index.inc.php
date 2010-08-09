@@ -33,10 +33,15 @@ switch($subpage)
     require $basedir .'/settings.inc.php';
     break;
 
+  /*
+  case 'widgets' :
+    require $basedir .'/widgets.inc.php';
+    break;
+  */
+
   default:
     $subpage = 'ministats';
     require $basedir .'/ministats.inc.php';
-
 }
 
 require $REX['INCLUDE_PATH'].'/layout/bottom.php';

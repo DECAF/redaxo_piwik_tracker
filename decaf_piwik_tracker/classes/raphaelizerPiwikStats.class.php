@@ -4,6 +4,7 @@ require_once('raphaelizer.class.php');
 
 class raphaelizerPiwikStats extends raphaelizer
 {
+
   private $data;
   private $stats;
   private $header_date;
@@ -27,7 +28,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   private $canvas_h;
 
-  public function __construct($id='stats_canvas', $options=array(), $I18N)
+  public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
   {
     // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
@@ -37,8 +38,9 @@ class raphaelizerPiwikStats extends raphaelizer
         $this->$key = $opt;
       }
     }
+    
     $this->canvas_h = 240 + (count($this->show) * 20);
-    parent::__construct(750, $this->canvas_h, $id);
+    parent::__construct($width, $this->canvas_h, $id);
     $this->stats = array();
     $this->I18N = $I18N;
   }
@@ -62,7 +64,7 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->path(
       array(
         0 => array('x' => 10, 'y' => 211),
-        1 => array('x' => 745, 'y' => 211)
+        1 => array('x' => $this->w-5, 'y' => 211)
       ), 
       array(
         'stroke-width'  => '1', 
@@ -70,7 +72,7 @@ class raphaelizerPiwikStats extends raphaelizer
       )
     );
 
-    $this->segment_width    = round(650 / $this->nb_columns)-1;
+    $this->segment_width    = round(($this->w - 120) / $this->nb_columns);
     $this->bar_width        = round(($this->segment_width / (count($this->show)) - (3/count($this->show))) );
     $this->offset_x         = 100;
     $this->offset_y         = 210;
@@ -85,13 +87,13 @@ class raphaelizerPiwikStats extends raphaelizer
 
   public function drawBranding()
   {
-    $this->text(685, 245,'Addon by', array(
+    $this->text(($this->w - 65), ($this->h - 15),'Addon by', array(
       'text-anchor' => 'end',
       'font'        => 'Helvetica, Verdana, Arial, sans-serif',
       'font-size'   => '9',
       'fill'        => '#bbb'
     ));
-    $this->image('/files/addons/decaf_piwik_tracker/logo.decaf.png',690,237,50,12, array('opacity' => '0.2'), 'logo_decaf');
+    $this->image('/files/addons/decaf_piwik_tracker/logo.decaf.png',($this->w - 60),($this->h - 23),50,12, array('opacity' => '0.2'), 'logo_decaf');
     $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1});');
     $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de");');
     $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
@@ -164,7 +166,7 @@ class raphaelizerPiwikStats extends raphaelizer
       $y = 236;
       if (in_array('nb_actions', $this->show))
       {
-        $this->text(80,228 - (50 * $i),$nb_actions_step * $i,
+        $this->text(80,228 - (50 * $i), $nb_actions_step * $i,
           array(
             'text-anchor' => 'end', 
             'fill'        => $this->color_actions, 
@@ -175,7 +177,7 @@ class raphaelizerPiwikStats extends raphaelizer
       }
       if (in_array('nb_visits', $this->show)) 
       {
-        $this->text(80,$y - (50 * $i),$nb_visits_step * $i,
+        $this->text(80,$y - (50 * $i), $nb_visits_step * $i,
           array(
             'text-anchor' => 'end', 
             'fill'        => (in_array('nb_uniq_visitors',$this->show)) ? $this->color_uniq_visitors : $this->color_visits, 
@@ -218,6 +220,14 @@ class raphaelizerPiwikStats extends raphaelizer
     for( $i=0; $i < $this->nb_columns; $i++ )
     {
       $j=0;
+      $x = ($this->offset_x + ($this->segment_width * $i));
+      $y = $this->offset_y - $h;
+      // draw divider
+      $this->path(array(
+        0 => array('x' => ($x - 1), 'y' => 10),
+        1 => array('x' => ($x - 1), 'y' => 210),
+      ),array('stroke-width' => '1', 'stroke' => $this->color_background));
+      
       foreach($this->show as $type)
       {
         switch ($type)
@@ -237,11 +247,7 @@ class raphaelizerPiwikStats extends raphaelizer
         }
         $x = ($this->offset_x + ($this->segment_width * $i)) + round($this->bar_width * $j);
         $y = $this->offset_y - $h;
-        // draw divider
-        $this->path(array(
-          0 => array('x' => ($x - 1), 'y' => 10),
-          1 => array('x' => ($x - 1), 'y' => 210),
-        ),array('stroke-width' => '1', 'stroke' => $this->color_background));
+
         $this->rect($x,$y,$this->bar_width,$h,array('fill' => '#eff9f9', 'stroke-width' => '0'));
         $elem = 'bar_'.$i.'_'.$j;
         $this->rect($x+1,$y,$this->bar_width-1,$h,array('fill' => $color, 'stroke-width' => '0'), $elem);
@@ -283,15 +289,17 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->header_type  = array();
     $this->data         = array();
 
-    foreach($this->stats as $date => $values)
+    foreach($this->stats as $date => $value)
     {
       $this->header_date[$i] = $date;
-      foreach($values as $k => $v) 
-      {
-        if (in_array($k, $this->show)) 
+      if (count($this->show) > 1) {
+        foreach($value as $k => $v) 
         {
-          $this->header_type[$k] = $k;
-          $this->data[$i][$k] = $v;
+          if (in_array($k, $this->show)) 
+          {
+            $this->header_type[$k] = $k;
+            $this->data[$i][$k] = $v;
+          }
           if ($v > $max['total'])
           {
             $max['total'] = $v;
@@ -300,8 +308,28 @@ class raphaelizerPiwikStats extends raphaelizer
           {
             $max[$k] = $v;
           }
+          
+        }
+      } else {
+        if (is_numeric($value))
+        {
+          $v=$value;
+        } else {
+          $v=FALSE;
+        }
+        $k = $this->show[0];
+        $this->header_type[$k] = $k;
+        $this->data[$i][$k] = $v;
+        if ($v > $max['total'])
+        {
+          $max['total'] = $v;
+        }
+        if ($v > $max[$k])
+        {
+          $max[$k] = $v;
         }
       }
+
       $i++;
     }
     $this->max        = $this->normalizeMax($max);

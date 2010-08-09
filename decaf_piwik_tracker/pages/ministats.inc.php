@@ -7,7 +7,9 @@
  * @package redaxo4
  * @version $Id$
  */
+
 $mypage = "decaf_piwik_tracker";
+$content_width = 745;
 require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');  
 
 if (!ini_get('allow_url_fopen'))
@@ -17,104 +19,90 @@ if (!ini_get('allow_url_fopen'))
 }
 else
 {
-  $periods  = explode(',',$piwik_config['ministats']['api_period']);
-  $dates    = explode(',',$piwik_config['ministats']['api_date']);
+  require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/decaf_piwik_tracker_config.php');  
+  $config = new decaf_piwik_tracker_config($REX['INCLUDE_PATH'] .'/addons/'.$mypage, $I18N);
+  $config->loadWidgetConfig();
 
-  $api_queries = array();
+  $api_query_urls = array();
 
-  for ($i=0; $i<count($periods); $i++)
-  {
-    $api_queries[$i]['period'] = trim($periods[$i]);
-    if (isset($dates[$i])) 
-    {
-      $api_queries[$i]['date'] = trim($dates[$i]);
-    }
-    else
-    {
-      $api_queries[$i]['date'] = trim($dates[0]);
-    }
+  if (!$config->config['piwik']['tracker_url'] || !$config->config['piwik']['site_id'] || !$config->config['piwik']['token_auth']) {
+    echo rex_warning($I18N->msg('piwik_config_incomplete'));
+    exit;
   }
+  $widgets = array();
 
-  $url = array();
-  foreach ($api_queries as $q)
-  {
-    $url[] = $piwik_config['piwik']['tracker_url'].
-      '/?module=API&method=VisitsSummary.get&idSite='.
-      $piwik_config['piwik']['site_id'].
-      '&period='.
-      $q['period'].
-      '&date='.
-      $q['date'].
-      '&format=php'.
-      '&token_auth='.
-      $piwik_config['piwik']['token_auth'].
-      '&columns=nb_uniq_visitors,nb_visits,nb_actions';
-  }
-  try
-  { // FIXME
-    $result = array();
-    foreach($url as $u)
+  foreach ($config->widget_config as $key => $value) {
+    $widgets[$key]['url'] = trim(sprintf(
+      '%s/?module=API&idSite=%s&token_auth=%s&method=%s&period=%s&date=%s&format=php&columns=%s',
+      $config->config['piwik']['tracker_url'],
+      $config->config['piwik']['site_id'],
+      $config->config['piwik']['token_auth'],
+      'VisitsSummary.get',
+      $value['api_period'],
+      $value['api_date'],
+      $value['columns']
+    ));
+    $widgets[$key]['config'] = $value;
+    $r = file_get_contents($widgets[$key]['url']);
+    $widgets[$key]['stats'] = unserialize($r);
+    if (isset($widgets[$key]['stats']['result']) && isset($widgets[$key]['stats']['message']))
     {
-      $result[] = file_get_contents($u);
+      $stats_error = true;
+      echo rex_warning('Piwik API: '.$widgets[$key]['stats']['message']);
     }
+    
   }
-  catch (Exception $e)
+  if ($stats_error)
   {
-    $stats_error = true;
-    echo rex_warning(sprintf($I18N->msg('piwik_error_get_stats'),$piwik_config['piwik']['tracker_url']));
-  }
-  $stats = array();
-  foreach($result as $r)
-  {
-    if ($r)
-    {
-      $stats[] = unserialize($r);
-      if (isset($stats['result']) && isset($stats['message']))
-      {
-        $stats_error = true;
-        echo rex_warning('Piwik API: '.$stats['message']);
-      }
-    }
+    echo rex_warning(sprintf($I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
   }
 }
+
 require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikStats.class.php');
-$raphaelizerOptions = array();
-
-
-
 ?>
 <?php if (!$stats_error): ?>
   <?php $i = 0; ?>
-  <?php foreach ($stats as $stat): ?>
-
-    <?php if ($i == 0): ?>
-      <h1>Besucher der letzen 21 Tage</h1>
+  <?php $w = 0; ?>
+  <?php foreach ($widgets as $widget): ?>
+    <?php $w = $w + $widget['config']['width']; ?>
+    <?php if ($w <= $content_width - 20): ?>
+      <?php $margin = 20; ?>
+      <?php $w = $w + 20; ?>
+    <?php else: ?>
+      <?php $margin = 0; ?>
+      <?php  $w = 0; ?>
     <?php endif ?>
-    <?php if ($i == 1): ?>
-      <h1>Besucher der letzen 8 Wochen</h1>
-    <?php endif ?>
-    <p>&nbsp;</p>
+    <div style="float: left; width: <?php echo $widget['config']['width'] ?>px; margin-right: <?php echo $margin ?>px;">
+      <h1><?php echo $widget['config']['widget_title'] ?></h1>
+      <p>&nbsp;</p>
+      <?php
 
-    <?php
-      $raphael = new raphaelizerPiwikStats('stat_'.$i, array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$raphaelizerOptions), $I18N);
-      $raphael->setStats($stat);
-      $raphael->canvas('#eff9f9');
-      $i++;
-    ?>
-    <?php echo $raphael->getJs(); ?>
-    
-    <?php /*
-      echo '<pre><xmp>';
-      print_r($raphael->getJs());
-      print_r($raphael->getData());
-      print_r($raphael->getMax());
-      echo '</xmp></pre>';
-    */ ?>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
+        $columns['show'] = explode(',',$widget['config']['columns']);
+
+        $options = array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$columns);
+
+        $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $I18N);
+        $raphael->setStats($widget['stats']);
+        $raphael->canvas('#eff9f9');
+        $i++;
+      ?>
+      <?php echo $raphael->getJs(); ?>
+
+      <?php /*
+        echo '<pre><xmp>';
+        print_r($raphael->getJs());
+        print_r($raphael->getData());
+        print_r($raphael->getMax());
+        echo '</xmp></pre>';
+      */ ?>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <?php $i++; ?>
   <?php endforeach ?>
 <?php endif ?>
+<div style="clear: both"></div>
 
 <h2>
   <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
