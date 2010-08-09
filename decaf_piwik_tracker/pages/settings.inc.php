@@ -7,62 +7,63 @@
  * @package redaxo4
  * @version $Id$
  */
+$mypage = "decaf_piwik_tracker";
 
-  if (!file_exists($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php'))
+if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php'))
+{
+  echo rex_warning($I18N->msg('piwik_config_missing'));
+  exit;
+}
+
+
+$allow_url_fopen = ini_get('allow_url_fopen');
+
+if (!$allow_url_fopen) 
+{
+  $tracking_types = array('Javascript');
+  echo rex_warning($I18N->msg('piwik_allow_url_fopen_off'));
+} 
+else 
+{
+  $tracking_types = array('Javascript', 'PHP');
+}
+
+$message = FALSE;
+
+if (rex_post('btn_save', 'string') != '')
+{
+  $file = $REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php';
+  $message = rex_is_writable($file);
+
+  if($message === true)
   {
-    echo rex_warning($I18N->msg('piwik_config_missing'));
-    exit;
-  }
+    $message  = $I18N->msg('piwik_config_saved_error');
+    $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/_config.ini.php');
+    $search   = array();
+    $replace  = array();
 
-
-  $allow_url_fopen = ini_get('allow_url_fopen');
-
-  if (!$allow_url_fopen) 
-  {
-    $tracking_types = array('Javascript');
-    echo rex_warning($I18N->msg('piwik_allow_url_fopen_off'));
-  } 
-  else 
-  {
-    $tracking_types = array('Javascript', 'PHP');
-  }
-
-  $message = FALSE;
-
-  if (rex_post('btn_save', 'string') != '')
-  {
-    $file = $REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php';
-    $message = rex_is_writable($file);
-
-    if($message === true)
+    foreach($_POST as $key => $val)
     {
-      $message  = $I18N->msg('piwik_config_saved_error');
-      $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/_config.ini.php');
-      $search   = array();
-      $replace  = array();
-
-      foreach($_POST as $key => $val)
-      {
-        $search[]   = '{{'.$key.'}}';
-        $replace[]  = $val;
-      }
-      $config_str = str_replace($search, $replace, $tpl);
-      if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/decaf_piwik_tracker/config/config.ini.php', $config_str))
-      {
-        $message  = $I18N->msg('piwik_config_saved_successful');
-      }
+      $search[]   = '{{'.$key.'}}';
+      $replace[]  = $val;
+    }
+    $config_str = str_replace($search, $replace, $tpl);
+    if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php', $config_str))
+    {
+      $message  = $I18N->msg('piwik_config_saved_successful');
     }
   }
+}
 
-  $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/decaf_piwik_tracker/config/config.ini.php', true);
+$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
 
-  $sel_tracking_method = new rex_select();
-  $sel_tracking_method->setId('piwik_tracking_method');
-  $sel_tracking_method->setName('tracking_method');
-  $sel_tracking_method->setSize(1);
-  $sel_tracking_method->setSelected($piwik_config['piwik']['tracking_method']);
-  foreach($tracking_types as $type)
-  $sel_tracking_method->addOption($type,$type);
+$sel_tracking_method = new rex_select();
+$sel_tracking_method->setId('piwik_tracking_method');
+$sel_tracking_method->setName('tracking_method');
+$sel_tracking_method->setSize(1);
+$sel_tracking_method->setSelected($piwik_config['piwik']['tracking_method']);
+foreach($tracking_types as $type)
+$sel_tracking_method->addOption($type,$type);
 
 if($message) 
 {

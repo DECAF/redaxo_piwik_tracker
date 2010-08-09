@@ -7,7 +7,8 @@
  * @package redaxo4
  * @version $Id$
  */
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwik_tracker/extensions/extension.decaf_piwik_tracker_stats.inc.php");  
+$mypage = "decaf_piwik_tracker";
+require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');  
 
 if (!ini_get('allow_url_fopen'))
 {
@@ -76,7 +77,7 @@ else
     }
   }
 }
-require_once($REX['INCLUDE_PATH']."/addons/decaf_piwik_tracker/classes/raphaelizerPiwikStats.class.php");
+require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikStats.class.php');
 $raphaelizerOptions = array();
 
 

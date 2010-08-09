@@ -8,10 +8,11 @@
  * @version $Id$
  */
 
-$mypage                           = "decaf_piwik_tracker";
+$mypage = "decaf_piwik_tracker";
+
 
 // just in case, we allow url_fopen wrapper
-ini_set("allow_url_fopen", "On");
+// ini_set("allow_url_fopen", "On");
 
 if ($REX['REDAXO'])
 {
