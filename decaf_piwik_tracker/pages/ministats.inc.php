@@ -43,6 +43,7 @@ else
       $value['columns']
     ));
     $widgets[$key]['config'] = $value;
+    $widgets[$key]['title'] = $config->getI18nTitle($value);
     $r = file_get_contents($widgets[$key]['url']);
     $widgets[$key]['stats'] = unserialize($r);
     if (isset($widgets[$key]['stats']['result']) && isset($widgets[$key]['stats']['message']))
@@ -50,7 +51,6 @@ else
       $stats_error = true;
       echo rex_warning('Piwik API: '.$widgets[$key]['stats']['message']);
     }
-    
   }
   if ($stats_error)
   {
@@ -64,6 +64,11 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
   <?php $i = 0; ?>
   <?php $w = 0; ?>
   <?php foreach ($widgets as $widget): ?>
+    <?php
+      $columns['show'] = explode(',',$widget['config']['columns']);
+      $options = array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$columns);
+      $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $I18N);
+    ?>
     <?php $w = $w + $widget['config']['width']; ?>
     <?php if ($w <= $content_width - 20): ?>
       <?php $margin = 20; ?>
@@ -73,29 +78,14 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
       <?php  $w = 0; ?>
     <?php endif ?>
     <div style="float: left; width: <?php echo $widget['config']['width'] ?>px; margin-right: <?php echo $margin ?>px;">
-      <h1><?php echo $widget['config']['widget_title'] ?></h1>
+      <h2><?php echo $widget['title'] ?></h2>
       <p>&nbsp;</p>
       <?php
-
-        $columns['show'] = explode(',',$widget['config']['columns']);
-
-        $options = array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$columns);
-
-        $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $I18N);
         $raphael->setStats($widget['stats']);
         $raphael->canvas('#eff9f9');
         $i++;
       ?>
       <?php echo $raphael->getJs(); ?>
-
-      <?php /*
-        echo '<pre><xmp>';
-        print_r($raphael->getJs());
-        print_r($raphael->getData());
-        print_r($raphael->getMax());
-        echo '</xmp></pre>';
-      */ ?>
-
       <p>&nbsp;</p>
       <p>&nbsp;</p>
     </div>

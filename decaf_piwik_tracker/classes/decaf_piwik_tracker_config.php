@@ -36,6 +36,45 @@ class decaf_piwik_tracker_config
     $this->widget_config = parse_ini_file($this->config_widgets_file, true);
   }
 
+
+  public function getI18nTitle($conf)
+  {
+    if ($conf['widget_title'])
+    {
+      return $conf['widget_title'];
+    }
+    $title = '';
+    $type_items = explode(',',$conf['columns']);
+    if (count($type_items > 2)) 
+    {
+      foreach ($type_items as &$item) 
+      {
+        $item = $this->I18N->msg($item);
+      }
+      $tmp = $this->I18N->msg('and') .' ' . array_pop($type_items);
+      $title .= implode(', ',$type_items) . ' ' . $tmp;
+    } 
+    else 
+    {
+      $title .= implode($this->I18N->msg('and'),$type_items);
+    }
+    $title .= ' ';
+
+    if (substr($conf['api_date'], 0, 4) == 'last') {
+      $quantity = substr($conf['api_date'], 4, strlen($conf['api_date']));
+      if ($quantity > 1) 
+      {
+        $title .= sprintf($this->I18N->msg('last_'.$conf['api_period'].'s'), $quantity);
+      } 
+      else 
+      {
+        $title .= $this->I18N->msg('last_'.$conf['api_period']);
+      }
+    }
+    return $title;
+  }
+
+
 /*
   public function saveWidgetConfig($widgets)
   {
@@ -73,7 +112,6 @@ class decaf_piwik_tracker_config
     }
     return $message;
   }
-
 
   private function getWidgetConfigTemplate()
   {

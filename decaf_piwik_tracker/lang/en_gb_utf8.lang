@@ -47,6 +47,15 @@ piwik_error_get_stats                   = Error retrieving statistic from %s
 nb_uniq_visitors                        = Unique visitors
 nb_visits                               = Visits
 nb_actions                              = Pageviews
+day                                     = day
+days                                    = %d days
+week                                    = week
+weeks                                   = %d weeks
+month                                   = month
+months                                  = %d months
+year                                    = year
+years                                   = %d years
+and                                     = and
 
 date_format_day                         = m/d
 date_format_week                        = \W\e\ek W

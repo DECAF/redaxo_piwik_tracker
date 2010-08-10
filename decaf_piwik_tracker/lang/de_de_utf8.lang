@@ -45,6 +45,18 @@ piwik_error_get_stats                   = Fehler beim holen der Statistik von  %
 nb_uniq_visitors                        = Eindeutige Besucher
 nb_visits                               = Besucher
 nb_actions                              = Seitenansichten
+last_day                                = von heute
+last_days                               = der letzten %d Tage
+last_week                               = diese Woche
+last_weeks                              = der letzten %d Wochen
+last_month                              = diesen Monat
+last_months                             = der letzten %d Monate
+last_year                               = dieses Jahr
+last_years                              = der letzten %d Jahre
+and                                     = und
+
+
+
 
 date_format_day                         = j.n.
 date_format_week                        = K\W W
