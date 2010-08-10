@@ -35,7 +35,6 @@ $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
 // $REX['ADDON'][$mypage]['options']['show']                 = array('nb_visits');
 
 
-
 if ($REX['REDAXO'])
 {
   // looad localized strings

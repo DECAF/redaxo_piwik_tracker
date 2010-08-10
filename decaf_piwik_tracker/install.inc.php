@@ -40,6 +40,13 @@ else
     $config_str = str_replace($search, $replace, $tpl);
     file_put_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php', $config_str);
   }
+  // now copy widgets.ini.php (if not exists)
+  $file = $REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/widgets.ini.php';
+  if (!file_exists($file)) 
+  {
+    $content = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/_widgets.ini.php');
+    file_put_contents($file, $content);
+  }  
 }
 
 if (!$error) 

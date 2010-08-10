@@ -17,7 +17,6 @@ $subpage = rex_request('subpage', 'string');
 $func = rex_request('func', 'string');
 
 require $REX['INCLUDE_PATH'].'/layout/top.php';
-
 rex_title($I18N->msg('piwik_headline'), $REX['ADDON']['pages'][$mypage]);
 
 $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
@@ -26,19 +25,18 @@ if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id']
   $subpage = 'settings';
 }
 
+if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/widgets.ini.php'))
+{
+  echo rex_warning($I18N->msg('piwik_config_missing'));
+  exit;
+}
+
 // Include Current Page
 switch($subpage)
 {
   case 'settings' :
     require $basedir .'/settings.inc.php';
     break;
-
-  /*
-  case 'widgets' :
-    require $basedir .'/widgets.inc.php';
-    break;
-  */
-
   default:
     $subpage = 'ministats';
     require $basedir .'/ministats.inc.php';
