@@ -44,7 +44,7 @@ if (rex_post('btn_save', 'string') != '')
 
     foreach($_POST as $key => $val)
     {
-      $search[]   = '{{'.$key.'}}';
+      $search[]   = '@@'.$key.'@@';
       $replace[]  = $val;
     }
     $config_str = str_replace($search, $replace, $tpl);

@@ -34,7 +34,7 @@ else
     $tpl = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/_config.ini.php');
     foreach($cfg as $key => $val)
     {
-      $search[]   = '{{'.$key.'}}';
+      $search[]   = '@@'.$key.'@@';
       $replace[]  = '';
     }
     $config_str = str_replace($search, $replace, $tpl);
