@@ -45,18 +45,20 @@ class decaf_piwik_tracker_config
     }
     $title = '';
     $type_items = explode(',',$conf['columns']);
-    if (count($type_items > 2)) 
+    foreach ($type_items as &$item) 
     {
-      foreach ($type_items as &$item) 
-      {
-        $item = $this->I18N->msg($item);
-      }
+      $item = $this->I18N->msg($item);
+    }
+    
+
+    if (count($type_items) > 2) 
+    {
       $tmp = $this->I18N->msg('and') .' ' . array_pop($type_items);
       $title .= implode(', ',$type_items) . ' ' . $tmp;
     } 
     else 
     {
-      $title .= implode($this->I18N->msg('and'),$type_items);
+      $title .= implode(' '.$this->I18N->msg('and').' ',$type_items);
     }
     $title .= ' ';
 
@@ -71,6 +73,7 @@ class decaf_piwik_tracker_config
         $title .= $this->I18N->msg('last_'.$conf['api_period']);
       }
     }
+    
     return $title;
   }
 
