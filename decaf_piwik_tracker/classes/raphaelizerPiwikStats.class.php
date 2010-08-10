@@ -1,6 +1,22 @@
 <?php
-require_once('raphaelizer.class.php');
+/*---------------------------------------------------------------------------+
+|              ________ __________________________ __________                |
+|              ___  __ \___  ____/__  ____/___    |___  ____/                |
+|              __  / / /__  __/   _  /     __  /| |__  /_                    |
+|              _  /_/ / _  /___   / /___   _  ___ |_  __/                    |
+|              /_____/  /_____/   \____/   /_/  |_|/_/                       |
+|                                                                            |
+|              DECAF° - agentur für digitale kommunikation                   |
+|              http://www.decaf.de         <info@decaf.de>                   |
++---------------------------------------------------------------------------*/
+/**
+  * @author    Sven Kesting <sk@decaf.de>
+  * @version   $Id$
+  * @copyright DECAF GmbH & Co. KG, 08 August, 2010
+  * @package   Piwik Tracker
+**/
 
+require_once('raphaelizer.class.php');
 
 class raphaelizerPiwikStats extends raphaelizer
 {
@@ -11,23 +27,27 @@ class raphaelizerPiwikStats extends raphaelizer
   private $header_type;
   private $nb_columns;
   private $max;
-
   private $color_background       = '#eff9f9';
   private $color_background_alt   = '#dfe9e9';
   private $color_visits           = '#3c9ed0';
   private $color_uniq_visitors    = '#14568a';
   private $color_actions          = '#5ab8ef';
   private $color_text             = '#000';
-  
   private $show                   = array('nb_uniq_visitors', 'nb_visits', 'nb_actions');
-
   private $segment_width;
   private $bar_width;
   private $offset_x;
   private $offset_y;
-
   private $canvas_h;
 
+
+  /**
+   * (void)__construct((str)id,(int)w,(array)options,(object)I18N)
+   * 
+   * Constructor for class raphaelizerPiwikStats
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
   {
     // TODO: width & height needs to be setable
@@ -45,12 +65,28 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->I18N = $I18N;
   }
 
+
+  /**
+   * (void)setStats((array)stats)
+   * 
+   * set stats and calls setData
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function setStats($stats = array())
   {
     $this->stats = $stats;
     $this->setData();
   }
 
+
+  /**
+   * (void)canvas((str)bgcolor)
+   * 
+   * prepares the widget
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function canvas($bgcolor=FALSE)
   {
     parent::canvas($bgcolor);
@@ -85,6 +121,13 @@ class raphaelizerPiwikStats extends raphaelizer
   }
 
 
+  /**
+   * (void)drawBranding()
+   * 
+   * draws decaf logo on the canvas
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function drawBranding()
   {
     $this->text(($this->w - 65), ($this->h - 15),'Addon by', array(
@@ -99,6 +142,14 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
   }
 
+
+  /**
+   * (void)drawLegend()
+   * 
+   * draws the legend on the canvas
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function drawLegend()
   {
     $x = 10;
@@ -135,6 +186,13 @@ class raphaelizerPiwikStats extends raphaelizer
   }
 
 
+  /**
+   * (void)drawCaptions()
+   * 
+   * draws the captions on the canvas
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function drawCaptions()
   {
     $i=0;
@@ -156,6 +214,14 @@ class raphaelizerPiwikStats extends raphaelizer
     }
   }
 
+
+  /**
+   * (void)drawScale()
+   * 
+   * draws the scale on the canvas
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function drawScale()
   {
     $nb_actions_step      = $this->max['nb_actions'] / 4;
@@ -200,6 +266,14 @@ class raphaelizerPiwikStats extends raphaelizer
     }
   }
 
+
+  /**
+   * (void)drawStatBars()
+   * 
+   * draws the bars for the statistics on the canvas
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function drawStatBars()
   {
     if (!$this->nb_columns) 
@@ -276,6 +350,14 @@ class raphaelizerPiwikStats extends raphaelizer
     
   }
 
+
+  /**
+   * (void)setData()
+   * 
+   * set the data so raphael can use it, set max for the different types
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function setData()
   {
     $i=0;
@@ -336,6 +418,14 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->nb_columns = count($this->header_date);
   }
 
+
+  /**
+   * (array)normalizeMax((array)max)
+   * 
+   * normalize the maximums
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   private function normalizeMax($max)
   {
     foreach ($max as &$m)
@@ -356,31 +446,69 @@ class raphaelizerPiwikStats extends raphaelizer
     return $max;
   }
 
+
+  /**
+   * (array)getData()
+   * 
+   * getter for data
+   **/
   public function getData()
   {
     return $this->data;
   }
 
+
+  /**
+   * (array)getMax()
+   * 
+   * getter for max
+   **/
   public function getMax()
   {
     return $this->max;
   }
 
+
+  /**
+   * (int)getNbColumns()
+   * 
+   * getter for nb_columns
+   **/
   public function getNbColumns()
   {
     return $this->nb_columns;
   }
 
-  public function getHeaderDate()
+
+  /**
+   * (array)getHeaderDate()
+   * 
+   * getter for header_date
+   **/
+   public function getHeaderDate()
   {
     return $this->header_date;
   }
 
-  public function getHeaderType()
+
+  /**
+   * (array)getHeaderType()
+   * 
+   * getter for header_type
+   **/  
+   public function getHeaderType()
   {
     return $this->header_type;
   }
-  
+
+
+  /**
+   * (str)convertPiwikDate((str)str)
+   * 
+   * converts the timestring delivered by Pikwik to something more readable
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   private function convertPiwikDate($str)
   {
     $retval = $str;

@@ -1,4 +1,22 @@
 <?php
+/*---------------------------------------------------------------------------+
+|              ________ __________________________ __________                |
+|              ___  __ \___  ____/__  ____/___    |___  ____/                |
+|              __  / / /__  __/   _  /     __  /| |__  /_                    |
+|              _  /_/ / _  /___   / /___   _  ___ |_  __/                    |
+|              /_____/  /_____/   \____/   /_/  |_|/_/                       |
+|                                                                            |
+|              DECAF° - agentur für digitale kommunikation                   |
+|              http://www.decaf.de         <info@decaf.de>                   |
++---------------------------------------------------------------------------*/
+/**
+  * @author    Sven Kesting <sk@decaf.de>
+  * @version   $Id$
+  * @copyright DECAF GmbH & Co. KG, 08 August, 2010
+  * @package   Piwik Tracker
+**/
+
+
 class decaf_piwik_tracker_config
 {
   public $config;
@@ -10,6 +28,13 @@ class decaf_piwik_tracker_config
   private $addon_path;
 
 
+  /**
+   * (void)__construct((str)addon_path,(object)I18N)
+   * 
+   * Constructor for decaf_piwik_tracker_config
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function __construct($addon_path, $I18N)
   {
     $this->config_file          = $config_file;
@@ -24,19 +49,39 @@ class decaf_piwik_tracker_config
     $this->loadConfig();
   }
 
-
+  /**
+   * (void)loadConfig()
+   * 
+   * sets config by parsing config_file
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function loadConfig()
   {
     $this->config = parse_ini_file($this->config_file, true);
   }
 
-
+  /**
+   * (void)loadWidgetConfig()
+   * 
+   * sets widget_config by parsing config_widgets_file
+   * 
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function loadWidgetConfig()
   {
     $this->widget_config = parse_ini_file($this->config_widgets_file, true);
   }
 
-
+  /**
+   * (str)getI18nTitle((array($conf)))
+   * 
+   * gets the title from the passed config array.
+   * if the config array has 'widget_title' set, this is returned
+   * 
+   * @return string
+   * @author Sven Kesting <sk@decaf.de>
+   **/
   public function getI18nTitle($conf)
   {
     if ($conf['widget_title'])
@@ -49,7 +94,6 @@ class decaf_piwik_tracker_config
     {
       $item = $this->I18N->msg($item);
     }
-    
 
     if (count($type_items) > 2) 
     {
@@ -62,7 +106,8 @@ class decaf_piwik_tracker_config
     }
     $title .= ' ';
 
-    if (substr($conf['api_date'], 0, 4) == 'last') {
+    if (substr($conf['api_date'], 0, 4) == 'last') 
+    {
       $quantity = substr($conf['api_date'], 4, strlen($conf['api_date']));
       if ($quantity > 1) 
       {
@@ -73,79 +118,7 @@ class decaf_piwik_tracker_config
         $title .= $this->I18N->msg('last_'.$conf['api_period']);
       }
     }
-    
     return $title;
   }
-
-
-/*
-  public function saveWidgetConfig($widgets)
-  {
-    $config_str = '';
-    $tpl = $this->getWidgetConfigTemplate();
-
-    foreach($widgets as $key => $widget)
-    {
-      $search   = array();
-      $replace  = array();
-      $search[]   = '{{key}}';
-      $replace[]  = $key;
-
-      foreach ($widget as $k => $v)
-      {
-        $search[]   = '{{'.$k.'}}';
-        $replace[]  = $v;
-      }
-      
-      $config_str .= str_replace($search, $replace, $tpl);
-      
-    }
-    $config_str = "; <?php die('No Access');\n" . $config_str;
-
-    $message = rex_is_writable($this->config_widgets_file);
-
-    if($message === true)
-    {
-      $message  = $this->I18N->msg('piwik_config_saved_error');
-      if (file_put_contents($this->config_widgets_file, $config_str))
-      {
-        $message  = $this->I18N->msg('piwik_config_saved_successful');
-        $this->loadWidgetConfig();
-      }
-    }
-    return $message;
-  }
-
-  private function getWidgetConfigTemplate()
-  {
-    $tpl = '[{{key}}]
-widget_title      = {{widget_title}}
-api_period        = {{api_period}}
-api_date          = {{api_date}}
-width             = {{width}}
-
-';
-    return $tpl;
-  }
-
-
-  private function getConfigTemplate()
-  {
-    $tpl = '; <?php die(\'No access\');
-[piwik]
-tracker_url       = {{tracker_url}}
-site_id           = {{site_id}}
-login             = {{login}}
-pass_md5          = {{pass_md5}}
-token_auth        = {{token_auth}}
-tracking_method   = {{tracking_method}}
-
-[ministats]
-api_period        = {{api_period}}
-api_date          = {{api_date}}
-';
-    return $tpl;
-  }
-*/
 
 } // end class  
