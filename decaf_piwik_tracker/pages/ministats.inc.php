@@ -95,6 +95,10 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
 <div style="clear: both"></div>
 
 <h2>
+<?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']): ?>
   <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
+<?php else: ?>
+  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
+<?php endif ?>
 </h2>
 
