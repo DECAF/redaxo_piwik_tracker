@@ -80,13 +80,13 @@ if($message)
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $I18N->msg('piwik_tracker_url'); ?></label>
-              <input type="text" name="tracker_url" id="piwik_tracker_url" value="<?php echo $piwik_config['piwik']['tracker_url'] ?>" placeholder="<?php echo $I18N->msg('piwikr_tracker_url_placeholde') ?>" />
+              <input type="text" name="tracker_url" id="piwik_tracker_url" value="<?php echo $piwik_config['piwik']['tracker_url'] ?>" placeholder="<?php echo $I18N->msg('piwik_tracker_url_placeholder') ?>" />
             </p>
           </div>
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $I18N->msg('piwik_site_id'); ?></label>
-              <input type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $I18N->msg('piwik_site_id_placeholde') ?>" />
+              <input type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $I18N->msg('piwik_site_id_placeholder') ?>" />
             </p>
           </div>
           <div class="rex-form-row">
