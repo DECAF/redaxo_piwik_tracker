@@ -8,6 +8,11 @@ About decaf\_piwik\_tracker
 This REDAXO addon adds the necessary Javescript- or PHP-Code to track your visitors with Piwik. Some statistics can be displayed in the REDAXO backend.
 
 
+Changelog
+---------
+
+**1.0.2:** Initial release
+
 Requirements
 ------------
 
