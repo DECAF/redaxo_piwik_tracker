@@ -7,8 +7,8 @@ Dieses REDAXO addon fügt den notwendigen Javascript- bzw. PHP-Code hinzu, um di
 
 h2. Voraussetzungen
 
-  * ein Piwik-Server
-  * PHP 5.2+
-  * REDAXO 4.2+
+* ein Piwik-Server
+* PHP 5.2+
+* REDAXO 4.2+
 
 Wenn Sie die PHP-Methode zum Tracking benutzen und die Statistic direkt im REDAXO Backend anzeigen möchten, muss 'allow_url_fopen' angestellt sein.

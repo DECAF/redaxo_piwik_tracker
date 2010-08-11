@@ -11,11 +11,12 @@
 switch ($REX['LANG']) {
    case "de_de": 
    case "de_de_utf8":
-      $file = "LIESMICH.textile"; 
+      $file = dirname( __FILE__) .'/LIESMICH.textile'; 
       break;
    default: 
-      $file = "README.textile"; 
+      $file = dirname( __FILE__) .'README.textile'; 
 }
+
 if(is_readable($file)) 
 {
   $content = file_get_contents($file);
