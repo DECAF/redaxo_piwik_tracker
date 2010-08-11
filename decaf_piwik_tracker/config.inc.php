@@ -12,7 +12,7 @@ $mypage = 'decaf_piwik_tracker';
 
 $REX['ADDON']['rxid'][$mypage]    = "770";
 $REX['ADDON']['page'][$mypage]    = $mypage;
-$REX['ADDON']['version'][$mypage] = "1.0.0";
+$REX['ADDON']['version'][$mypage] = "1.0.3";
 $REX['ADDON']['author'][$mypage]  = "Sven Kesting &lt;sk@decaf.de&gt;, DECAF&deg; | www.decaf.de";
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";
