@@ -7,7 +7,7 @@
  * @package redaxo4
  * @version $Id$
  */
-$mypage = "decaf_piwik_tracker";
+$mypage = 'decaf_piwik_tracker';
 
 if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php'))
 {

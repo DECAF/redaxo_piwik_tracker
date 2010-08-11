@@ -8,6 +8,6 @@
  * @version $Id$
  */
 
-$mypage = "decaf_piwik_tracker";
+$mypage = 'decaf_piwik_tracker';
 
 $REX['ADDON']['install'][$mypage] = 0;

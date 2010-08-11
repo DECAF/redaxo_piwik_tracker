@@ -1,12 +1,13 @@
-README
-======
+h1. README
 
-About decaf_piwik_tracker
--------------------------
+h2. About decaf_piwik_tracker
 
-This REDAXO addon 
+This REDAXO addon adds the necessary Javescript- or PHP-Code to track your visitors with Piwik.
 
-Requirements
-------------
 
-This addon requires at least PHP 5.2 and REDAXO 4.3. To use it you need Piwik installed somewhere.
+h2. Requirements
+
+  * PHP 5.2+
+  * REDAXO 4.2+
+
+If you want to track your visitors using PHP-Code and display the statistics in REDAXO 'allow_url_fopen' needs to be turned on.

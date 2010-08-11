@@ -8,7 +8,7 @@
  * @version $Id$
  */
 
-$mypage = "decaf_piwik_tracker";
+$mypage = 'decaf_piwik_tracker';
 
 $REX['ADDON']['rxid'][$mypage]    = "770";
 $REX['ADDON']['page'][$mypage]    = $mypage;
@@ -34,13 +34,26 @@ if ($REX['REDAXO'])
   if($REX['REDAXO'])
   {
     $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
-    $REX['ADDON'][$mypage]['SUBPAGES'] = array (
-      array ('', $I18N->msg('piwik_headline')),
-    );
-    if($REX_USER && ($REX_USER->isValueOf('rights','admin[]') || $REX_USER->isValueOf('rights','decaf_piwik_tracker[config]') ))
+    $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
+    if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
     {
-      $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('settings', $I18N->msg('piwik_configuration'));
+      if($REX_USER && ($REX_USER->isValueOf('rights','admin[]') || $REX_USER->isValueOf('rights','decaf_piwik_tracker[config]') ))
+      {
+        $REX['ADDON'][$mypage]['SUBPAGES'] = array (
+          array ('settings', $I18N->msg('piwik_configuration')),
+        );
+      }
     }
+    else {
+      $REX['ADDON'][$mypage]['SUBPAGES'] = array (
+        array ('', $I18N->msg('piwik_headline')),
+      );
+      if($REX_USER && ($REX_USER->isValueOf('rights','admin[]') || $REX_USER->isValueOf('rights','decaf_piwik_tracker[config]') ))
+      {
+        $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('settings', $I18N->msg('piwik_configuration'));
+      }
+    }
+    
   }
 }
 

@@ -15,7 +15,7 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker');
  */
 function decaf_piwik_tracker($params) 
 {
-  $mypage = "decaf_piwik_tracker";
+  $mypage = 'decaf_piwik_tracker';
   global $REX;
   if (file_exists($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php')) 
   {

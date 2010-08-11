@@ -3,7 +3,7 @@
 api_period        = day                                       ; day, week, month or year
 api_date          = last14                                    ; lastX, previousX
 width             = 745                                       ; width in px
-columns           = nb_visits,nb_actions                      ; nb_uniq_visitors,nb_visits,nb_actions (No spaces!)
+columns           = nb_visits                                 ; nb_uniq_visitors,nb_visits,nb_actions (No spaces!)
 
 ; [1]
 ; api_period        = week
