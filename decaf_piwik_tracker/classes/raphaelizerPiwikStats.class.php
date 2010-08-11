@@ -48,7 +48,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * @author Sven Kesting <sk@decaf.de>
    **/
-  public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
+  public function __construct($id='stats_canvas', $width = 745, $options=array(), $piwik_I18N)
   {
     // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
@@ -62,7 +62,7 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->canvas_h = 240 + (count($this->show) * 20);
     parent::__construct($width, $this->canvas_h, $id);
     $this->stats = array();
-    $this->I18N = $I18N;
+    $this->I18N = $piwik_I18N;
   }
 
 
@@ -138,7 +138,7 @@ class raphaelizerPiwikStats extends raphaelizer
     ));
     $this->image('/files/addons/decaf_piwik_tracker/logo.decaf.gif',($this->w - 60),($this->h - 23),50,12, array('opacity' => '0.2'), 'logo_decaf');
     $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1});');
-    $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de/?redaxo-piwik-tracker");');
+    $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de/rpa");');
     $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
   }
 

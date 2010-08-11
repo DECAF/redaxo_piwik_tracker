@@ -19,14 +19,7 @@ switch ($REX['LANG']) {
 
 if(is_readable($file)) 
 {
-  $content = file_get_contents($file);
-  if(OOAddon::isAvailable("textile"))
-  {
-    echo rex_a79_textile($content);
-  } 
-  else {
-    echo nl2br($content);
-  }
+  echo nl2br(file_get_contents($file));
 }
 
 ?>

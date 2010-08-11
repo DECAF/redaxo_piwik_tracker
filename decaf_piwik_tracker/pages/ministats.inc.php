@@ -14,19 +14,19 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.deca
 
 if (!ini_get('allow_url_fopen'))
 {
-  echo rex_warning($I18N->msg('piwik_allow_url_fopen_off'));
+  echo rex_warning($piwik_I18N->msg('piwik_allow_url_fopen_off'));
   $stats_error = true;
 }
 else
 {
   require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/decaf_piwik_tracker_config.php');  
-  $config = new decaf_piwik_tracker_config($REX['INCLUDE_PATH'] .'/addons/'.$mypage, $I18N);
+  $config = new decaf_piwik_tracker_config($REX['INCLUDE_PATH'] .'/addons/'.$mypage, $piwik_I18N);
   $config->loadWidgetConfig();
 
   $api_query_urls = array();
 
   if (!$config->config['piwik']['tracker_url'] || !$config->config['piwik']['site_id'] || !$config->config['piwik']['token_auth']) {
-    echo rex_warning($I18N->msg('piwik_config_incomplete'));
+    echo rex_warning($piwik_I18N->msg('piwik_config_incomplete'));
     exit;
   }
   $widgets = array();
@@ -54,7 +54,7 @@ else
   }
   if ($stats_error)
   {
-    echo rex_warning(sprintf($I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
+    echo rex_warning(sprintf($piwik_I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
   }
 }
 
@@ -67,7 +67,7 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
     <?php
       $columns['show'] = explode(',',$widget['config']['columns']);
       $options = array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$columns);
-      $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $I18N);
+      $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $piwik_I18N);
     ?>
     <?php $w = $w + $widget['config']['width']; ?>
     <?php if ($w <= $content_width - 20): ?>
@@ -96,9 +96,9 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
 
 <h2>
 <?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']): ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
+  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
 <?php else: ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php">» <?php echo $I18N->msg('piwik_link_caption') ?></a>
+  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
 <?php endif ?>
 </h2>
 

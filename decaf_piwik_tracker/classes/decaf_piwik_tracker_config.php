@@ -35,10 +35,10 @@ class decaf_piwik_tracker_config
    * 
    * @author Sven Kesting <sk@decaf.de>
    **/
-  public function __construct($addon_path, $I18N)
+  public function __construct($addon_path, $piwik_I18N)
   {
     $this->config_file          = $config_file;
-    $this->I18N                 = $I18N;
+    $this->I18N                 = $piwik_I18N;
     $this->addon_path           = $addon_path;
     $this->config_file          = $this->addon_path.'/config/config.ini.php';
     $this->config_widgets_file  = $this->addon_path.'/config/widgets.ini.php';

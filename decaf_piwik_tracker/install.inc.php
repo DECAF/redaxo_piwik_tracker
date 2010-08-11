@@ -13,7 +13,7 @@ $base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
 
 if ($REX['REDAXO'])
 {
-  $I18N->appendFile($base_path.'/lang/');
+  $piwik_I18N->appendFile($base_path.'/lang/');
 }
 
 $error = false;
@@ -21,7 +21,7 @@ $error = false;
 // check if /config is writable
 if (!is_writable($base_path.'/config/'))
 {
-  echo rex_warning($I18N->msg('piwik_config_dir_locked'));
+  echo rex_warning($piwik_I18N->msg('piwik_config_dir_locked'));
   $error = true;
 }
 else 
