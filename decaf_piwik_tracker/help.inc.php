@@ -27,7 +27,7 @@
 <p>&nbsp;</p>
 
 <h3>Changelog</h3>
-<p><b>0.1</b>: Inital Release</p>
+<p><b>1.0.1</b>: Inital Release</p>
 <p>&nbsp;</p>
 
 <h3>Credits:</h3>
