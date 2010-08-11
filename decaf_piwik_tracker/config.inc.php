@@ -42,32 +42,6 @@ if ($REX['REDAXO'])
       $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('settings', $I18N->msg('piwik_configuration'));
     }
   }
-
-  //if($REX_USER && ($REX_USER->isValueOf('rights','admin[]') || $REX_USER->isValueOf('rights','decaf_bbclonestats[config]') || $REX_USER->isValueOf('rights','decaf_bbclonestats[widgets]') )) 
-  //{
-  //  if($REX_USER && ($REX_USER->isValueOf('rights','admin[]') || $REX_USER->isValueOf('rights','decaf_bbclonestats[config]') ))
-  //  {
-  //    // add menu buttons
-  //    $settingsPage = new rex_be_page($I18N->msg('piwik_configuration'), array(
-  //        'page'=>'decaf_piwik_tracker',
-  //        'subpage'=>'settings'
-  //      )
-  //    );
-  //
-  //    $settingsPage->setHref('index.php?page=decaf_piwik_tracker&subpage=settings');
-  //  }
-  //
-  //  $statsPage = new rex_be_page($I18N->msg('piwik_ministats'), array(
-  //      'page'=>'decaf_piwik_tracker',
-  //      'subpage'=> ''
-  //    )
-  //  );
-  //  $statsPage->setHref('index.php?page=decaf_piwik_tracker');
-  //
-  //  $REX['ADDON']['pages'][$mypage] = array (
-  //    $statsPage,  $settingsPage
-  //  );
-  //}
 }
 
 // include extension point only in frontend
