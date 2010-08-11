@@ -18,6 +18,7 @@ $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[config]";
 
+// REDAXO 4.2+
 $REX['ADDON'][$mypage]['options']['color_background']     = '#eff9f9';
 $REX['ADDON'][$mypage]['options']['color_background_alt'] = '#dfe9e9';
 $REX['ADDON'][$mypage]['options']['color_visits']         = '#14568a';
@@ -25,10 +26,20 @@ $REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#3c9ed0';
 $REX['ADDON'][$mypage]['options']['color_actions']        = '#5ab8ef';
 $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
 
+// REDAXO 4.1
+/*
+$REX['ADDON'][$mypage]['options']['color_background']     = '#faf9f5';
+$REX['ADDON'][$mypage]['options']['color_background_alt'] = '#f0efeb';
+$REX['ADDON'][$mypage]['options']['color_visits']         = '#0c5f00';
+$REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#298f1a';
+$REX['ADDON'][$mypage]['options']['color_actions']        = '#56bf47';
+$REX['ADDON'][$mypage]['options']['color_text']           = '#000';
+*/
+
 if ($REX['REDAXO'])
 {
   // looad localized strings
-  $piwik_I18N = new i18n($REX['LANG'], $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  $piwik_I18N = new i18n($lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
   $piwik_I18N->loadTexts();
 
   $REX['ADDON']['name'][$mypage]    = $piwik_I18N->msg("piwik_menu");

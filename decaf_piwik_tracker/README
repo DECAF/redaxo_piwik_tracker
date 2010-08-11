@@ -1,0 +1,80 @@
+README
+======
+
+
+About decaf\_piwik\_tracker
+-------------------------
+
+This REDAXO addon adds the necessary Javescript- or PHP-Code to track your visitors with Piwik. Some statistics can be displayed in the REDAXO backend.
+
+
+Requirements
+------------
+
+* Piwik Server
+* PHP 5.2+
+* REDAXO 4.2+
+
+If you want to track your visitors using PHP-Code and display the statistics in REDAXO 'allow\_url\_fopen' needs to be turned on.
+
+For more information on Piwik visit http://piwik.org. They have good documentation how to setup the statistics server.
+
+
+Installation
+------------
+
+* Unzip the addon
+* Place the decaf\_piwik\_tracker folder into redaxo/include/addons
+* make sure the folder decaf\_piwik\_tracker and decaf\_piwik\_tracker/config is writable by the webserver
+* Use the Addon-Panel in the REDAXO-backend to install and activate the addon
+
+
+**Note for REDAXO 4.1 users:**
+
+If you want to use this addon with **REDAXO 4.1** you will need to manually create the folder /files/addons/decaf\_piwik\_tracker/ and copy everything from /redaxo/include/addons/decaf\_piwik\_tracker/files/ to the newly created folder.
+
+
+Configuration
+-------------
+
+Once the addon is installed you need to configure some parameters on the configuration page.
+
+**Tracker URL:**
+The URL to your Piwik-Server, no trailing slash please. E.g.: http://stats.your-server.tpl
+
+**Site Id:**
+The ID as shown in Piwik under Settings » Websites.
+
+**Tracking Method:**
+Choose between Javascript (default) and PHP. The PHP Method is only available if allow\_url\_fopen is turned on. 
+
+Javascript has the ability to track more information (e.g. screen sizes), while PHP is less obvious.
+
+**Auth Token:**
+The auth token is required if you want to include stats in the REDAXO backend. It's shown in Piwik under Settings » Users.
+
+**Username:**
+Optional parameter. If you want the link to the statistic server with automatic login you need to set this and the Password (MD5).
+
+**Password (MD5):**
+Optional parameter. You can find the md5 encrypted password in the piwik\_user MySQL-table.
+
+
+Widget Configuration
+--------------------
+
+To configure what statistics are displayed in the REDAXO backend you need to edit the widgets.ini.php in the config/ folder.
+
+You can show multiple widgets by adding entries to the widget.ini.php.
+
+**api_period:** The period to display. Can be either 'day', 'week', 'month' or 'year'
+
+**api_date:** The date range to fetch. Right now only lastX ist supportet. To fetch the last 6 weeks use api\_date= last6 and api\_period = week.
+
+**columns:** What columns to display. You can use nb\_visits, nb\_uniq\_visitors and nb\_actions. Separate multiple values with commas (,) and **no spaces**. 
+
+**width:** The width of the widget. Usually it's 745. If you use smaller values the widgets will be displayed on the same row.
+
+**widget\_title** If you want to override the automatic title generation you can set your custom title here.
+
+

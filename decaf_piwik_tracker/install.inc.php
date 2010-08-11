@@ -13,7 +13,8 @@ $base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
 
 if ($REX['REDAXO'])
 {
-  $piwik_I18N->appendFile($base_path.'/lang/');
+  $piwik_I18N = new i18n($REX['LANG'], $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  $piwik_I18N->loadTexts();
 }
 
 $error = false;

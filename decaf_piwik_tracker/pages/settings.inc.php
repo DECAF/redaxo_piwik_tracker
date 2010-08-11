@@ -91,18 +91,6 @@ if($message)
           </div>
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_login'); ?></label>
-              <input type="text" name="login" id="piwik_login" value="<?php echo $piwik_config['piwik']['login'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_login_placeholder') ?>" />
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_md5_pass'); ?></label>
-              <input type="text" name="pass_md5" id="piwik_md5_pass" value="<?php echo $piwik_config['piwik']['pass_md5'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_md5_pass_placeholder') ?>" />
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_token_auth'); ?></label>
               <input type="text" name="token_auth" id="piwik_token_auth" value="<?php echo $piwik_config['piwik']['token_auth'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_token_auth_placeholder') ?>" />
             </p>
@@ -111,6 +99,18 @@ if($message)
             <p class="rex-form-col-a rex-form-select">
               <label for="encoding"><?php echo $piwik_I18N->msg('piwik_tracking_method'); ?></label>
               <?php echo $sel_tracking_method->show(); ?>
+            </p>
+          </div>
+          <div class="rex-form-row">
+            <p class="rex-form-col-a rex-form-text">
+              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_login'); ?></label>
+              <input type="text" name="login" id="piwik_login" value="<?php echo $piwik_config['piwik']['login'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_login_placeholder') ?>" />
+            </p>
+          </div>
+          <div class="rex-form-row">
+            <p class="rex-form-col-a rex-form-text">
+              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_md5_pass'); ?></label>
+              <input type="text" name="pass_md5" id="piwik_md5_pass" value="<?php echo $piwik_config['piwik']['pass_md5'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_md5_pass_placeholder') ?>" />
             </p>
           </div>
         </div>

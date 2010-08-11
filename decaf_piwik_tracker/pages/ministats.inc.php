@@ -63,26 +63,19 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
 <?php if (!$stats_error): ?>
   <?php $i = 0; ?>
   <?php $w = 0; ?>
+  <div id="widgets_wrapper" style="margin-right: -20px; zoom: 1">
   <?php foreach ($widgets as $widget): ?>
     <?php
       $columns['show'] = explode(',',$widget['config']['columns']);
       $options = array_merge($REX['ADDON']['decaf_piwik_tracker']['options'],$columns);
       $raphael = new raphaelizerPiwikStats('stat_'.$i, $widget['config']['width'], $options, $piwik_I18N);
     ?>
-    <?php $w = $w + $widget['config']['width']; ?>
-    <?php if ($w <= $content_width - 20): ?>
-      <?php $margin = 20; ?>
-      <?php $w = $w + 20; ?>
-    <?php else: ?>
-      <?php $margin = 0; ?>
-      <?php  $w = 0; ?>
-    <?php endif ?>
-    <div style="float: left; width: <?php echo $widget['config']['width'] ?>px; margin-right: <?php echo $margin ?>px;">
+    <div style="float: left; width: <?php echo $widget['config']['width'] ?>px; margin-right: 20px;">
       <h2><?php echo $widget['title'] ?></h2>
       <p>&nbsp;</p>
       <?php
         $raphael->setStats($widget['stats']);
-        $raphael->canvas('#eff9f9');
+        $raphael->canvas($REX['ADDON'][$mypage]['options']['color_background']);
         $i++;
       ?>
       <?php echo $raphael->getJs(); ?>
@@ -91,14 +84,15 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
     </div>
     <?php $i++; ?>
   <?php endforeach ?>
+  </div>
 <?php endif ?>
 <div style="clear: both"></div>
 
 <h2>
 <?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']): ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
+  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>" target="_blank">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
 <?php else: ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
+  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php" target="_blank">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
 <?php endif ?>
 </h2>
 

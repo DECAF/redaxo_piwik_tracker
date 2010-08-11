@@ -8,18 +8,11 @@
  * @version $Id$
  */
 
-switch ($REX['LANG']) {
-   case "de_de": 
-   case "de_de_utf8":
-      $file = dirname( __FILE__) .'/LIESMICH.textile'; 
-      break;
-   default: 
-      $file = dirname( __FILE__) .'README.textile'; 
-}
+$file = dirname( __FILE__) .'/README'; 
 
 if(is_readable($file)) 
 {
-  echo nl2br(file_get_contents($file));
+  echo nl2br(str_replace('\\','',file_get_contents($file)));
 }
 
 ?>
