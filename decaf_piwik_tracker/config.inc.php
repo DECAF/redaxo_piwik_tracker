@@ -12,7 +12,7 @@ $mypage = 'decaf_piwik_tracker';
 
 $REX['ADDON']['rxid'][$mypage]    = "770";
 $REX['ADDON']['page'][$mypage]    = $mypage;
-$REX['ADDON']['version'][$mypage] = "1.0.2";
+$REX['ADDON']['version'][$mypage] = "1.0.0";
 $REX['ADDON']['author'][$mypage]  = "Sven Kesting &lt;sk@decaf.de&gt;, DECAF&deg; | www.decaf.de";
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";
@@ -39,7 +39,14 @@ $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
 if ($REX['REDAXO'])
 {
   // looad localized strings
-  $piwik_I18N = new i18n($lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  if ($lang == 'default')
+  {
+    $be_lang = 'de_de_utf8';
+  } 
+  else {
+    $be_lang = $lang;
+  }
+  $piwik_I18N = new i18n($be_lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
   $piwik_I18N->loadTexts();
 
   $REX['ADDON']['name'][$mypage]    = $piwik_I18N->msg("piwik_menu");
