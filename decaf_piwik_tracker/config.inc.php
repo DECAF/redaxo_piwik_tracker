@@ -12,11 +12,12 @@ $mypage = 'decaf_piwik_tracker';
 
 $REX['ADDON']['rxid'][$mypage]    = "774";
 $REX['ADDON']['page'][$mypage]    = $mypage;
-$REX['ADDON']['version'][$mypage] = "1.0.3";
+$REX['ADDON']['version'][$mypage] = "1.0.4";
 $REX['ADDON']['author'][$mypage]  = "Sven Kesting &lt;sk@decaf.de&gt;, DECAF&deg; | www.decaf.de";
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[config]";
+
 
 // REDAXO 4.2+
 $REX['ADDON'][$mypage]['options']['color_background']     = '#eff9f9';
@@ -26,15 +27,16 @@ $REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#3c9ed0';
 $REX['ADDON'][$mypage]['options']['color_actions']        = '#5ab8ef';
 $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
 
-// REDAXO 4.1
-/*
-$REX['ADDON'][$mypage]['options']['color_background']     = '#faf9f5';
-$REX['ADDON'][$mypage]['options']['color_background_alt'] = '#f0efeb';
-$REX['ADDON'][$mypage]['options']['color_visits']         = '#0c5f00';
-$REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#298f1a';
-$REX['ADDON'][$mypage]['options']['color_actions']        = '#56bf47';
-$REX['ADDON'][$mypage]['options']['color_text']           = '#000';
-*/
+if ($REX['VERSION'] == 4 && $REX['SUBVERSION'] <= 1)
+{
+  // REDAXO 4.1
+  $REX['ADDON'][$mypage]['options']['color_background']     = '#faf9f5';
+  $REX['ADDON'][$mypage]['options']['color_background_alt'] = '#f0efeb';
+  $REX['ADDON'][$mypage]['options']['color_visits']         = '#0c5f00';
+  $REX['ADDON'][$mypage]['options']['color_uniq_visitors']  = '#298f1a';
+  $REX['ADDON'][$mypage]['options']['color_actions']        = '#56bf47';
+  $REX['ADDON'][$mypage]['options']['color_text']           = '#000';
+}
 
 if ($REX['REDAXO'])
 {
