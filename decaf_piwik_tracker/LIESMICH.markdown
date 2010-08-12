@@ -12,6 +12,7 @@ Changelog
 ---------
 
 * **1.0.4:** 
+  * Automatische Farbschema Anpassung für REDAXO 4.1
   * Deutsches LIESMICH
 * **1.0.3:** 
   * Erstveröffentlichung

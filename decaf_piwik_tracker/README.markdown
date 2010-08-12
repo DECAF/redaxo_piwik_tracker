@@ -12,6 +12,7 @@ Changelog
 ---------
 
 * **1.0.4:** 
+  * Automatically changing colors for REDAXO 4.1
   * Added German README
 * **1.0.3:** 
   * Initial release
