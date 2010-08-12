@@ -11,7 +11,10 @@ This REDAXO addon adds the necessary Javescript- or PHP-Code to track your visit
 Changelog
 ---------
 
-**1.0.3:** Initial release
+* **1.0.4:** 
+  * Added German README
+* **1.0.3:** 
+  * Initial release
 
 Requirements
 ------------
