@@ -5,7 +5,7 @@ README
 Über decaf\_piwik\_tracker
 --------------------------
 
-Dieses REDAXO Addon fügt den notwendigen Javascript-, bzw. PHP-Code in das Frontend um Besucher mit dem Piwik Server zu tracken. Im Backend wird eine Besucher-Statistik abgezeigt.
+Dieses REDAXO-Addon fügt den notwendigen Javascript-, bzw. PHP-Code in das Frontend, um Besucher mit dem Piwik-Server zu tracken. Im Backend wird eine Besucher-Statistik angezeigt.
 
 
 Changelog
@@ -14,19 +14,20 @@ Changelog
 * **1.0.4:** 
   * Automatische Farbschema Anpassung für REDAXO 4.1
   * Deutsches LIESMICH
+  * Verbesserte Bestimmung der Maximalwerte innerhalb der Graphen
 * **1.0.3:** 
   * Erstveröffentlichung
 
 Voraussetzungen
 ---------------
 
-* Piwik Server
+* Piwik-Server
 * PHP 5.2+
 * REDAXO 4.2+
 
 Wenn die Besucher per PHP include getrackt werden sollen, muss 'allow\_url\_fopen' angeschaltet sein.
 
-Mehr Information zu Piwik gibt es unter http://piwik.org. Dort gibt es eine gute Doku, wie der Piwik Server zu installieren und einzurichten ist.
+Mehr Information zu Piwik gibt es unter http://piwik.org. Dort gibt es eine gute Doku, wie der Piwik-Server zu installieren und einzurichten ist.
 
 Installation
 ------------
