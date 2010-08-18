@@ -420,12 +420,12 @@ class raphaelizerPiwikStats extends raphaelizer
 
 
   /**
-   * (array)normalizeMax((array)max)
-   * 
-   * normalize the maximums
-   * 
-   * @author Sven Kesting <sk@decaf.de>
-   **/
+    * (array)normalizeMax((array)max)
+    * 
+    * normalize the maximums
+    * 
+    * @author Sven Kesting <sk@decaf.de>
+    **/
   private function normalizeMax($max)
   {
     foreach ($max as &$m)
@@ -433,7 +433,15 @@ class raphaelizerPiwikStats extends raphaelizer
       $len = strlen($m)-1;
       $first = substr($m,0,1);
       $first += 1;
-      while (floor(($first / 4)) != ($first / 4))
+      if ($m <= 10) 
+      {
+        $divider = 4;
+      }
+      else 
+      {
+        $divider = 2;
+      }
+      while (floor(($first / $divider)) != ($first / $divider))
       {
         $first += 1;
       }
