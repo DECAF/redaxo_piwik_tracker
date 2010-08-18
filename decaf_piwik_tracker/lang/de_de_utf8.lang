@@ -10,6 +10,7 @@ piwik_link_caption                      = Komplette Statistik einsehen
 
 piwik_tracker_url                       = Tracker URL
 piwik_site_id                           = Site ID
+piwik_login_legend                      = Login-Angaben (optional)
 piwik_login                             = Benutzername
 piwik_md5_pass                          = Passwort (MD5)
 piwik_token_auth                        = Auth Token

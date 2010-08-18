@@ -74,6 +74,7 @@ if($message)
 <div class="rex-addon-output">
   <div id="rex-addon-editmode" class="rex-form">
     <form action="" method="post">
+ 
       <fieldset class="rex-form-col-1">
         <div class="rex-form-wrapper">
           <h3 class="rex-hl2"><?php echo $piwik_I18N->msg('piwik_configuration'); ?></h3>
@@ -101,6 +102,12 @@ if($message)
               <?php echo $sel_tracking_method->show(); ?>
             </p>
           </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="rex-form-col-1">
+        <legend><?php echo $piwik_I18N->msg('piwik_login_legend'); ?>:</legend> 
+        <div class="rex-form-wrapper"> 
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_login'); ?></label>
@@ -115,12 +122,7 @@ if($message)
           </div>
         </div>
       </fieldset>
-      <div class="rex-form-row">
-        <p class="rex-form-col-a rex-form-submit">
-          <input class="rex-form-submit" type="submit" name="btn_save" value="<?php echo $piwik_I18N->msg('piwik_save'); ?>" />
-          <input class="rex-form-submit rex-form-submit-2" type="reset" name="btn_reset" value="<?php echo $piwik_I18N->msg('piwik_reset'); ?>" />
-        </p>
-      </div>
+
     </form>
   </div>
 </div>
