@@ -14,7 +14,7 @@ Changelog
 * **1.0.4:** 
   * Automatically changing colors for REDAXO 4.1
   * Added German README
-  * Improved adjustment of max values on drawing the graphs
+  * Improved adjustment for max values on drawing the graphs
 * **1.0.3:** 
   * Initial release
 
