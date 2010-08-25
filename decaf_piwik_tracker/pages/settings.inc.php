@@ -123,6 +123,13 @@ if($message)
         </div>
       </fieldset>
 
+      <div class="rex-form-row">
+        <p class="rex-form-col-a rex-form-submit">
+          <input class="rex-form-submit" type="submit" name="btn_save" value="<?php echo $piwik_I18N->msg('piwik_save'); ?>" />
+          <input class="rex-form-submit rex-form-submit-2" type="reset" name="btn_reset" value="<?php echo $piwik_I18N->msg('piwik_reset'); ?>" />
+        </p>
+      </div>
+
     </form>
   </div>
 </div>
