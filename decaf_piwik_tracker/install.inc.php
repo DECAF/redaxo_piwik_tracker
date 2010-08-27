@@ -10,6 +10,7 @@
 
 $mypage = 'decaf_piwik_tracker';
 $base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
+require_once($base_path.'/compat.inc.php');
 
 if ($REX['REDAXO'])
 {

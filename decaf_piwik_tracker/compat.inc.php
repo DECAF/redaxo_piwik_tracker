@@ -12,7 +12,7 @@ if (!function_exists('rex_info'))
 {
     function rex_info($str)
     {
-        return file_warning($str);
+        return rex_warning($str);
     }
 }
 
