@@ -13,16 +13,16 @@ $base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
 
 if ($REX['REDAXO'])
 {
-  if ($lang == 'default')
+  if (!isset($lang) || $lang == 'default') 
   {
     $be_lang = 'de_de_utf8';
   } 
-  else {
+  else 
+  {
     $be_lang = $lang;
   }
   $piwik_I18N = new i18n($be_lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
   $piwik_I18N->loadTexts();
-
 }
 
 $error = false;

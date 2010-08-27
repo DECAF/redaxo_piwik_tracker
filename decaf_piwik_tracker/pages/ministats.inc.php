@@ -11,6 +11,7 @@
 $mypage = 'decaf_piwik_tracker';
 $content_width = 745;
 require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');  
+$stats_error = false;
 
 if (!ini_get('allow_url_fopen'))
 {
@@ -52,7 +53,7 @@ else
       echo rex_warning('Piwik API: '.$widgets[$key]['stats']['message']);
     }
   }
-  if ($stats_error)
+  if (isset($stats_error) && $stats_error)
   {
     echo rex_warning(sprintf($piwik_I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
   }

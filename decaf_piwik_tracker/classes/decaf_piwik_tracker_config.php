@@ -37,7 +37,6 @@ class decaf_piwik_tracker_config
    **/
   public function __construct($addon_path, $piwik_I18N)
   {
-    $this->config_file          = $config_file;
     $this->I18N                 = $piwik_I18N;
     $this->addon_path           = $addon_path;
     $this->config_file          = $this->addon_path.'/config/config.ini.php';
@@ -84,7 +83,7 @@ class decaf_piwik_tracker_config
    **/
   public function getI18nTitle($conf)
   {
-    if ($conf['widget_title'])
+    if (isset($conf['widget_title']) && $conf['widget_title'])
     {
       return $conf['widget_title'];
     }

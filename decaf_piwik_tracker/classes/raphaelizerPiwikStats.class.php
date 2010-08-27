@@ -291,6 +291,7 @@ class raphaelizerPiwikStats extends raphaelizer
     {
       $uniq_visitors_ratio  = 200 / $this->max['nb_uniq_visitors'];
     }
+    $h=0;
     for( $i=0; $i < $this->nb_columns; $i++ )
     {
       $j=0;

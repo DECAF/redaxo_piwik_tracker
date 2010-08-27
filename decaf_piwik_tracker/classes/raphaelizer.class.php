@@ -164,6 +164,7 @@ class raphaelizer
   private function getSvgPath($points)
   {
     $i=0;
+    $svg_path_str = '';
     foreach ($points as $path)
     {
       if(!$i) $cmd = 'M'; else $cmd = 'L';
