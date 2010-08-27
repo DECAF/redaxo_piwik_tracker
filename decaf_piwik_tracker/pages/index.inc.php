@@ -17,7 +17,7 @@ $subpage = rex_request('subpage', 'string');
 $func = rex_request('func', 'string');
 
 require $REX['INCLUDE_PATH'].'/layout/top.php';
-rex_title($piwik_I18N->msg('piwik_headline'), $REX['ADDON']['pages'][$mypage]);
+rex_title($piwik_I18N->msg('piwik_headline')); // , $REX['ADDON']['pages'][$mypage]);
 
 
 // $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);

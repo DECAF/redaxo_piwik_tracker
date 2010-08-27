@@ -15,3 +15,9 @@ if (!function_exists('rex_info'))
         return file_warning($str);
     }
 }
+
+if (!isset($REX['USER'])) {
+  if (isset($REX_USER)) {
+    $REX['USER'] = $REX_USER;
+  }
+}

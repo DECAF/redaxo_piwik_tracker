@@ -9,6 +9,9 @@
  */
 
 $mypage = 'decaf_piwik_tracker';
+$base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
+require_once($base_path.'/compat.inc.php');
+
 
 $REX['ADDON']['rxid'][$mypage]    = "774";
 $REX['ADDON']['page'][$mypage]    = $mypage;
