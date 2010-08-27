@@ -7,6 +7,16 @@
  * @package redaxo4
  * @version $Id$
  */
+
+if (!function_exists('rex_get_file_contents'))
+{
+    function rex_get_file_contents($path)
+    {
+        return file_get_contents($path);
+    }
+}
+
+
 $mypage = 'decaf_piwik_tracker';
 
 if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php'))

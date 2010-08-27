@@ -48,6 +48,7 @@ if ($REX['REDAXO'])
   else {
     $be_lang = $lang;
   }
+
   $piwik_I18N = new i18n($be_lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
   $piwik_I18N->loadTexts();
 
