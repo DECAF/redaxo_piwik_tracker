@@ -17,8 +17,20 @@ $subpage = rex_request('subpage', 'string');
 $func = rex_request('func', 'string');
 
 require $REX['INCLUDE_PATH'].'/layout/top.php';
-rex_title($piwik_I18N->msg('piwik_headline')); // , $REX['ADDON']['pages'][$mypage]);
 
+if ($REX['VERSION'] == 4 && $REX['SUBVERSION'] <= 1)
+{
+  // Build Subnavigation
+  $subpages = array (
+    array ('','Besucherstatistik'),
+    array ('settings','Konfiguration')
+  );
+  rex_title('Image Resize', $subpages);
+}
+else
+{
+  rex_title($piwik_I18N->msg('piwik_headline')); // , $REX['ADDON']['pages'][$mypage]);
+}
 
 // $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
 if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
