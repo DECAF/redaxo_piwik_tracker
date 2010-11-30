@@ -15,7 +15,7 @@ require_once($base_path.'/compat.inc.php');
 
 $REX['ADDON']['rxid'][$mypage]    = "774";
 $REX['ADDON']['page'][$mypage]    = $mypage;
-$REX['ADDON']['version'][$mypage] = "1.0.4";
+$REX['ADDON']['version'][$mypage] = "1.0.7";
 $REX['ADDON']['author'][$mypage]  = "Sven Kesting <sk@decaf.de>, DECAF° | www.decaf.de";
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";
@@ -43,13 +43,14 @@ if ($REX['VERSION'] == 4 && $REX['SUBVERSION'] <= 1)
 
 if ($REX['REDAXO'])
 {
-  // looad localized strings
+  // load localized strings
 
   if (!isset($lang) || $lang == 'default')
   {
     $be_lang = 'de_de_utf8';
-  } 
-  else {
+  }
+  else
+  {
     $be_lang = $lang;
   }
 
@@ -69,7 +70,8 @@ if ($REX['REDAXO'])
       );
     }
   }
-  else {
+  else
+  {
     $REX['ADDON'][$mypage]['SUBPAGES'] = array (
       array ('', $piwik_I18N->msg('piwik_headline')),
     );

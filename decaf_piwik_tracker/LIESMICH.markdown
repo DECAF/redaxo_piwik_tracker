@@ -10,7 +10,7 @@ Dieses REDAXO-Addon fügt den notwendigen Javascript-, bzw. PHP-Code in das Fron
 
 Changelog
 ---------
-* **1.0.5:** 
+* **1.0.7:** 
   * Automatische md5 Kodierung für Login Passwort
 * **1.0.4:** 
   * Automatische Farbschema Anpassung für REDAXO 4.1
