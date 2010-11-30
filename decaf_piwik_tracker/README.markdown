@@ -10,6 +10,8 @@ This REDAXO addon adds the necessary Javescript- or PHP-Code to track your visit
 
 Changelog
 ---------
+* **1.0.5:** 
+  * Automatically md5 encode login password
 
 * **1.0.4:** 
   * Automatically changing colors for REDAXO 4.1

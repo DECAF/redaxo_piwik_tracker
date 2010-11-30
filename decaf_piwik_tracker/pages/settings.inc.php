@@ -55,6 +55,9 @@ if (rex_post('btn_save', 'string') != '')
     foreach($_POST as $key => $val)
     {
       $search[]   = '@@'.$key.'@@';
+      if ($key == 'pass_md5' && strlen($val) != 32) {
+        $val = md5($val);
+      }
       $replace[]  = $val;
     }
     $config_str = str_replace($search, $replace, $tpl);
