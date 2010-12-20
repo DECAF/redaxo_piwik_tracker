@@ -9,18 +9,17 @@
  */
 $mypage = 'decaf_piwik_tracker';
 $base_path = $REX['INCLUDE_PATH'] .'/addons/'.$mypage;
-require_once($base_path.'/classes/markdown.class.php');
 
 if ($lang == 'default' || $lang == 'de_de' || $lang == 'de_de_utf8')
 {
-  $file = 'LIESMICH.markdown';
+  $file = 'LIESMICH.html';
 }
 else {
-  $file = 'README.markdown';  
+  $file = 'README.html';  
 }
 
 
-$content = Markdown(file_get_contents(dirname( __FILE__)."/".$file));
+$content = file_get_contents(dirname( __FILE__)."/".$file);
  
 ?>
 <style type="text/css" media="screen">
