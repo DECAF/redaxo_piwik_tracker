@@ -35,7 +35,7 @@ if (!$allow_url_fopen)
 } 
 else 
 {
-  $tracking_types = array('Javascript', 'PHP');
+  $tracking_types = array('PHP ('.$piwik_I18N->msg('piwik_recommended').')', 'Javascript');
 }
 
 $message = FALSE;
@@ -95,24 +95,28 @@ if($message)
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_tracker_url'); ?></label>
               <input type="text" name="tracker_url" id="piwik_tracker_url" value="<?php echo $piwik_config['piwik']['tracker_url'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_tracker_url_placeholder') ?>" />
+              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_tracker_url_notice'); ?></span>
             </p>
           </div>
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_site_id'); ?></label>
               <input type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_site_id_placeholder') ?>" />
+              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_site_id_notice'); ?></span>
             </p>
           </div>
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_token_auth'); ?></label>
               <input type="text" name="token_auth" id="piwik_token_auth" value="<?php echo $piwik_config['piwik']['token_auth'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_token_auth_placeholder') ?>" />
+              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_token_auth_notice'); ?></span>
             </p>
           </div>
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-select">
               <label for="encoding"><?php echo $piwik_I18N->msg('piwik_tracking_method'); ?></label>
               <?php echo $sel_tracking_method->show(); ?>
+              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_tracking_method_notice'); ?></span>
             </p>
           </div>
         </div>
