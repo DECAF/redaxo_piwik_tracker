@@ -24,7 +24,7 @@
 
 <div id="addon-help">
 
-  <h1>Addon: <a href="http://www.redaxo.de/180-0-addon-details.html?addon_id=774" title="http://www.redaxo.de/180-0-addon-details.html?addon_id=774">Piwik Tracker</a></h1>
+  <h1>Addon: <a href="http://www.redaxo.org/de/download/addons/?addon_id=774" title="http://www.redaxo.org/de/download/addons/?addon_id=774">Piwik Tracker</a></h1>
 
   <ul>
     <li><strong>Adds the tracking code to the website, either as JavaScript snippet or PHP include.</strong></li>
