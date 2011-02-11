@@ -45,39 +45,37 @@ if ($REX['REDAXO'])
 {
   // load localized strings
 
-  if (!isset($lang) || $lang == 'default')
+  if ($REX['LANG'] == 'default')
   {
     $be_lang = 'de_de_utf8';
   }
   else
   {
-    $be_lang = $lang;
+    $be_lang = $REX['LANG'];
   }
+  $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  
+  $REX['ADDON']['name'][$mypage]    = $I18N->msg("piwik_menu");
 
-  $piwik_I18N = new i18n($be_lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
-  $piwik_I18N->loadTexts();
-
-  $REX['ADDON']['name'][$mypage]    = $piwik_I18N->msg("piwik_menu");
-
-  // $piwik_I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  // $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
   $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
   if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
   {
     if($REX['USER'] && ($REX['USER']->isValueOf('rights','admin[]') || $REX['USER']->isValueOf('rights','decaf_piwik_tracker[config]') ))
     {
       $REX['ADDON'][$mypage]['SUBPAGES'] = array (
-        array ('settings', $piwik_I18N->msg('piwik_configuration')),
+        array ('settings', $I18N->msg('piwik_configuration')),
       );
     }
   }
   else
   {
     $REX['ADDON'][$mypage]['SUBPAGES'] = array (
-      array ('', $piwik_I18N->msg('piwik_headline')),
+      array ('', $I18N->msg('piwik_headline')),
     );
     if($REX['USER'] && ($REX['USER']->isValueOf('rights','admin[]') || $REX['USER']->isValueOf('rights','decaf_piwik_tracker[config]') ))
     {
-      $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('settings', $piwik_I18N->msg('piwik_configuration'));
+      $REX['ADDON'][$mypage]['SUBPAGES'][] = array ('settings', $I18N->msg('piwik_configuration'));
     }
   }
 }

@@ -48,7 +48,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * @author Sven Kesting <sk@decaf.de>
    **/
-  public function __construct($id='stats_canvas', $width = 745, $options=array(), $piwik_I18N)
+  public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
   {
     // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
@@ -62,7 +62,7 @@ class raphaelizerPiwikStats extends raphaelizer
     $this->canvas_h = 240 + (count($this->show) * 20);
     parent::__construct($width, $this->canvas_h, $id);
     $this->stats = array();
-    $this->I18N = $piwik_I18N;
+    $this->I18N = $I18N;
   }
 
 
