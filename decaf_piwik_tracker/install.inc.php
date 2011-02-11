@@ -14,23 +14,25 @@ require_once($base_path.'/compat.inc.php');
 
 if ($REX['REDAXO'])
 {
-  if ($REX['LANG'] == 'default') 
+  if (!isset($lang) || $lang == 'default') 
   {
     $be_lang = 'de_de_utf8';
   } 
   else 
   {
-    $be_lang = $REX['LANG'];
+    $be_lang = $lang;
   }
-  $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  $piwik_I18N = new i18n($be_lang, $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/lang/');
+  $piwik_I18N->loadTexts();
 }
+
 
 $error = false;
 
 // check if /config is writable
 if (!is_writable($base_path.'/config/'))
 {
-  echo rex_warning($I18N->msg('piwik_config_dir_locked'));
+  echo rex_warning($piwik_I18N->msg('piwik_config_dir_locked'));
   $error = true;
 }
 else 
