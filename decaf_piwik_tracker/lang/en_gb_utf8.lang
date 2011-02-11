@@ -8,7 +8,6 @@ piwik_widgets                           = Widgets
 
 piwik_link_caption                      = View complete statistic
 
-
 piwik_tracker_url                       = Tracker URL
 piwik_tracker_url_notice                = The URL to your Piwik-Server, no trailing slash please. Example: http://stats.your-server.tpl
 piwik_site_id                           = Site ID
@@ -20,7 +19,6 @@ piwik_token_auth                        = Auth Token
 piwik_token_auth_notice                 = Refer to Piwik at Settings » Users. Required, if you want to show stats in the REDAXO backend.
 piwik_tracking_method                   = Tracking Method
 piwik_tracking_method_notice            = Javascript has the ability to track more information (e.g. screen sizes), while PHP is more dependable.
-piwik_recommended                       = recommended
 piwik_widget                            = Widget
 piwik_widget_title                      = Headline
 piwik_api_period                        = Period
@@ -46,7 +44,6 @@ piwik_widget_title_placeholder          = Title for the widget
 piwik_api_period_placeholder            = day, week, month or year
 piwik_api_date_placeholder              = YYYY-MM-DD, today, yesterday, lastX or previousX
 piwik_width_placeholder                 = Widget width in pixel
-
 
 piwik_error_get_stats                   = Error retrieving statistic from %s
 

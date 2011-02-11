@@ -19,7 +19,6 @@ piwik_token_auth                        = Auth Token
 piwik_token_auth_notice                 = Zu finden in Piwik unter Einstellungen » Benutzer. Wird benötigt, wenn Statistiken im REDAXO-Backend ausgegeben werden sollen.
 piwik_tracking_method                   = Tracking Methode
 piwik_tracking_method_notice            = JavaScript kann mehr Details der Besucher erfassen (z.B. Bildschirmgrößen), PHP funktioniert jedoch zuverlässiger.
-piwik_recommended                       = empfohlen
 piwik_widget                            = Widget
 piwik_widget_title                      = Überschrift
 piwik_api_period                        = Zeitraum

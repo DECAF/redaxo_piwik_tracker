@@ -35,7 +35,7 @@ if (!$allow_url_fopen)
 } 
 else 
 {
-  $tracking_types = array('PHP ('.$piwik_I18N->msg('piwik_recommended').')', 'Javascript');
+  $tracking_types = array('PHP', 'Javascript');
 }
 
 $message = FALSE;
