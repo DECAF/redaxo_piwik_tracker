@@ -41,7 +41,7 @@ function decaf_piwik_tracker($params)
           </script><noscript><p><img src=\"".$piwik_config['piwik']['tracker_url']."piwik.php?idsite=".$piwik_config['piwik']['site_id']."\" style=\"border:0\" alt=\"\" /></p></noscript>
           <!-- End Piwik Tag -->
         ";
-        $content = str_replace("</head>", $js."</head>", $content);
+        $content = str_replace("</body>", $js."</body>", $content);
         return $content;
       }
       if ($piwik_config['piwik']['tracking_method'] == 'PHP' && ini_get('allow_url_fopen')) 
