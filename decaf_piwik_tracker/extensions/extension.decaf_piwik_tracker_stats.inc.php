@@ -2,9 +2,7 @@
 /**
  * piwikTracker Addon
  *
- * @author Sven Kesting <sk@decaf.de>
- * @author <a href="http://www.decaf.de">www.decaf.de</a>
- * @package redaxo4
+ * @author DECAF
  * @version $Id$
  */
 
@@ -19,8 +17,8 @@ function decaf_piwik_tracker_stats($params)
   global $REX;
   $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
   $content = $params['subject'];
-  // Backend - include Rafael.js
-  $js = '  <script src="../files/addons/'.$mypage.'/rafael.js" type="text/javascript" charset="utf-8"></script>';
+  // Backend - include raphael.js
+  $js = '  <script src="../files/addons/'.$mypage.'/raphael.js" type="text/javascript" charset="utf-8"></script>';
   $content = str_replace("</head>", $js."\n</head>", $content);
   return $content;
 }

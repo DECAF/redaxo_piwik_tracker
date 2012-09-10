@@ -1,21 +1,10 @@
 <?php
-/*---------------------------------------------------------------------------+
-|              ________ __________________________ __________                |
-|              ___  __ \___  ____/__  ____/___    |___  ____/                |
-|              __  / / /__  __/   _  /     __  /| |__  /_                    |
-|              _  /_/ / _  /___   / /___   _  ___ |_  __/                    |
-|              /_____/  /_____/   \____/   /_/  |_|/_/                       |
-|                                                                            |
-|              DECAF° - agentur für digitale kommunikation                   |
-|              http://www.decaf.de         <info@decaf.de>                   |
-+---------------------------------------------------------------------------*/
 /**
-  * @author    Sven Kesting <sk@decaf.de>
-  * @version   $Id$
-  * @copyright DECAF GmbH & Co. KG, 08 August, 2010
-  * @package   Piwik Tracker
-**/
-
+ * piwikTracker Addon 
+ *
+ * @author DECAF
+ * @version $Id$
+ */
 
 class decaf_piwik_tracker_config
 {
@@ -33,7 +22,7 @@ class decaf_piwik_tracker_config
    * 
    * Constructor for decaf_piwik_tracker_config
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function __construct($addon_path, $I18N)
   {
@@ -53,7 +42,7 @@ class decaf_piwik_tracker_config
    * 
    * sets config by parsing config_file
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function loadConfig()
   {
@@ -65,7 +54,7 @@ class decaf_piwik_tracker_config
    * 
    * sets widget_config by parsing config_widgets_file
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function loadWidgetConfig()
   {
@@ -79,7 +68,7 @@ class decaf_piwik_tracker_config
    * if the config array has 'widget_title' set, this is returned
    * 
    * @return string
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function getI18nTitle($conf)
   {

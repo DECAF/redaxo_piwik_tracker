@@ -2,9 +2,7 @@
 /**
  * piwikTracker Addon
  *
- * @author Sven Kesting | sk@decaf.de
- * @author htttp://www.decaf.de
- * @package redaxo4
+ * @author DECAF
  * @version $Id$
  */
 ?>

@@ -1,20 +1,10 @@
 <?php
-/*---------------------------------------------------------------------------+
-|              ________ __________________________ __________                |
-|              ___  __ \___  ____/__  ____/___    |___  ____/                |
-|              __  / / /__  __/   _  /     __  /| |__  /_                    |
-|              _  /_/ / _  /___   / /___   _  ___ |_  __/                    |
-|              /_____/  /_____/   \____/   /_/  |_|/_/                       |
-|                                                                            |
-|              DECAF° - agentur für digitale kommunikation                   |
-|              http://www.decaf.de         <info@decaf.de>                   |
-+---------------------------------------------------------------------------*/
 /**
-  * @author    Sven Kesting <sk@decaf.de>
-  * @version   $Id$
-  * @copyright DECAF GmbH & Co. KG, 08 August, 2010
-  * @package   Piwik Tracker
-**/
+ * piwikTracker Addon 
+ *
+ * @author DECAF
+ * @version $Id$
+ */
 
 class raphaelizer
 {
@@ -33,7 +23,7 @@ class raphaelizer
    * 
    * Constructor for class raphaelizer
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function __construct($w, $h, $canvas_id='mycanvas')
   {
@@ -51,7 +41,7 @@ class raphaelizer
    * 
    * prepares the raphael canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function canvas($bgcolor = FALSE)
   {
@@ -68,7 +58,7 @@ class raphaelizer
    * 
    * draws a rectancle
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function rect($x, $y, $w, $h, $attr=array(), $id='')
   {
@@ -90,7 +80,7 @@ class raphaelizer
    * 
    * draws text
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function text($x, $y, $text, $attr=array(), $id='')
   {
@@ -112,7 +102,7 @@ class raphaelizer
    * 
    * draws an image on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function image($src, $x, $y, $w, $h, $attr=array(), $id='')
   {
@@ -135,7 +125,7 @@ class raphaelizer
    * draws a path
    * the points need to be an array with array(x=>int,y=>int) as the single points
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function path($points, $attr=array(), $id='')
   {
@@ -159,7 +149,7 @@ class raphaelizer
    * converts points to an SVG path
    * 
    * @return (str)svg_path
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   private function getSvgPath($points)
   {
@@ -180,7 +170,7 @@ class raphaelizer
    * 
    * adds an event listener to an element
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function addEventListener($elem, $event, $action)
   {
@@ -193,7 +183,7 @@ class raphaelizer
    * 
    * adds svg attributes
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function addAttr($attr) 
   {
@@ -213,7 +203,7 @@ class raphaelizer
    * returns the html code for an raphael widget
    * 
    * @return (str)this->js
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function getJs()
   {
@@ -230,7 +220,7 @@ class raphaelizer
    * 
    * adds the closing script tag
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function setJsClosingTag()
   {

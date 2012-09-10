@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 This software uses external libraries:
 
-Raphael 1.4.7 - JavaScript Vector Library
+Raphael - JavaScript Vector Library
   Copyright (c) 2010 Dmitry Baranovskiy (http://raphaeljs.com)
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 

@@ -1,20 +1,10 @@
 <?php
-/*---------------------------------------------------------------------------+
-|              ________ __________________________ __________                |
-|              ___  __ \___  ____/__  ____/___    |___  ____/                |
-|              __  / / /__  __/   _  /     __  /| |__  /_                    |
-|              _  /_/ / _  /___   / /___   _  ___ |_  __/                    |
-|              /_____/  /_____/   \____/   /_/  |_|/_/                       |
-|                                                                            |
-|              DECAF° - agentur für digitale kommunikation                   |
-|              http://www.decaf.de         <info@decaf.de>                   |
-+---------------------------------------------------------------------------*/
 /**
-  * @author    Sven Kesting <sk@decaf.de>
-  * @version   $Id$
-  * @copyright DECAF GmbH & Co. KG, 08 August, 2010
-  * @package   Piwik Tracker
-**/
+ * piwikTracker Addon 
+ *
+ * @author DECAF
+ * @version $Id$
+ */
 
 require_once('raphaelizer.class.php');
 
@@ -46,7 +36,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * Constructor for class raphaelizerPiwikStats
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
   {
@@ -71,7 +61,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * set stats and calls setData
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function setStats($stats = array())
   {
@@ -85,7 +75,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * prepares the widget
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function canvas($bgcolor=FALSE)
   {
@@ -126,7 +116,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * draws decaf logo on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function drawBranding()
   {
@@ -148,7 +138,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * draws the legend on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function drawLegend()
   {
@@ -191,7 +181,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * draws the captions on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function drawCaptions()
   {
@@ -220,7 +210,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * draws the scale on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function drawScale()
   {
@@ -272,7 +262,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * draws the bars for the statistics on the canvas
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function drawStatBars()
   {
@@ -357,7 +347,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * set the data so raphael can use it, set max for the different types
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   public function setData()
   {
@@ -425,7 +415,7 @@ class raphaelizerPiwikStats extends raphaelizer
     * 
     * normalize the maximums
     * 
-    * @author Sven Kesting <sk@decaf.de>
+    * @author DECAF
     **/
   private function normalizeMax($max)
   {
@@ -516,7 +506,7 @@ class raphaelizerPiwikStats extends raphaelizer
    * 
    * converts the timestring delivered by Pikwik to something more readable
    * 
-   * @author Sven Kesting <sk@decaf.de>
+   * @author DECAF
    **/
   private function convertPiwikDate($str)
   {
