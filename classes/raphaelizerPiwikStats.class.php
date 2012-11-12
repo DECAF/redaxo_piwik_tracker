@@ -127,7 +127,7 @@ class raphaelizerPiwikStats extends raphaelizer
       'fill'        => '#bbb'
     ));
     $this->image('/files/addons/decaf_piwik_tracker/logo.decaf.gif',($this->w - 60),($this->h - 23),50,12, array('opacity' => '0.2'), 'logo_decaf');
-    $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1});');
+    $this->addEventListener('logo_decaf', 'mouseover', 'this.attr({"opacity": 1, "cursor": "pointer"});');
     $this->addEventListener('logo_decaf', 'click', 'window.open("http://decaf.de/");');
     $this->addEventListener('logo_decaf', 'mouseout', 'this.attr({"opacity": 0.2});');
   }

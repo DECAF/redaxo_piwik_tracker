@@ -11,7 +11,7 @@
  *  - CURL or STREAM extensions (to issue the http request to Piwik)
  *  
  * @license released under BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version $Id: PiwikTracker.php 6908 2012-09-02 23:04:04Z matt $
+ * @version $Id: PiwikTracker.php 7190 2012-10-15 07:41:12Z matt $
  * @link http://piwik.org/docs/tracking-api/
  *
  * @category Piwik
@@ -89,7 +89,7 @@ class PiwikTracker
     	{
     		self::$URL = $apiUrl;
     	}
-    	$this->visitorId = substr(md5(uniqid(rand(), true)), 0, self::LENGTH_VISITOR_ID);
+    	$this->setNewVisitorId();
     	
 		// Allow debug while blocking the request
     	$this->requestTimeout = 600;
@@ -222,8 +222,13 @@ class PiwikTracker
     	return $cookieDecoded[$id];
     }
     
-    
-    
+    /**
+     * Sets the current visitor ID to a random new one.
+     */
+    public function setNewVisitorId()
+    {
+    	$this->visitorId = substr(md5(uniqid(rand(), true)), 0, self::LENGTH_VISITOR_ID);
+    }
     
     /**
      * Sets the Browser language. Used to guess visitor countries when GeoIP is not enabled
@@ -265,8 +270,24 @@ class PiwikTracker
     {
     	$url = $this->getUrlTrackPageView($documentTitle);
     	return $this->sendRequest($url);
-    } 
-    
+    }
+
+	/**
+	 * Tracks an internal Site Search query, and optionally tracks the Search Category, and Search results Count.
+	 * These are used to populate reports in Actions > Site Search.
+	 *
+	 * @param string $keyword Searched query on the site
+	 * @param string $category Optional, Search engine category if applicable
+	 * @param int $countResults results displayed on the search result page. Used to track "zero result" keywords.
+	 *
+	 * @return string|true Response or true if using bulk requests.
+	 */
+	public function doTrackSiteSearch( $keyword, $category = false, $countResults = false )
+	{
+		$url = $this->getUrlTrackSiteSearch($keyword, $category, $countResults);
+		return $this->sendRequest($url);
+	}
+
     /**
      * Records a Goal conversion
      * 
@@ -523,6 +544,22 @@ class PiwikTracker
     	}
     	return $url;
     }
+
+	/**
+	 * @see doTrackSiteSearch()
+	 */
+	public function getUrlTrackSiteSearch($keyword, $category, $countResults)
+	{
+		$url = $this->getRequest( $this->idSite );
+		$url .= '&search=' . urlencode($keyword);
+		if($category !== false) {
+			$url .= '&search_cat=' . urlencode($category);
+		}
+		if($countResults !== false) {
+			$url .= '&search_count=' . (int)$countResults;
+		}
+		return $url;
+	}
     
     /**
      * @see doTrackGoal()
@@ -780,7 +817,11 @@ class PiwikTracker
     	// if doing a bulk request, store the url
     	if ($this->doBulkRequests && !$force)
     	{
-    		$this->storedTrackingActions[] = $url;
+    		$this->storedTrackingActions[]
+    			= $url
+    			. (!empty($this->userAgent) ? ('&ua='.urlencode($this->userAgent)) : '')
+    			. (!empty($this->acceptLanguage) ? ('&lang='.urlencode($this->acceptLanguage)) : '')
+    			;
     		return true;
     	}
     	

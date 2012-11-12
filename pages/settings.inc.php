@@ -99,7 +99,7 @@ if($message)
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_site_id'); ?></label>
-              <input type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_site_id_placeholder') ?>" />
+              <input style="width: 50px;" type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_site_id_placeholder') ?>" />
               <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_site_id_notice'); ?></span>
             </p>
           </div>
