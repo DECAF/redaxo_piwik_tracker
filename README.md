@@ -40,8 +40,8 @@ Once the addon is installed you need to configure some parameters on the configu
 
 To configure what statistics are displayed in the REDAXO backend you need to edit the `widgets.ini.php` in the `config/` folder. You can show multiple widgets by adding entries to the `widget.ini.php`.
 
-* **`api_period`**: The period to display. Can be either `day`, `week`, `month` or `year`
-* **`api_date`**: The date range to fetch. Right now only `lastX` is supportet. To fetch the last 6 weeks use `api_date= last6` and `api_period = week`.
-* **`columns`**: What columns to display. You can use `nb_visits`, `nb_uniq_visitors` and `nb_actions`. Separate multiple values with commas (`,`) and **no spaces**.
-* **`width`**: The width of the widget. Usually it's `745`. If you use smaller values the widgets will be displayed on the same row.
-* **`widget_title`**: If you want to override the automatic title generation you can set your custom title here.
+* `api_period`: The period to display. Can be either `day`, `week`, `month` or `year`
+* `api_date`: The date range to fetch. Right now only `lastX` is supportet. To fetch the last 6 weeks use `api_date= last6` and `api_period = week`.
+* `columns`: What columns to display. You can use `nb_visits`, `nb_uniq_visitors` and `nb_actions`. Separate multiple values with commas (`,`) and **no spaces**.
+* `width`: The width of the widget. Usually it's `745`. If you use smaller values the widgets will be displayed on the same row.
+* `widget_title`: If you want to override the automatic title generation you can set your custom title here.
