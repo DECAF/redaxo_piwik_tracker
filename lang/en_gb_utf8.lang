@@ -7,6 +7,7 @@ piwik_ministats                         = Statistic
 piwik_widgets                           = Widgets
 
 piwik_link_caption                      = View complete statistic
+piwik_clear_cache                       = Refresh
 
 piwik_tracker_url                       = Tracker URL
 piwik_tracker_url_notice                = The URL to your Piwik-Server, no trailing slash please. Example: http://stats.your-server.tpl
@@ -34,6 +35,7 @@ piwik_config_missing                    = No configuration file found. Please re
 piwik_config_incomplete                 = Some parameter are missing in the configuration.
 piwik_config_dir_locked                 = The folder decaf_piwik_tracker/config is not writable. Please fix the permissions for this folder.
 piwik_allow_url_fopen_off               = To update the statistic with the php include 'allow_url_fopen' must be set turned on in your php.ini
+piwik_cleared_cache                     = Visitor statistics reloaded.
 
 piwik_tracker_url_placeholder           = http://your.stat-server
 piwik_site_id_placeholder               = Site ID for this Website
@@ -63,3 +65,4 @@ and                                     = and
 date_format_day                         = m/d
 date_format_week                        = \W\e\ek W
 date_format_month                       = M Y
+date_format_updated                     = m/d/y, g:i a

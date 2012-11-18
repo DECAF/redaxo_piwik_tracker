@@ -30,6 +30,7 @@ else
   }
   $widgets = array();
 
+  // build widget meta
   foreach ($config->widget_config as $key => $value) {
     $widgets[$key]['url'] = trim(sprintf(
       '%s/?module=API&idSite=%s&token_auth=%s&method=%s&period=%s&date=%s&format=php&columns=%s',
@@ -43,14 +44,60 @@ else
     ));
     $widgets[$key]['config'] = $value;
     $widgets[$key]['title'] = $config->getI18nTitle($value);
-    $r = file_get_contents($widgets[$key]['url']);
-    $widgets[$key]['stats'] = unserialize($r);
-    if (isset($widgets[$key]['stats']['result']) && isset($widgets[$key]['stats']['message']))
-    {
-      $stats_error = true;
-      echo rex_warning('Piwik API: '.$widgets[$key]['stats']['message']);
+  }
+
+  // set update time
+  $statsUpdated = time();
+
+  // check cache files
+  $cacheFile = $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/.cache';
+  $cacheFileLastModified = $cacheContent = NULL;
+  $cacheLifetime = 60*60*16; // 16h, baby!
+  $useCache = false;
+  if (is_readable($cacheFile)) {
+    // check lifetime
+    $cacheFileLastModified = filemtime($cacheFile); 
+    if (time()-$cacheFileLastModified < $cacheLifetime) {
+      $cacheContent = unserialize(file_get_contents($cacheFile));
+      // compare cache file config to current widget config
+      $cacheConfig = $widgetsConfig = NULL;
+      foreach ($cacheContent as $k => $v) {
+        $cacheConfig.= $v['url'];
+      }
+      foreach ($widgets as $k => $v) {
+        $widgetsConfig.= $v['url'];
+      }
+      if ($cacheConfig !== NULL && $cacheConfig == $widgetsConfig) {
+        $useCache = true;
+        $statsUpdated = $cacheFileLastModified;
+      }
     }
   }
+
+  // add widget data
+  foreach ($widgets as $k => $v) {
+    if ($useCache === true) {
+      // add data from cache files
+      $widgets[$k]['stats'] = $cacheContent[$k]['stats'];
+    }
+    else {
+      // get live data from piwik server
+      $r = file_get_contents($widgets[$k]['url']);
+      $widgets[$k]['stats'] = unserialize($r);
+    }
+    if (isset($widgets[$k]['stats']['result']) && isset($widgets[$k]['stats']['message']))
+    {
+      $stats_error = true;
+      echo rex_warning('Piwik API: '.$widgets[$k]['stats']['message']);
+    }
+  }
+
+  // save to cache file
+  if ($useCache != true) {
+    @file_put_contents($cacheFile, serialize($widgets));
+  }
+
+  // warnings
   if (isset($stats_error) && $stats_error)
   {
     echo rex_warning(sprintf($piwik_I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
@@ -62,7 +109,7 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
 <?php if (!$stats_error): ?>
   <?php $i = 0; ?>
   <?php $w = 0; ?>
-  <div id="widgets_wrapper" style="margin-right: -20px; zoom: 1">
+  <div id="widgets_wrapper" style="width: <?php echo $content_width+20; ?>px; zoom: 1;">
   <?php foreach ($widgets as $widget): ?>
     <?php
       $columns['show'] = explode(',',$widget['config']['columns']);
@@ -83,15 +130,15 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
     </div>
     <?php $i++; ?>
   <?php endforeach ?>
+  <div style="clear: both"></div>
+
+  <p style="float: right; margin-right: 20px;">
+    Stand: <?php echo date($piwik_I18N->msg('date_format_updated'), $statsUpdated); ?> &nbsp; <a href="index.php?page=<?php echo $mypage ?>&amp;subpage=&amp;func=clear_cache"><strong>»&nbsp;Aktualisieren</strong></a>
+  </p>
+  <p>
+    <a href="<?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']) { echo $piwik_config['piwik']['tracker_url'].'/index.php?module=Login&amp;action=logme&amp;login='.$piwik_config['piwik']['login'].'&amp;password='.$piwik_config['piwik']['pass_md5']; } else { echo $piwik_config['piwik']['tracker_url'].'/index.php'; } ?>" target="_blank"><strong>»&nbsp;<?php echo $piwik_I18N->msg('piwik_link_caption') ?></strong></a>
+  </p>
+
   </div>
 <?php endif ?>
 <div style="clear: both"></div>
-
-<h2>
-<?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']): ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php?module=Login&action=logme&login=<?php echo $piwik_config['piwik']['login'] ?>&password=<?php echo $piwik_config['piwik']['pass_md5'] ?>" target="_blank">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
-<?php else: ?>
-  <a href="<?php echo $piwik_config['piwik']['tracker_url'] ?>/index.php" target="_blank">» <?php echo $piwik_I18N->msg('piwik_link_caption') ?></a>
-<?php endif ?>
-</h2>
-

@@ -42,6 +42,13 @@ if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/widgets.ini.p
   exit;
 }
 
+// clear cache
+if ($func == 'clear_cache') {
+  $cacheFile = $REX['INCLUDE_PATH'].'/addons/'.$mypage.'/.cache';
+  if (is_file($cacheFile)) unlink($cacheFile);
+  echo rex_info($piwik_I18N->msg('piwik_cleared_cache'));
+}
+
 // Include Current Page
 switch($subpage)
 {
