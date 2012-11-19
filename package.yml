@@ -12,5 +12,3 @@ navigation:
 requires:
   redaxo:
     version: '5.0.alpha3'
-  php:
-    min-version: '5.2'

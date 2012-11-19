@@ -6,8 +6,6 @@
  * @version $Id$
  */
 
-$mypage = 'decaf_piwik_tracker';
-
 $this->setProperty('color_background',     '#eff9f9');
 $this->setProperty('color_background_alt', '#dfe9e9');
 $this->setProperty('color_visits',         '#14568a');
@@ -17,5 +15,5 @@ $this->setProperty('color_text',           '#000000');
 
 // include extension point in frontend
 if (!rex::isBackend()) {
-  require_once(rex_path::addon($mypage, 'extensions/extension.decaf_piwik_tracker.inc.php'));
+  require_once($this->getBasePath('extensions/extension.decaf_piwik_tracker.inc.php'));
 }

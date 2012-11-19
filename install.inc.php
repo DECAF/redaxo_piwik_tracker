@@ -6,11 +6,9 @@
  * @version $Id$
  */
 
-$mypage = 'decaf_piwik_tracker';
-
 // init config
-$configFile = rex_path::addonData($mypage, '.config.ini');
-$configFileTemplate = rex_path::addon($mypage, 'config/_config.ini');
+$configFile = $this->getDataPath('.config.ini');
+$configFileTemplate = $this->getBasePath('config/_config.ini');
 if (!file_exists($configFile)) {
   $cfg = parse_ini_file($configFileTemplate);
   $tpl = rex_file::get($configFileTemplate);
@@ -23,9 +21,8 @@ if (!file_exists($configFile)) {
 }
 
 // init widgets
-$widgetsFile = rex_path::addonData($mypage, '.widgets.ini');
-$widgetsFileTemplate = rex_path::addon($mypage, 'config/_widgets.ini');
+$widgetsFile = $this->getDataPath('.widgets.ini');
+$widgetsFileTemplate = $this->getBasePath('config/_widgets.ini');
 if (!file_exists($widgetsFile)) {
-    $content = rex_file::get($widgetsFileTemplate);
-    rex_file::put($widgetsFile, $content);
+  rex_file::copy($widgetsFileTemplate, $widgetsFile);
 }
