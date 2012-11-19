@@ -1,6 +1,6 @@
 <?php
 /**
- * piwikTracker Addon 
+ * Piwik Tracker Addon
  *
  * @author DECAF
  * @version $Id$

@@ -1,0 +1,16 @@
+version: '2.0'
+author: 'DECAF'
+supportpage: www.redaxo.org/de/forum/
+
+navigation:
+  title: 'translate:piwik_menu'
+  perm: piwik_tracker[]
+  subpages:
+    stats: {title: 'translate:piwik_menu'}
+    settings: {title: 'translate:piwik_configuration', perm: piwik_tracker[config]}
+
+requires:
+  redaxo:
+    version: '5.0.alpha3'
+  php:
+    min-version: '5.2'
