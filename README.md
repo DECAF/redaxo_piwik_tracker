@@ -16,14 +16,10 @@
 
 * Piwik Server
 * PHP 5.2+
-* REDAXO 4.1+
+* REDAXO 5+
 * If you want to track your visitors using PHP-Code and display the statistics in REDAXO `allow_url_fopen` needs to be turned on.
 
 For more information on Piwik visit [http://piwik.org](http://piwik.org). They have good documentation how to setup the statistics server.
-
-### Installation note for REDAXO 4.1 users:
-
-If you want to use this addon with <strong>REDAXO 4.1</strong> you will need to manually create the folder `/files/addons/decaf_piwik_tracker/` and copy everything from `/redaxo/include/addons/decaf_piwik_tracker/files/` to the newly created folder.
 
 ### Configuration
 
@@ -38,7 +34,7 @@ Once the addon is installed you need to configure some parameters on the configu
 
 ### Widget Configuration
 
-To configure what statistics are displayed in the REDAXO backend you need to edit the `widgets.ini.php` in the `config/` folder. You can show multiple widgets by adding entries to the `widget.ini.php`.
+To configure what statistics are displayed in the REDAXO backend you need to edit the `widgets.ini` in the `config/` folder and reinstall the addon in order to activate the new config. You can show multiple widgets by adding entries to the `widget.ini`.
 
 * `api_period`: The period to display. Can be either `day`, `week`, `month` or `year`
 * `api_date`: The date range to fetch. Right now only `lastX` is supportet. To fetch the last 6 weeks use `api_date= last6` and `api_period = week`.

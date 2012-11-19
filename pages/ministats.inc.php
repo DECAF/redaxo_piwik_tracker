@@ -1,11 +1,16 @@
 <?php
 /**
- * piwikTracker Addon
+ * Piwik Tracker Addon
  *
  * @author DECAF
  * @version $Id$
  */
 
+
+/* TODO! */
+
+
+/*
 $mypage = 'decaf_piwik_tracker';
 $content_width = 745;
 require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');  

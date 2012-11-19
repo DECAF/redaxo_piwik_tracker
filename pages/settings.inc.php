@@ -1,11 +1,17 @@
 <?php
 /**
- * piwikTracker Addon
+ * Piwik Tracker Addon
  *
  * @author DECAF
  * @version $Id$
  */
 
+
+/* TODO! */
+
+
+
+/*
 if (!function_exists('rex_get_file_contents'))
 {
     function rex_get_file_contents($path)
