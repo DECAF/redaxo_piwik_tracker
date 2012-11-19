@@ -6,52 +6,37 @@
  * @version $Id$
  */
 
-
-/* TODO! */
-
+$content = '';
 
 
-/*
-if (!function_exists('rex_get_file_contents'))
-{
-    function rex_get_file_contents($path)
-    {
-        return file_get_contents($path);
-    }
-}
-
-
-$mypage = 'decaf_piwik_tracker';
-
-if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php'))
-{
-  echo rex_warning($piwik_I18N->msg('piwik_config_missing'));
-  exit;
-}
-
-
+// init tracking methods
+$tracking_types = NULL;
 $allow_url_fopen = ini_get('allow_url_fopen');
-
-if (!$allow_url_fopen) 
-{
+if (!$allow_url_fopen) {
   $tracking_types = array('Javascript');
-  echo rex_warning($piwik_I18N->msg('piwik_allow_url_fopen_off'));
+  echo rex_view::warning($this->i18n('piwik_allow_url_fopen_off'));
 } 
-else 
-{
+else {
   $tracking_types = array('PHP', 'Javascript');
 }
 
-$message = FALSE;
+// submit action
+if (rex_post('config-submit', 'boolean')) {
+  $this->setConfig(rex_post('config', array(
+    array('tracker_url', 'string'),
+    array('site_id', 'string'),
+    array('token_auth', 'string'),
+    array('tracking_method', 'string')
+  )));
 
-if (rex_post('btn_save', 'string') != '')
-{
+  // update config
+  /*
   $file = $REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php';
   $message = rex_is_writable($file);
 
   if($message === true)
   {
-    $message  = $piwik_I18N->msg('piwik_config_saved_error');
+    $message  = rex_i18n::msg('piwik_config_saved_error');
     $tpl      = rex_get_file_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/_config.ini.php');
     $search   = array();
     $replace  = array();
@@ -67,90 +52,70 @@ if (rex_post('btn_save', 'string') != '')
     $config_str = str_replace($search, $replace, $tpl);
     if (file_put_contents($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.php', $config_str))
     {
-      $message  = $piwik_I18N->msg('piwik_config_saved_successful');
+      $message  = rex_i18n::msg('piwik_config_saved_successful');
     }
   }
+  */
+
+  echo rex_view::success($this->i18n('piwik_config_saved_successful'));
 }
 
-$piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
+// generate form elements
+$formElements = array(); // init
 
-$sel_tracking_method = new rex_select();
-$sel_tracking_method->setId('piwik_tracking_method');
-$sel_tracking_method->setName('tracking_method');
-$sel_tracking_method->setSize(1);
-$sel_tracking_method->setSelected($piwik_config['piwik']['tracking_method']);
-foreach($tracking_types as $type)
-$sel_tracking_method->addOption($type,$type);
+$n = array();
+$n['label'] = '<label for="piwik_tracker_url">' . $this->i18n('piwik_tracker_url') . '</label>';
+$n['field'] = '<input type="text" id="piwik_tracker_url" name="config[tracker_url]" value="' . $this->getConfig('tracker_url') . '" placeholder="' . $this->i18n('piwik_tracker_url_placeholder') . '" />';
+$n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_tracker_url_notice') . '</div>';
+$formElements[] = $n;
 
-if($message) 
-{
-  echo rex_info($message);
+$n = array();
+$n['label'] = '<label for="piwik_site_id">' . $this->i18n('piwik_site_id') . '</label>';
+$n['field'] = '<input type="text" id="piwik_site_id" name="config[site_id]" value="' . $this->getConfig('site_id') . '" placeholder="' . $this->i18n('piwik_site_id_placeholder') . '" />';
+$n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_site_id_notice') . '</div>';
+$formElements[] = $n;
+
+$n = array();
+$n['label'] = '<label for="piwik_token_auth">' . $this->i18n('piwik_token_auth') . '</label>';
+$n['field'] = '<input type="text" id="piwik_token_auth" name="config[token_auth]" value="' . $this->getConfig('token_auth') . '" placeholder="' . $this->i18n('piwik_token_auth_placeholder') . '" />';
+$n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_token_auth_notice') . '</div>';
+$formElements[] = $n;
+
+$n = array();
+$n['label'] = '<label for="piwik_tracking_method">' . $this->i18n('piwik_tracking_method') . '</label>';
+$piwik_config = parse_ini_file($this->getDataPath('.config.ini'), true);
+$select = new rex_select();
+$select->setId('piwik_tracking_method');
+$select->setName('config[tracking_method]');
+$select->setSize(1);
+$select->setSelected($piwik_config['piwik']['tracking_method']);
+foreach($tracking_types as $type) {
+  $select->addOption($type,$type);
 }
-?>
+$select->setSelected($this->getConfig('config[tracking_method]'));
+$n['field'] = $select->get();
+$n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_tracking_method_notice') . '</div>';
+$formElements[] = $n;
 
-<div class="rex-addon-output">
-  <div id="rex-addon-editmode" class="rex-form">
-    <form action="" method="post">
- 
-      <fieldset class="rex-form-col-1">
-        <div class="rex-form-wrapper">
-          <h3 class="rex-hl2"><?php echo $piwik_I18N->msg('piwik_configuration'); ?></h3>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_tracker_url'); ?></label>
-              <input type="text" name="tracker_url" id="piwik_tracker_url" value="<?php echo $piwik_config['piwik']['tracker_url'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_tracker_url_placeholder') ?>" />
-              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_tracker_url_notice'); ?></span>
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_site_id'); ?></label>
-              <input style="width: 50px;" type="text" name="site_id" id="piwik_site_id" value="<?php echo $piwik_config['piwik']['site_id'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_site_id_placeholder') ?>" />
-              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_site_id_notice'); ?></span>
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_token_auth'); ?></label>
-              <input type="text" name="token_auth" id="piwik_token_auth" value="<?php echo $piwik_config['piwik']['token_auth'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_token_auth_placeholder') ?>" />
-              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_token_auth_notice'); ?></span>
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-select">
-              <label for="encoding"><?php echo $piwik_I18N->msg('piwik_tracking_method'); ?></label>
-              <?php echo $sel_tracking_method->show(); ?>
-              <span class="rex-form-notice"><?php echo $piwik_I18N->msg('piwik_tracking_method_notice'); ?></span>
-            </p>
-          </div>
-        </div>
-      </fieldset>
+$n = array();
+$n['field'] = '<input type="submit" name="config-submit" value="' . $this->i18n('piwik_save') . '" ' . rex::getAccesskey($this->i18n('piwik_save'), 'save') . ' />';
+$formElements[] = $n;
 
-      <fieldset class="rex-form-col-1">
-        <legend><?php echo $piwik_I18N->msg('piwik_login_legend'); ?>:</legend> 
-        <div class="rex-form-wrapper"> 
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_login'); ?></label>
-              <input type="text" name="login" id="piwik_login" value="<?php echo $piwik_config['piwik']['login'] ?>"  placeholder="<?php echo $piwik_I18N->msg('piwik_login_placeholder') ?>" />
-            </p>
-          </div>
-          <div class="rex-form-row">
-            <p class="rex-form-col-a rex-form-text">
-              <label for="fromname"><?php echo $piwik_I18N->msg('piwik_md5_pass'); ?></label>
-              <input type="text" name="pass_md5" id="piwik_md5_pass" value="<?php echo $piwik_config['piwik']['pass_md5'] ?>" placeholder="<?php echo $piwik_I18N->msg('piwik_md5_pass_placeholder') ?>" />
-            </p>
-          </div>
-        </div>
-      </fieldset>
+// build form content
+$content .= '
 
-      <div class="rex-form-row">
-        <p class="rex-form-col-a rex-form-submit">
-          <input class="rex-form-submit" type="submit" name="btn_save" value="<?php echo $piwik_I18N->msg('piwik_save'); ?>" />
-          <input class="rex-form-submit rex-form-submit-2" type="reset" name="btn_reset" value="<?php echo $piwik_I18N->msg('piwik_reset'); ?>" />
-        </p>
-      </div>
+    <h2>' . rex_i18n::msg('piwik_configuration') . '</h2>
 
-    </form>
-  </div>
-</div>
+    <form action="' . rex_url::currentBackendPage() . '" method="post">
+      <fieldset>'.PHP_EOL;
+
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements, false);
+$content .= '
+        '.$fragment->parse('form.tpl').PHP_EOL;
+
+$content .= '
+    </fieldset>
+  </form>';
+
+echo rex_view::contentBlock($content);

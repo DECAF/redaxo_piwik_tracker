@@ -6,12 +6,10 @@
  * @version $Id$
  */
 
+echo rex_view::title($this->i18n('piwik_headline'), ' ');
+
 $subpage = rex_be_controller::getCurrentPagePart(2);
 $func = rex_request('func', 'string');
-$msg = '';
-
-// page title
-echo rex_view::title(rex_i18n::msg('piwik_headline'), ' ');
 
 // clear cache
 if ($func == 'clear_cache') {
@@ -20,12 +18,17 @@ if ($func == 'clear_cache') {
 }
 
 // check for config
-if (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id']) {
-  $subpage = 'settings';
-}
-if (!file_exists($this->getDataPath('.widgets.ini'))) {
-  echo rex_view::error(rex_i18n::msg('piwik_config_missing'));
-  $subpage = 'settings';
+if ( ( (!$piwik_config['piwik']['tracker_url'] || !$piwik_config['piwik']['site_id'])
+  || !file_exists($this->getDataPath('.widgets.ini')) )
+  && $subpage != 'settings' ) {
+  if (rex::getUser()->hasPerm('piwik_tracker[config]')) {
+    // redirect to settings page, if user has permission
+    rex_response::sendRedirect(rex_url::backendPage('decaf_piwik_tracker/settings'));
+  }
+  else {
+    // throw error
+    echo rex_view::error(rex_i18n::msg('piwik_config_missing'));  
+  }
 }
 
 // router

@@ -6,6 +6,9 @@
  * @version $Id$
  */
 
+$content = 'stats';
+echo rex_view::contentBlock($content, null, 'plain');
+
 
 /* TODO! */
 
