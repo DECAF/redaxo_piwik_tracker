@@ -67,19 +67,19 @@ $n = array();
 $n['label'] = '<label for="piwik_tracker_url">' . $this->i18n('piwik_tracker_url') . '</label>';
 $n['field'] = '<input type="text" id="piwik_tracker_url" name="config[tracker_url]" value="' . $this->getConfig('tracker_url') . '" placeholder="' . $this->i18n('piwik_tracker_url_placeholder') . '" />';
 $n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_tracker_url_notice') . '</div>';
-$formElements[] = $n;
+$formElements[0][] = $n;
 
 $n = array();
 $n['label'] = '<label for="piwik_site_id">' . $this->i18n('piwik_site_id') . '</label>';
 $n['field'] = '<input type="text" id="piwik_site_id" name="config[site_id]" value="' . $this->getConfig('site_id') . '" placeholder="' . $this->i18n('piwik_site_id_placeholder') . '" />';
 $n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_site_id_notice') . '</div>';
-$formElements[] = $n;
+$formElements[0][] = $n;
 
 $n = array();
 $n['label'] = '<label for="piwik_token_auth">' . $this->i18n('piwik_token_auth') . '</label>';
 $n['field'] = '<input type="text" id="piwik_token_auth" name="config[token_auth]" value="' . $this->getConfig('token_auth') . '" placeholder="' . $this->i18n('piwik_token_auth_placeholder') . '" />';
 $n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_token_auth_notice') . '</div>';
-$formElements[] = $n;
+$formElements[0][] = $n;
 
 $n = array();
 $n['label'] = '<label for="piwik_tracking_method">' . $this->i18n('piwik_tracking_method') . '</label>';
@@ -95,27 +95,57 @@ foreach($tracking_types as $type) {
 $select->setSelected($this->getConfig('config[tracking_method]'));
 $n['field'] = $select->get();
 $n['after'] = '<div class="rex-form-notice">' . $this->i18n('piwik_tracking_method_notice') . '</div>';
-$formElements[] = $n;
+$formElements[0][] = $n;
+
+
+$n = array();
+$n['label'] = '<label for="piwik_login">' . $this->i18n('piwik_login') . '</label>';
+$n['field'] = '<input type="text" id="piwik_login" name="config[login]" value="' . $this->getConfig('login') . '" placeholder="' . $this->i18n('piwik_login_placeholder') . '" />';
+$formElements[1][] = $n;
+
+$n = array();
+$n['label'] = '<label for="piwik_md5_pass">' . $this->i18n('piwik_md5_pass') . '</label>';
+$n['field'] = '<input type="text" id="piwik_md5_pass" name="config[md5_pass]" value="' . $this->getConfig('md5_pass') . '" placeholder="' . $this->i18n('piwik_md5_pass_placeholder') . '" />';
+$formElements[1][] = $n;
+
 
 $n = array();
 $n['field'] = '<input type="submit" name="config-submit" value="' . $this->i18n('piwik_save') . '" ' . rex::getAccesskey($this->i18n('piwik_save'), 'save') . ' />';
-$formElements[] = $n;
+$formElements[2][] = $n;
+
+
 
 // build form content
 $content .= '
+  <form action="' . rex_url::currentBackendPage() . '" method="post">'.PHP_EOL;
 
-    <h2>' . rex_i18n::msg('piwik_configuration') . '</h2>
-
-    <form action="' . rex_url::currentBackendPage() . '" method="post">
-      <fieldset>'.PHP_EOL;
-
+$content .= '
+      <fieldset>
+        <h2>' . rex_i18n::msg('piwik_configuration') . '</h2>'.PHP_EOL;
 $fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
+$fragment->setVar('elements', $formElements[0], false);
+$content .= $fragment->parse('form.tpl').PHP_EOL;
 $content .= '
-        '.$fragment->parse('form.tpl').PHP_EOL;
+      </fieldset>'.PHP_EOL;
 
 $content .= '
-    </fieldset>
+      <fieldset>
+        <h2>' . $this->i18n('piwik_login_legend') . '</h2>'.PHP_EOL;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements[1], false);
+$content .= $fragment->parse('form.tpl').PHP_EOL;
+$content .= '
+      </fieldset>'.PHP_EOL;
+
+$content .= '
+      <fieldset class="rex-form-action">'.PHP_EOL;
+$fragment = new rex_fragment();
+$fragment->setVar('elements', $formElements[2], false);
+$content .= $fragment->parse('form.tpl').PHP_EOL;
+$content .= '
+      </fieldset>'.PHP_EOL;
+
+$content .= '
   </form>';
 
-echo rex_view::contentBlock($content);
+echo rex_view::contentBlock($content, '', 'block');

@@ -66,3 +66,6 @@ date_format_day                         = m/d
 date_format_week                        = \W\e\ek W
 date_format_month                       = M Y
 date_format_updated                     = m/d/y, g:i a
+
+perm_general_piwik_tracker[]            = Visitor statistics
+perm_general_piwik_tracker[config]      = Visitor statistics settings

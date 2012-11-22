@@ -66,3 +66,6 @@ date_format_day                         = j.n.
 date_format_week                        = K\W W
 date_format_month                       = M Y
 date_format_updated                     = d.m.Y, H:i \U\h\r
+
+perm_general_piwik_tracker[]            = Besucherstatistik (Piwik)
+perm_general_piwik_tracker[config]      = Besucherstatistik konfigurieren (Piwik)
