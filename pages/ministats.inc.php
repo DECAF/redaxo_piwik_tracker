@@ -136,7 +136,7 @@ require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/raphaelizerPiwikS
     Stand: <?php echo date($piwik_I18N->msg('date_format_updated'), $statsUpdated); ?> &nbsp; <a href="index.php?page=<?php echo $mypage ?>&amp;subpage=&amp;func=clear_cache"><strong>»&nbsp;Aktualisieren</strong></a>
   </p>
   <p>
-    <a href="<?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']) { echo $piwik_config['piwik']['tracker_url'].'/index.php?module=Login&amp;action=logme&amp;login='.$piwik_config['piwik']['login'].'&amp;password='.$piwik_config['piwik']['pass_md5']; } else { echo $piwik_config['piwik']['tracker_url'].'/index.php'; } ?>" target="_blank"><strong>»&nbsp;<?php echo $piwik_I18N->msg('piwik_link_caption') ?></strong></a>
+    <a href="<?php if ($piwik_config['piwik']['login'] && $piwik_config['piwik']['pass_md5']) { echo $piwik_config['piwik']['tracker_url'].'/index.php?module=Login&amp;action=logme&amp;login='.$piwik_config['piwik']['login'].'&amp;password='.$piwik_config['piwik']['pass_md5'].'&amp;idSite='.$piwik_config['piwik']['site_id']; } else { echo $piwik_config['piwik']['tracker_url'].'/index.php'; } ?>" target="_blank"><strong>»&nbsp;<?php echo $piwik_I18N->msg('piwik_link_caption') ?></strong></a>
   </p>
 
   </div>
