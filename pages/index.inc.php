@@ -49,6 +49,11 @@ if ($func == 'clear_cache') {
   echo rex_info($piwik_I18N->msg('piwik_cleared_cache'));
 }
 
+// set piwik ignore cookie for REDAXO users
+if($_SESSION[$REX['INSTNAME']]['UID']) {
+  setcookie('redaxo_piwiktracker_ignore', $_SESSION[$REX['INSTNAME']]['UID'], time()+(60*60*24*30), '/');
+}
+
 // Include Current Page
 switch($subpage)
 {
