@@ -11,7 +11,7 @@
  *  - CURL or STREAM extensions (to issue the http request to Piwik)
  *  
  * @license released under BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version $Id: PiwikTracker.php 7190 2012-10-15 07:41:12Z matt $
+ * @version $Id: PiwikTracker.php 7569 2012-12-04 00:26:22Z matt $
  * @link http://piwik.org/docs/tracking-api/
  *
  * @category Piwik
@@ -51,6 +51,13 @@ class PiwikTracker
 	 * @ignore
 	 */
 	const LENGTH_VISITOR_ID = 16;
+
+	/**
+	 * Charset
+	 * @see setPageCharset
+	 * @ignore
+	 */
+	const DEFAULT_CHARSET_PARAMETER_VALUES = 'utf-8';
 	
 	/**
 	 * Builds a PiwikTracker object, used to track visits, pages and Goal conversions 
@@ -81,6 +88,7 @@ class PiwikTracker
     	$this->requestCookie = '';
     	$this->idSite = $idSite;
     	$this->urlReferrer = @$_SERVER['HTTP_REFERER'];
+    	$this->pageCharset = self::DEFAULT_CHARSET_PARAMETER_VALUES;
     	$this->pageUrl = self::getCurrentUrl();
     	$this->ip = @$_SERVER['REMOTE_ADDR'];
     	$this->acceptLanguage = @$_SERVER['HTTP_ACCEPT_LANGUAGE'];
@@ -96,7 +104,20 @@ class PiwikTracker
     	$this->doBulkRequests = false;
     	$this->storedTrackingActions = array();
     }
-    
+
+	/**
+	 * By default, Piwik expects utf-8 encoded values, for example
+	 * for the page URL parameter values, Page Title, etc.
+	 * It is recommended to only send UTF-8 data to Piwik.
+	 * If required though, you can also specify another charset using this function.
+	 *
+	 * @param string $charset
+	 */
+	public function setPageCharset( $charset = false )
+	{
+		$this->pageCharset = $charset;
+	}
+
     /**
      * Sets the current URL being tracked
      * 
@@ -251,6 +272,66 @@ class PiwikTracker
     	$this->userAgent = $userAgent;
     }
     
+    /**
+     * Sets the country of the visitor. If not used, Piwik will try to find the country
+     * using either the visitor's IP address or language.
+     *
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
+     * @param string $country
+     */
+    public function setCountry($country)
+    {
+    	$this->country = $country;
+    }
+    
+    /**
+     * Sets the region of the visitor. If not used, Piwik may try to find the region
+     * using the visitor's IP address (if configured to do so).
+     *
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+    	$this->region = $region;
+    }
+    
+    /**
+     * Sets the city of the visitor. If not used, Piwik may try to find the city
+     * using the visitor's IP address (if configured to do so).
+     *
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+    	$this->city = $city;
+    }
+    
+    /**
+     * Sets the latitude of the visitor. If not used, Piwik may try to find the visitor's
+     * latitude using the visitor's IP address (if configured to do so).
+     *
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
+     * @param float $lat
+     */
+    public function setLatitude($lat)
+    {
+    	$this->lat = $lat;
+    }
+    
+    /**
+     * Sets the longitude of the visitor. If not used, Piwik may try to find the visitor's
+     * longitude using the visitor's IP address (if configured to do so).
+     *
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
+     * @param float $long
+     */
+    public function setLongitude($long)
+    {
+    	$this->long = $long;
+    }
+    
 	/**
 	 * Enables the bulk request feature. When used, each tracking action is stored until the
 	 * doBulkTrack method is called. This method will send all tracking data at once.
@@ -369,7 +450,7 @@ class PiwikTracker
     	
     	if (empty($this->storedTrackingActions))
     	{
-    		return '';
+    		throw new Exception("Error:  you must call the function doTrackPageView or doTrackGoal from this class, before calling this method doBulkTrack()");
     	}
     	
     	$data = array('requests' => $this->storedTrackingActions, 'token_auth' => $this->token_auth);
@@ -622,7 +703,7 @@ class PiwikTracker
      * 
      * This is typically used with the Javascript getVisitorId() function.
      * 
-     * Allowed only for Super User, must be used along with setTokenAuth().
+     * Allowed only for Admin/Super User, must be used along with setTokenAuth().
      * @see setTokenAuth()
      * @param string $visitorId 16 hexadecimal characters visitor ID, eg. "33c31e01394bdc63"
      */
@@ -983,6 +1064,7 @@ class PiwikTracker
 	        // URL parameters
 	        '&url=' . urlencode($this->pageUrl) .
 			'&urlref=' . urlencode($this->urlReferrer) .
+		    ((!empty($this->pageCharset) && $this->pageCharset != self::DEFAULT_CHARSET_PARAMETER_VALUES) ? '&cs=' . $this->pageCharset : '') .
 	        
 	        // Attribution information, so that Goal conversions are attributed to the right referrer or campaign
 	        // Campaign name
@@ -993,6 +1075,13 @@ class PiwikTracker
     		(!empty($this->attributionInfo[2]) ? '&_refts=' . $this->attributionInfo[2] : '') .
     		// Referrer URL
     		(!empty($this->attributionInfo[3]) ? '&_ref=' . urlencode($this->attributionInfo[3]) : '') .
+    		
+    		// custom location info
+    		(!empty($this->country) ? '&country='.urlencode($this->country) : '') .
+    		(!empty($this->region) ? '&region='.urlencode($this->region) : '') .
+    		(!empty($this->city) ? '&city='.urlencode($this->city) : '') .
+    		(!empty($this->lat) ? '&lat='.urlencode($this->lat) : '') .
+    		(!empty($this->long) ? '&long='.urlencode($this->long) : '') .
 
     		// DEBUG 
 	        $this->DEBUG_APPEND_URL
