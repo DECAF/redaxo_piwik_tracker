@@ -28,6 +28,7 @@
     <li><strong>Adds the tracking code to the website, either as JavaScript snippet or PHP include.</strong></li>
     <li><strong>Shows graphical statistics on the REDAXO backend being focused on essential output per default (last 14 days’ visits) but also being quite configurable.</strong></li>
     <li><strong>Adds a direct link on your Piwik installation with an auto login feature (optional).</strong></li>
+    <li><strong>Does not track REDAXO authors. Either when session has ended (cookie).</strong></li>
   </ul>
 
   <h2>Requirements:</h2>
