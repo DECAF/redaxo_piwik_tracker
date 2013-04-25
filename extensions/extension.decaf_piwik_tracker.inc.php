@@ -27,7 +27,7 @@ function decaf_piwik_tracker($params)
       // JavaScript tracking
       if ($piwik_config['piwik']['tracking_method'] == 'Javascript') 
       {
-        if($_SESSION[$REX['INSTNAME']]['UID'] || isset($_COOKIE['redaxo_piwiktracker_ignore']))
+        if(isset($_SESSION[$REX['INSTNAME']]['UID']) || isset($_COOKIE['redaxo_piwiktracker_ignore']))
         {
           $debugMsg = 'Piwik Tracker: JavaScript. Did not track REDAXO user.';
         } else {
@@ -52,7 +52,7 @@ function decaf_piwik_tracker($params)
       // PHP tracking
       if ($piwik_config['piwik']['tracking_method'] == 'PHP' && ini_get('allow_url_fopen')) 
       {
-        if($_SESSION[$REX['INSTNAME']]['UID'] || isset($_COOKIE['redaxo_piwiktracker_ignore']))
+        if(isset($_SESSION[$REX['INSTNAME']]['UID']) || isset($_COOKIE['redaxo_piwiktracker_ignore']))
         {
           $debugMsg = 'Piwik Tracker: PHP. Did not track REDAXO user.';
         } else {

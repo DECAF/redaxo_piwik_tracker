@@ -295,44 +295,47 @@ class raphaelizerPiwikStats extends raphaelizer
       
       foreach($this->show as $type)
       {
-        switch ($type)
+        if (isset($this->data[$i][$type]))
         {
-          case 'nb_actions':
-            $h      = round($this->data[$i][$type] * $actions_ratio);
-            $color  = $this->color_actions;
-            break;
-          case 'nb_visits':
-            $h      = round($this->data[$i][$type] * $visits_ratio);
-            $color  = $this->color_visits;
-            break;
-          case 'nb_uniq_visitors':
-            $h      = round($this->data[$i][$type] * $uniq_visitors_ratio);
-            $color  = $this->color_uniq_visitors;
-            break;
-        }
-        $x = ($this->offset_x + ($this->segment_width * $i)) + round($this->bar_width * $j);
-        $y = $this->offset_y - $h;
+          switch ($type)
+          {
+            case 'nb_actions':
+              $h      = round($this->data[$i][$type] * $actions_ratio);
+              $color  = $this->color_actions;
+              break;
+            case 'nb_visits':
+              $h      = round($this->data[$i][$type] * $visits_ratio);
+              $color  = $this->color_visits;
+              break;
+            case 'nb_uniq_visitors':
+              $h      = round($this->data[$i][$type] * $uniq_visitors_ratio);
+              $color  = $this->color_uniq_visitors;
+              break;
+          }
+          $x = ($this->offset_x + ($this->segment_width * $i)) + round($this->bar_width * $j);
+          $y = $this->offset_y - $h;
 
-        $this->rect($x,$y,$this->bar_width,$h,array('fill' => '#eff9f9', 'stroke-width' => '0'));
-        $elem = 'bar_'.$i.'_'.$j;
-        $this->rect($x+1,$y,$this->bar_width-1,$h,array('fill' => $color, 'stroke-width' => '0'), $elem);
-        if ($h > 12)
-        {
-          $this->text($x + $this->bar_width - 4 , $y+9, $this->data[$i][$type],array(
-            'fill'        => '#fff',
-            'font'        => 'Helvetica, Arial, sans-serif',
-            'font-size'   => '9',
-            'text-anchor' => 'end'
-          ));
-        }
-        else 
-        {
-          $this->text($x + $this->bar_width - 4, $y-5, $this->data[$i][$type],array(
-            'fill'        => $color,
-            'font'        => 'Helvetica, Arial, sans-serif',
-            'font-size'   => '9',
-            'text-anchor' => 'end'
-          ));
+          $this->rect($x,$y,$this->bar_width,$h,array('fill' => '#eff9f9', 'stroke-width' => '0'));
+          $elem = 'bar_'.$i.'_'.$j;
+          $this->rect($x+1,$y,$this->bar_width-1,$h,array('fill' => $color, 'stroke-width' => '0'), $elem);
+          if ($h > 12)
+          {
+            $this->text($x + $this->bar_width - 4 , $y+9, $this->data[$i][$type],array(
+              'fill'        => '#fff',
+              'font'        => 'Helvetica, Arial, sans-serif',
+              'font-size'   => '9',
+              'text-anchor' => 'end'
+            ));
+          }
+          else 
+          {
+            $this->text($x + $this->bar_width - 4, $y-5, $this->data[$i][$type],array(
+              'fill'        => $color,
+              'font'        => 'Helvetica, Arial, sans-serif',
+              'font-size'   => '9',
+              'text-anchor' => 'end'
+            ));
+          }
         }
         $j++;
       }
