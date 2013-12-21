@@ -9,7 +9,7 @@
 rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker');
 
 /**
- * adds the js code to the html <head> section
+ * adds the tracking code
  */
 function decaf_piwik_tracker($params) 
 {
@@ -25,7 +25,7 @@ function decaf_piwik_tracker($params)
     if ($piwik_config['piwik']['tracker_url'] && $piwik_config['piwik']['site_id'])
     {
       // JavaScript tracking
-      if ($piwik_config['piwik']['tracking_method'] == 'Javascript') 
+      if ($piwik_config['piwik']['tracking_method'] == 'JavaScript') 
       {
         if(isset($_SESSION[$REX['INSTNAME']]['UID']) || isset($_COOKIE['redaxo_piwiktracker_ignore']))
         {

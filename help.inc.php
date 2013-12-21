@@ -51,7 +51,7 @@
   <ul>
     <li><strong>Tracker URL:</strong> The URL to your Piwik-Server, no trailing slash please. E.g.: http://stats.your-server.tpl</li>
     <li><strong>Site Id:</strong> The ID as shown in Piwik under Settings » Websites.</li>
-    <li><strong>Tracking Method:</strong> Choose between Javascript (default) and PHP. The PHP Method is only available if allow_url_fopen is turned on. Javascript has the ability to track more information (e.g. screen sizes), while PHP is more dependable.</li>
+    <li><strong>Tracking Method:</strong> Choose between JavaScript (default) and PHP. The PHP Method is only available if allow_url_fopen is turned on. JavaScript has the ability to track more information (e.g. screen sizes), while PHP is more dependable.</li>
     <li><strong>Auth Token:</strong> The auth token is required if you want to include stats in the REDAXO backend. It's shown in Piwik under Settings » Users.</li>
     <li><strong>Username:</strong> Optional parameter. Enables auto login at the Piwik stat server (requires username and password).</li>
     <li><strong>Password:</strong> Optional parameter. Enables auto login at the Piwik stat server (requires username and password).</li>

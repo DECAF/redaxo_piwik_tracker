@@ -25,16 +25,21 @@ if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.ph
 
 
 $allow_url_fopen = ini_get('allow_url_fopen');
+$tracking_types = array();
 
 if (!$allow_url_fopen) 
 {
-  $tracking_types = array('Javascript');
+  $tracking_types[] = array('JavaScript', 'JavaScript');
   echo rex_warning($piwik_I18N->msg('piwik_allow_url_fopen_off'));
-} 
-else 
-{
-  $tracking_types = array('PHP', 'Javascript');
 }
+else
+{
+  $tracking_types[] = array('PHP', 'PHP');
+  $tracking_types[] = array('JavaScript', 'JavaScript');
+}
+$tracking_types[] = array('-', $piwik_I18N->msg('piwik_tracking_method_none'));
+
+
 
 $message = FALSE;
 
@@ -74,7 +79,7 @@ $sel_tracking_method->setName('tracking_method');
 $sel_tracking_method->setSize(1);
 $sel_tracking_method->setSelected($piwik_config['piwik']['tracking_method']);
 foreach($tracking_types as $type)
-$sel_tracking_method->addOption($type,$type);
+$sel_tracking_method->addOption($type[1],$type[0]);
 
 if($message) 
 {
