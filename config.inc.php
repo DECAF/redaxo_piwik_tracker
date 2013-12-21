@@ -13,7 +13,7 @@ require_once($base_path.'/compat.inc.php');
 
 $REX['ADDON']['rxid'][$mypage]    = "774";
 $REX['ADDON']['page'][$mypage]    = $mypage;
-$REX['ADDON']['version'][$mypage] = "1.3.1";
+$REX['ADDON']['version'][$mypage] = "1.4";
 $REX['ADDON']['author'][$mypage]  = "DECAF";
 $REX['ADDON']['perm'][$mypage]    = "decaf_piwik_tracker[]";
 $REX['PERM'][]                    = "decaf_piwik_tracker[]";

@@ -2,7 +2,8 @@ _**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte 
 
 # [Piwik Tracker](http://www.redaxo.org/de/download/addons/?addon_id=774)
 
-* Fügt den Tracking-Code in die Website ein, wahlweise als JavaScript-Schnipsel oder PHP-include.
+* Fügt den Tracking-Code in die Website ein, wahlweise als JavaScript-Schnipsel oder PHP-include.  
+  _Kann ab v1.4 deaktiviert werden, wenn der Tracking-Code manuell eingebracht werden soll._
 * Zeigt eine grafische Statistik im REDAXO-Backend, die erstmal aufs Wesentliche reduziert ist (Besucher der letzten 14 Tage), aber recht frei konfiguriert werden kann.
 * Bringt einen Direktlink auf die Piwik-Installation mit automatischem Login (optional).
 * Zählt keine REDAXO-Redakteure mit. Auch nicht nach Ablauf der Sitzung (Cookie).
@@ -11,14 +12,15 @@ _**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte 
 
 ## Instructions (English only)
 
-* Adds the tracking code to the website, either as JavaScript snippet or PHP include.
+* Adds the tracking code to the website, either as JavaScript snippet or PHP include.  
+  _Can be disabled from v1.4 if tracking code wants to be added manually._
 * Shows graphical statistics on the REDAXO backend being focused on essential output per default (last 14 days’ visits) but also being quite configurable.
 * Adds a direct link on your Piwik installation with an auto login feature (optional).
 * Does not track REDAXO authors. Either when session has ended (cookie).
 
 ### Requirements:
 
-* Piwik Server
+* Piwik Server (any version)
 * PHP 5.2+
 * REDAXO 4.1+
 * If you want to track your visitors using PHP-Code and display the statistics in REDAXO `allow_url_fopen` needs to be turned on.
