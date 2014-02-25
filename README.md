@@ -1,4 +1,4 @@
-_**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte Verzeichnis umzubenennen in `decaf_piwik_tracker` (statt redaxo_piwik_tracker)!_
+__**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte Verzeichnis umzubenennen in `decaf_piwik_tracker` (statt redaxo_piwik_tracker)!__
 
 # [Piwik Tracker](http://www.redaxo.org/de/download/addons/?addon_id=774)
 
