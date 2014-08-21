@@ -11,11 +11,11 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker');
 /**
  * adds the tracking code
  */
-function decaf_piwik_tracker($params) 
+function decaf_piwik_tracker($params)
 {
   $mypage = 'decaf_piwik_tracker';
   global $REX;
-  if (file_exists($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php')) 
+  if (file_exists($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php'))
   {
     $piwik_config = parse_ini_file($REX['INCLUDE_PATH']. '/addons/'.$mypage.'/config/config.ini.php', true);
     $content = $params['subject'];
@@ -25,7 +25,7 @@ function decaf_piwik_tracker($params)
     if ($piwik_config['piwik']['tracker_url'] && $piwik_config['piwik']['site_id'])
     {
       // JavaScript tracking
-      if ($piwik_config['piwik']['tracking_method'] == 'JavaScript') 
+      if ($piwik_config['piwik']['tracking_method'] == 'JavaScript')
       {
         if(isset($_SESSION[$REX['INSTNAME']]['UID']) || isset($_COOKIE['redaxo_piwiktracker_ignore']))
         {
@@ -33,24 +33,27 @@ function decaf_piwik_tracker($params)
         } else {
           $debugMsg = 'Piwik Tracker: JavaScript.';
           $trackingSnippet = "
-            <!-- Piwik -->
-            <script type=\"text/javascript\">
-            var pkBaseURL = \"".$piwik_config['piwik']['tracker_url']."\" + \"/\";
-            document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));
-            </script><script type=\"text/javascript\">
-            try {
-            var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", ".$piwik_config['piwik']['site_id'].");
-            piwikTracker.trackPageView();
-            piwikTracker.enableLinkTracking();
-            } catch( err ) {}
-            </script><noscript><p><img src=\"".$piwik_config['piwik']['tracker_url']."piwik.php?idsite=".$piwik_config['piwik']['site_id']."\" style=\"border:0\" alt=\"\" /></p></noscript>
-            <!-- End Piwik Tag -->
-          ";
+<!-- Piwik -->
+<script type=\"text/javascript\">
+    var _paq = _paq || [];
+    (function(){ var u=\"".$piwik_config['piwik']['tracker_url']."/\";
+    _paq.push(['setSiteId', ".$piwik_config['piwik']['site_id']."]);
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js';
+    s.parentNode.insertBefore(g,s); })();
+</script>
+<noscript>
+  <img src=\"".$piwik_config['piwik']['tracker_url']."/piwik.php?idsite=".$piwik_config['piwik']['site_id']."&amp;rec=1\" style=\"border:0\" alt=\"\">
+</noscript>
+<!-- End Piwik -->
+";
         }
       }
 
       // PHP tracking
-      if ($piwik_config['piwik']['tracking_method'] == 'PHP' && ini_get('allow_url_fopen')) 
+      if ($piwik_config['piwik']['tracking_method'] == 'PHP' && ini_get('allow_url_fopen'))
       {
         if(isset($_SESSION[$REX['INSTNAME']]['UID']) || isset($_COOKIE['redaxo_piwiktracker_ignore']))
         {
