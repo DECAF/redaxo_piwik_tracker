@@ -1,5 +1,7 @@
 __**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte Verzeichnis umzubenennen in `decaf_piwik_tracker` (statt redaxo_piwik_tracker)!__
 
+
+
 # [Piwik Tracker](http://www.redaxo.org/de/download/addons/?addon_id=774)
 
 * Fügt den Tracking-Code in die Website ein, wahlweise als JavaScript-Schnipsel oder PHP-include.  
@@ -8,7 +10,11 @@ __**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte
 * Bringt einen Direktlink auf die Piwik-Installation mit automatischem Login (optional).
 * Zählt keine REDAXO-Redakteure mit. Auch nicht nach Ablauf der Sitzung (Cookie).
 
+
+
 ---
+
+
 
 ## Instructions (English only)
 
@@ -51,3 +57,28 @@ To configure what statistics are displayed in the REDAXO backend you need to edi
 * `columns`: What columns to display. You can use `nb_visits`, `nb_uniq_visitors` and `nb_actions`. Separate multiple values with commas (`,`) and **no spaces**.
 * `width`: The width of the widget. Usually it's `745`. If you use smaller values the widgets will be displayed on the same row.
 * `widget_title`: If you want to override the automatic title generation you can set your custom title here.
+
+
+
+## Changelog
+
+### v1.5pre _ t.b.a.
+
+* REX 4.6 compatibility
+* Use asynchronous JavaScript tracking (see [API reference](http://developer.piwik.org/api-reference/tracking-javascript))
+* Update PiwikTracker PHP class from current Piwik 2.6.0
+* Slight cleanup
+
+### v1.4 _ 22.12.2013
+
+* Auto tracking code can be disabled now if you want to add the tracking code by yourself.
+* Update PiwikTracker class from current Piwik 2.0
+* Update Raphaël JS component to current 2.1.2
+* README, typo, slight cleanup.
+
+
+
+
+
+
+
