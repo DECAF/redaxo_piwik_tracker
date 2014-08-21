@@ -11,7 +11,7 @@ rex_register_extension('OUTPUT_FILTER', 'decaf_piwik_tracker_stats');
 /**
  * adds the js code to the html <head> section
  */
-function decaf_piwik_tracker_stats($params) 
+function decaf_piwik_tracker_stats($params)
 {
   $mypage = 'decaf_piwik_tracker';
   global $REX;

@@ -1,6 +1,6 @@
 <?php
 /**
- * piwikTracker Addon 
+ * piwikTracker Addon
  *
  * @author DECAF
  * @version $Id$
@@ -12,7 +12,7 @@ class raphaelizer
   public $w;
   public $h;
   public $canvas_id;
-  
+
   private $has_closing_tag;
   private $valid_attr = array('clip-rect', 'cx', 'cy', 'fill', 'fill-opacity', /* 'font', */ 'font-family', 'font-size', 'font-weight', 'height', 'opacity', 'path', 'r', 'rotation', 'rx', 'ry', 'scale', 'src', 'stroke', 'stroke-dash', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'translation', 'width', 'x', 'y');
   // IE BUG - This sad excuse of a browser can't handle the 'font' attribute
@@ -20,9 +20,9 @@ class raphaelizer
 
   /**
    * (void)__construct((int)w,(int)h,(str)canvas_id)
-   * 
+   *
    * Constructor for class raphaelizer
-   * 
+   *
    * @author DECAF
    **/
   public function __construct($w, $h, $canvas_id='mycanvas')
@@ -38,15 +38,15 @@ class raphaelizer
 
   /**
    * (void)canvas((str)bgcolor)
-   * 
+   *
    * prepares the raphael canvas
-   * 
+   *
    * @author DECAF
    **/
   public function canvas($bgcolor = FALSE)
   {
     $this->js .= '  var '.$this->canvas_id.' = Raphael("'.$this->canvas_id.'", '.$this->w.', '.$this->h.');'."\n";
-    if ($bgcolor) 
+    if ($bgcolor)
     {
       $this->rect(0,0,$this->w,$this->h,array('fill' => $bgcolor, 'stroke-width' => 0));
     }
@@ -55,9 +55,9 @@ class raphaelizer
 
   /**
    * (void)rect((int)x,(int)y,(int)w,(int)h,(array)attr,(str)id)
-   * 
+   *
    * draws a rectancle
-   * 
+   *
    * @author DECAF
    **/
   public function rect($x, $y, $w, $h, $attr=array(), $id='')
@@ -77,9 +77,9 @@ class raphaelizer
 
   /**
    * (void)text((int)x,(int)y,(array)attr,(str)id)
-   * 
+   *
    * draws text
-   * 
+   *
    * @author DECAF
    **/
   public function text($x, $y, $text, $attr=array(), $id='')
@@ -99,9 +99,9 @@ class raphaelizer
 
   /**
    * (void)text((str)src,(int)x,(int)y,(int)w,(int)h,(array)attr,(str)id)
-   * 
+   *
    * draws an image on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function image($src, $x, $y, $w, $h, $attr=array(), $id='')
@@ -121,10 +121,10 @@ class raphaelizer
 
   /**
    * (void)path((array)points,(array)attr,(str)id)
-   * 
+   *
    * draws a path
    * the points need to be an array with array(x=>int,y=>int) as the single points
-   * 
+   *
    * @author DECAF
    **/
   public function path($points, $attr=array(), $id='')
@@ -145,9 +145,9 @@ class raphaelizer
 
   /**
    * (str)getSvgPath((array)points)
-   * 
+   *
    * converts points to an SVG path
-   * 
+   *
    * @return (str)svg_path
    * @author DECAF
    **/
@@ -167,9 +167,9 @@ class raphaelizer
 
   /**
    * (void)addEventListener((str)elem,(str)event,(str)action)
-   * 
+   *
    * adds an event listener to an element
-   * 
+   *
    * @author DECAF
    **/
   public function addEventListener($elem, $event, $action)
@@ -180,16 +180,16 @@ class raphaelizer
 
   /**
    * (void)addAttr((array)attr)
-   * 
+   *
    * adds svg attributes
-   * 
+   *
    * @author DECAF
    **/
-  public function addAttr($attr) 
+  public function addAttr($attr)
   {
-    foreach ($attr as $key => $value) 
+    foreach ($attr as $key => $value)
     {
-      if (in_array($key,$this->valid_attr)) 
+      if (in_array($key,$this->valid_attr))
       {
         $this->js .= '.attr({"'.$key.'":"'.$value.'"})';
       }
@@ -199,15 +199,15 @@ class raphaelizer
 
   /**
    * (str)getJs()
-   * 
+   *
    * returns the html code for an raphael widget
-   * 
+   *
    * @return (str)this->js
    * @author DECAF
    **/
   public function getJs()
   {
-    if (!$this->has_closing_tag) 
+    if (!$this->has_closing_tag)
     {
       $this->setJsClosingTag();
     }
@@ -217,9 +217,9 @@ class raphaelizer
 
   /**
    * (void)setJsClosingTag()
-   * 
+   *
    * adds the closing script tag
-   * 
+   *
    * @author DECAF
    **/
   public function setJsClosingTag()

@@ -1,6 +1,6 @@
 <?php
 /**
- * piwikTracker Addon 
+ * piwikTracker Addon
  *
  * @author DECAF
  * @version $Id$
@@ -19,9 +19,9 @@ class decaf_piwik_tracker_config
 
   /**
    * (void)__construct((str)addon_path,(object)I18N)
-   * 
+   *
    * Constructor for decaf_piwik_tracker_config
-   * 
+   *
    * @author DECAF
    **/
   public function __construct($addon_path, $I18N)
@@ -39,9 +39,9 @@ class decaf_piwik_tracker_config
 
   /**
    * (void)loadConfig()
-   * 
+   *
    * sets config by parsing config_file
-   * 
+   *
    * @author DECAF
    **/
   public function loadConfig()
@@ -51,9 +51,9 @@ class decaf_piwik_tracker_config
 
   /**
    * (void)loadWidgetConfig()
-   * 
+   *
    * sets widget_config by parsing config_widgets_file
-   * 
+   *
    * @author DECAF
    **/
   public function loadWidgetConfig()
@@ -63,10 +63,10 @@ class decaf_piwik_tracker_config
 
   /**
    * (str)getI18nTitle((array($conf)))
-   * 
+   *
    * gets the title from the passed config array.
    * if the config array has 'widget_title' set, this is returned
-   * 
+   *
    * @return string
    * @author DECAF
    **/
@@ -78,30 +78,30 @@ class decaf_piwik_tracker_config
     }
     $title = '';
     $type_items = explode(',',$conf['columns']);
-    foreach ($type_items as &$item) 
+    foreach ($type_items as &$item)
     {
       $item = $this->I18N->msg($item);
     }
 
-    if (count($type_items) > 2) 
+    if (count($type_items) > 2)
     {
       $tmp = $this->I18N->msg('and') .' ' . array_pop($type_items);
       $title .= implode(', ',$type_items) . ' ' . $tmp;
-    } 
-    else 
+    }
+    else
     {
       $title .= implode(' '.$this->I18N->msg('and').' ',$type_items);
     }
     $title .= ' ';
 
-    if (substr($conf['api_date'], 0, 4) == 'last') 
+    if (substr($conf['api_date'], 0, 4) == 'last')
     {
       $quantity = substr($conf['api_date'], 4, strlen($conf['api_date']));
-      if ($quantity > 1) 
+      if ($quantity > 1)
       {
         $title .= sprintf($this->I18N->msg('last_'.$conf['api_period'].'s'), $quantity);
-      } 
-      else 
+      }
+      else
       {
         $title .= $this->I18N->msg('last_'.$conf['api_period']);
       }
@@ -109,4 +109,4 @@ class decaf_piwik_tracker_config
     return $title;
   }
 
-} // end class  
+} // end class

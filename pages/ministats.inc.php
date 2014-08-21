@@ -8,7 +8,7 @@
 
 $mypage = 'decaf_piwik_tracker';
 $content_width = 745;
-require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');  
+require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/extensions/extension.decaf_piwik_tracker_stats.inc.php');
 $stats_error = false;
 
 if (!ini_get('allow_url_fopen'))
@@ -18,7 +18,7 @@ if (!ini_get('allow_url_fopen'))
 }
 else
 {
-  require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/decaf_piwik_tracker_config.php');  
+  require_once($REX['INCLUDE_PATH'].'/addons/'.$mypage.'/classes/decaf_piwik_tracker_config.php');
   $config = new decaf_piwik_tracker_config($REX['INCLUDE_PATH'] .'/addons/'.$mypage, $piwik_I18N);
   $config->loadWidgetConfig();
 
@@ -56,7 +56,7 @@ else
   $useCache = false;
   if (is_readable($cacheFile)) {
     // check lifetime
-    $cacheFileLastModified = filemtime($cacheFile); 
+    $cacheFileLastModified = filemtime($cacheFile);
     if (time()-$cacheFileLastModified < $cacheLifetime) {
       $cacheContent = unserialize(file_get_contents($cacheFile));
       // compare cache file config to current widget config
@@ -100,7 +100,7 @@ else
   // warnings
   if (isset($stats_error) && $stats_error)
   {
-    echo rex_warning(sprintf($piwik_I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));   
+    echo rex_warning(sprintf($piwik_I18N->msg('piwik_error_get_stats'),$config->config['piwik']['tracker_url']));
   }
 }
 

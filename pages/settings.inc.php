@@ -27,7 +27,7 @@ if (!file_exists($REX['INCLUDE_PATH'] .'/addons/'.$mypage.'/config/config.ini.ph
 $allow_url_fopen = ini_get('allow_url_fopen');
 $tracking_types = array();
 
-if (!$allow_url_fopen) 
+if (!$allow_url_fopen)
 {
   $tracking_types[] = array('JavaScript', 'JavaScript');
   echo rex_warning($piwik_I18N->msg('piwik_allow_url_fopen_off'));
@@ -81,7 +81,7 @@ $sel_tracking_method->setSelected($piwik_config['piwik']['tracking_method']);
 foreach($tracking_types as $type)
 $sel_tracking_method->addOption($type[1],$type[0]);
 
-if($message) 
+if($message)
 {
   echo rex_info($message);
 }
@@ -90,7 +90,7 @@ if($message)
 <div class="rex-addon-output">
   <div id="rex-addon-editmode" class="rex-form">
     <form action="" method="post">
- 
+
       <fieldset class="rex-form-col-1">
         <div class="rex-form-wrapper">
           <h3 class="rex-hl2"><?php echo $piwik_I18N->msg('piwik_configuration'); ?></h3>
@@ -126,8 +126,8 @@ if($message)
       </fieldset>
 
       <fieldset class="rex-form-col-1">
-        <legend><?php echo $piwik_I18N->msg('piwik_login_legend'); ?>:</legend> 
-        <div class="rex-form-wrapper"> 
+        <legend><?php echo $piwik_I18N->msg('piwik_login_legend'); ?>:</legend>
+        <div class="rex-form-wrapper">
           <div class="rex-form-row">
             <p class="rex-form-col-a rex-form-text">
               <label for="fromname"><?php echo $piwik_I18N->msg('piwik_login'); ?></label>

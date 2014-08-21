@@ -1,6 +1,6 @@
 <?php
 /**
- * piwikTracker Addon 
+ * piwikTracker Addon
  *
  * @author DECAF
  * @version $Id$
@@ -33,9 +33,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)__construct((str)id,(int)w,(array)options,(object)I18N)
-   * 
+   *
    * Constructor for class raphaelizerPiwikStats
-   * 
+   *
    * @author DECAF
    **/
   public function __construct($id='stats_canvas', $width = 745, $options=array(), $I18N)
@@ -43,12 +43,12 @@ class raphaelizerPiwikStats extends raphaelizer
     // TODO: width & height needs to be setable
     foreach($options as $key => $opt)
     {
-      if ($this->$key) 
+      if ($this->$key)
       {
         $this->$key = $opt;
       }
     }
-    
+
     $this->canvas_h = 240 + (count($this->show) * 20);
     parent::__construct($width, $this->canvas_h, $id);
     $this->stats = array();
@@ -58,9 +58,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)setStats((array)stats)
-   * 
+   *
    * set stats and calls setData
-   * 
+   *
    * @author DECAF
    **/
   public function setStats($stats = array())
@@ -72,9 +72,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)canvas((str)bgcolor)
-   * 
+   *
    * prepares the widget
-   * 
+   *
    * @author DECAF
    **/
   public function canvas($bgcolor=FALSE)
@@ -91,9 +91,9 @@ class raphaelizerPiwikStats extends raphaelizer
       array(
         0 => array('x' => 10, 'y' => 211),
         1 => array('x' => $this->w-5, 'y' => 211)
-      ), 
+      ),
       array(
-        'stroke-width'  => '1', 
+        'stroke-width'  => '1',
         'stroke'        => '#ccc'
       )
     );
@@ -113,9 +113,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)drawBranding()
-   * 
+   *
    * draws decaf logo on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function drawBranding()
@@ -135,18 +135,18 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)drawLegend()
-   * 
+   *
    * draws the legend on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function drawLegend()
   {
     $x = 10;
     $y = 238;
-    foreach ($this->show as $type) 
+    foreach ($this->show as $type)
     {
-      switch ($type) 
+      switch ($type)
       {
         case 'nb_uniq_visitors':
           $color = $this->color_uniq_visitors;
@@ -163,13 +163,13 @@ class raphaelizerPiwikStats extends raphaelizer
         'stroke-width'  => '0'
       ));
       // $x += 16;
-      
+
       $this->text($x+16,$y+7,$this->I18N->msg($type),array(
         'fill'          => $color,
         'font'          => 'Helvetica, Arial, sans-serif',
         'font-size'     => '12',
         'font-weight'   => 'bold',
-        'text-anchor'   => 'start', 
+        'text-anchor'   => 'start',
       ));
       $y += 20;
     }
@@ -178,15 +178,15 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)drawCaptions()
-   * 
+   *
    * draws the captions on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function drawCaptions()
   {
     $i=0;
-    
+
     $this->text(80, 225, $this->I18N->msg('piwik_api_date'),array(
       'font'        => 'Helvetica, Arial, sans-serif',
       'font-size'   => '11',
@@ -207,9 +207,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (void)drawScale()
-   * 
+   *
    * draws the scale on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function drawScale()
@@ -224,59 +224,59 @@ class raphaelizerPiwikStats extends raphaelizer
       {
         $this->text(80,228 - (50 * $i), $nb_actions_step * $i,
           array(
-            'text-anchor' => 'end', 
-            'fill'        => $this->color_actions, 
+            'text-anchor' => 'end',
+            'fill'        => $this->color_actions,
             'font-weight' => 'bold',
             'font-size'   => '12'
           ));
           $y = 243;
       }
-      if (in_array('nb_visits', $this->show)) 
+      if (in_array('nb_visits', $this->show))
       {
         $this->text(80,$y - (50 * $i), $nb_visits_step * $i,
           array(
-            'text-anchor' => 'end', 
-            'fill'        => (in_array('nb_uniq_visitors',$this->show)) ? $this->color_uniq_visitors : $this->color_visits, 
+            'text-anchor' => 'end',
+            'fill'        => (in_array('nb_uniq_visitors',$this->show)) ? $this->color_uniq_visitors : $this->color_visits,
             'font-weight' => 'bold',
             'font-size'   => '12'
           ));
       } else {
-        if (in_array('nb_uniq_visitors', $this->show)) 
+        if (in_array('nb_uniq_visitors', $this->show))
         {
           $this->text(80,$y - (50 * $i),$nb_uniq_visitors_step * $i,
             array(
-              'text-anchor' => 'end', 
-              'fill'        => $this->color_uniq_visitors, 
+              'text-anchor' => 'end',
+              'fill'        => $this->color_uniq_visitors,
               'font-weight' => 'bold',
               'font-size'   => '12'
             ));
         }
       }
-        
+
     }
   }
 
 
   /**
    * (void)drawStatBars()
-   * 
+   *
    * draws the bars for the statistics on the canvas
-   * 
+   *
    * @author DECAF
    **/
   public function drawStatBars()
   {
-    if (!$this->nb_columns) 
+    if (!$this->nb_columns)
     {
       return;
     }
 
     $actions_ratio = 200 / $this->max['nb_actions'];
     $visits_ratio  = 200 / $this->max['nb_visits'];
-    if (in_array('nb_visits', $this->show)) 
+    if (in_array('nb_visits', $this->show))
     {
       $uniq_visitors_ratio  = 200 / $this->max['nb_visits']; // visits & unique visitors share the same ratio
-    } 
+    }
     else
     {
       $uniq_visitors_ratio  = 200 / $this->max['nb_uniq_visitors'];
@@ -292,7 +292,7 @@ class raphaelizerPiwikStats extends raphaelizer
         0 => array('x' => ($x - 1), 'y' => 10),
         1 => array('x' => ($x - 1), 'y' => 210),
       ),array('stroke-width' => '1', 'stroke' => $this->color_background));
-      
+
       foreach($this->show as $type)
       {
         if (isset($this->data[$i][$type]))
@@ -327,7 +327,7 @@ class raphaelizerPiwikStats extends raphaelizer
               'text-anchor' => 'end'
             ));
           }
-          else 
+          else
           {
             $this->text($x + $this->bar_width - 4, $y-5, $this->data[$i][$type],array(
               'fill'        => $color,
@@ -339,17 +339,17 @@ class raphaelizerPiwikStats extends raphaelizer
         }
         $j++;
       }
-      
+
     }
-    
+
   }
 
 
   /**
    * (void)setData()
-   * 
+   *
    * set the data so raphael can use it, set max for the different types
-   * 
+   *
    * @author DECAF
    **/
   public function setData()
@@ -369,9 +369,9 @@ class raphaelizerPiwikStats extends raphaelizer
     {
       $this->header_date[$i] = $date;
       if (count($this->show) > 1) {
-        foreach($value as $k => $v) 
+        foreach($value as $k => $v)
         {
-          if (in_array($k, $this->show)) 
+          if (in_array($k, $this->show))
           {
             $this->header_type[$k] = $k;
             $this->data[$i][$k] = $v;
@@ -384,7 +384,7 @@ class raphaelizerPiwikStats extends raphaelizer
           {
             $max[$k] = $v;
           }
-          
+
         }
       } else {
         if (is_numeric($value))
@@ -415,9 +415,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
     * (array)normalizeMax((array)max)
-    * 
+    *
     * normalize the maximums
-    * 
+    *
     * @author DECAF
     **/
   private function normalizeMax($max)
@@ -427,11 +427,11 @@ class raphaelizerPiwikStats extends raphaelizer
       $len = strlen($m)-1;
       $first = substr($m,0,1);
       $first += 1;
-      if ($m <= 10) 
+      if ($m <= 10)
       {
         $divider = 4;
       }
-      else 
+      else
       {
         $divider = 2;
       }
@@ -451,7 +451,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (array)getData()
-   * 
+   *
    * getter for data
    **/
   public function getData()
@@ -462,7 +462,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (array)getMax()
-   * 
+   *
    * getter for max
    **/
   public function getMax()
@@ -473,7 +473,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (int)getNbColumns()
-   * 
+   *
    * getter for nb_columns
    **/
   public function getNbColumns()
@@ -484,7 +484,7 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (array)getHeaderDate()
-   * 
+   *
    * getter for header_date
    **/
    public function getHeaderDate()
@@ -495,9 +495,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (array)getHeaderType()
-   * 
+   *
    * getter for header_type
-   **/  
+   **/
    public function getHeaderType()
   {
     return $this->header_type;
@@ -506,9 +506,9 @@ class raphaelizerPiwikStats extends raphaelizer
 
   /**
    * (str)convertPiwikDate((str)str)
-   * 
+   *
    * converts the timestring delivered by Pikwik to something more readable
-   * 
+   *
    * @author DECAF
    **/
   private function convertPiwikDate($str)
@@ -527,7 +527,7 @@ class raphaelizerPiwikStats extends raphaelizer
       {
         $retval = date($this->I18N->msg('date_format_month'), mktime(0,0,0,$date['month'], 1, $date['year']));
       }
-      
+
     }
     return $retval;
   }

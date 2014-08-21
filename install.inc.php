@@ -12,11 +12,11 @@ require_once($base_path.'/compat.inc.php');
 
 if ($REX['REDAXO'])
 {
-  if (!isset($lang) || $lang == 'default') 
+  if (!isset($lang) || $lang == 'default')
   {
     $be_lang = 'de_de_utf8';
-  } 
-  else 
+  }
+  else
   {
     $be_lang = $lang;
   }
@@ -33,11 +33,11 @@ if (!is_writable($base_path.'/config/'))
   echo rex_warning($piwik_I18N->msg('piwik_config_dir_locked'));
   $error = true;
 }
-else 
+else
 {
   // check if config.ini exists
   $file = $base_path.'/config/config.ini.php';
-  if (!file_exists($file)) 
+  if (!file_exists($file))
   {
     $cfg = parse_ini_file($base_path.'/config/_config.ini.php');
     $tpl = rex_get_file_contents($base_path.'/config/_config.ini.php');
@@ -51,14 +51,14 @@ else
   }
   // now copy widgets.ini.php (if not exists)
   $file = $base_path.'/config/widgets.ini.php';
-  if (!file_exists($file)) 
+  if (!file_exists($file))
   {
     $content = rex_get_file_contents($base_path.'/config/_widgets.ini.php');
     file_put_contents($file, $content);
   }
 }
 
-if (!$error) 
+if (!$error)
 {
   $REX['ADDON']['install'][$mypage] = true;
 }
