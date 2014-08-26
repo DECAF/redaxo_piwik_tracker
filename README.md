@@ -2,7 +2,7 @@ __**Github-Hinweis:** Beim Download von Github bitte daran denken, das entpackte
 
 
 
-# [Piwik Tracker](http://www.redaxo.org/de/download/addons/?addon_id=774)
+# [Piwik Tracker 1.5pre](http://www.redaxo.org/de/download/addons/?addon_id=774)
 
 * Fügt den Tracking-Code in die Website ein, wahlweise als JavaScript-Schnipsel oder PHP-include.  
   _Kann ab v1.4 deaktiviert werden, wenn der Tracking-Code manuell eingebracht werden soll._
